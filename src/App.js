@@ -20,6 +20,15 @@ import brandSimmons      from './Assets/Brands Worked/brand-simmons.png';
 // re-derived at every size, and it ships 88KB instead of 233KB.
 import djAppzPhoto from './Assets/Roster/djappz-portrait.jpg';
 
+// ─── ABOUT PAGE PHOTOGRAPHY ──────────────────────────────────────────────────
+// emmanuel-portrait.jpg is a 3:4 head-and-shoulders crop of the source (Emmanuel
+// bio.jpeg, kept as the master and deliberately not imported — a 943x2048 studio
+// shot with a black letterbox bar and a lot of plain t-shirt below the face).
+// Cropped rather than left to CSS: the frame's aspect is close enough to the
+// source's own that object-position alone couldn't get the face to fill the
+// notehead — most of the frame would just show shirt.
+import emmanuelPhoto from './Assets/About bio/emmanuel-portrait.jpg';
+
 // ─── PHOTOGRAPHY ─────────────────────────────────────────────────────────────
 // Web-sized derivatives of the originals in this folder. The masters
 // (WeddingDance2 (1)/(2).jpg, 6000x4000 and 5114x3403, 5.1MB together) are kept
@@ -91,18 +100,24 @@ const ROSTER = [
     website: 'https://www.dj-appz.com/',
   },
   {
-    draft: true,   // template — fill in and remove this flag to publish
     id: 2,
-    name: 'DJ [NAME 2]',
-    slug: 'dj-name-2',
-    tagline: '[Short punchy tagline]',
-    genres: ['Tech House', 'Deep House', 'Minimal'],
-    bio: '[Full bio for DJ 2.]',
-    photo: null,
+    name: 'Jordan',
+    slug: 'jordan',
+    tagline: 'From the dance floor to the decks.',
+    genres: ['Commercial', 'Latin', 'Pop'],
+    bio: 'Jordan brings a dancer’s instinct to the booth — before DJing, he competed and won at UK dance championships and performed for Monster Energy, and that read of a room shows in every set. Since launching his residency at Simmons Bar in October 2023, he has built a fast-growing reputation across London’s Latin, commercial and pop-leaning nightlife, adding a residency at Lightbox Vauxhall alongside BAILE TRAMA, ITSAFLIP, BAILE LONDON, Brixton Radio and the UK’s largest Latin festival. For venues, that means a DJ who carries a themed Latin night and a mainstream commercial floor with equal confidence.',
+    photo: null,          // photo to follow — will be added to src/Assets/Roster
     photoDecks: null,
-    instagram: '@[handle2]',
+    instagram: '@jordanblack_o',
+    mixes: [
+      {
+        title: 'Listen on SoundCloud',
+        embed: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user75551272&color=%23785417&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false',
+        height: 300,   // SoundCloud's profile widget needs more room than Mixcloud's compact bar
+      },
+    ],
     mixcloudEmbed: null,
-    mixcloudUser: '[mixcloud-username-2]',
+    mixcloudUser: null,
   },
   {
     draft: true,   // template — fill in and remove this flag to publish
@@ -159,6 +174,22 @@ const ROSTER = [
     instagram: '@[handle6]',
     mixcloudEmbed: null,
     mixcloudUser: '[mixcloud-username-6]',
+  },
+  {
+    id: 7,
+    name: 'DJ Pierre',
+    slug: 'dj-pierre',
+    tagline: 'Sleek, seamless, every set.',
+    genres: ['House', 'R&B', 'Commercial', 'Pop', 'Retro'],
+    // Placeholder profile — real facts, no photo/links yet. Add photo, instagram
+    // and mixes, then this reads exactly like DJ Appz's entry above.
+    bio: 'DJ Pierre has built his reputation behind the decks in bars across London — including Dirty Martini, Boom Battle Bar and London Cocktail Club — with a body of work that extends UK-wide. Wherever the booking, his sets stay sleek and seamless — a through-line across a broad range that spans house, R&B, commercial, pop, retro and more. For venues, that versatility means one DJ who can hold a varied crowd rather than a single narrow lane.',
+    photo: null,          // import djPierrePhoto from './Assets/Roster/djpierre-portrait.jpg'
+    photoDecks: null,     // import djPierreDecks from './Assets/Roster/djpierre-decks.jpg'
+    instagram: '@[handle]',
+    mixes: [],
+    mixcloudEmbed: null,
+    mixcloudUser: '[mixcloud-username]',
   },
 ];
 
@@ -276,10 +307,10 @@ const PARTNERS = [
 
 // ─── STATS ────────────────────────────────────────────────────────────────────
 const STATS = [
-  { value: '6+', label: 'Artists on Roster' },
-  { value: '200+', label: 'Events Delivered' },
-  { value: '40+', label: 'Venue Partnerships' },
-  { value: '5★', label: 'Average Client Rating' },
+  { value: 'Premium', label: 'Curated DJ Roster' },
+  { value: '100+', label: 'Events Delivered' },
+  { value: '20+', label: 'Venue Partnerships' },
+  { value: '5★', label: 'Average Client Rating' },   // a rating scale, not a count — not something to halve
 ];
 
 // ─── COLOUR TOKENS ───────────────────────────────────────────────────────────
@@ -399,6 +430,34 @@ const SectionLabel = ({ children, onDark = false }) => (
   }}>{children}</p>
 );
 
+// Shows only the first paragraph, with a "Read More" toggle that reveals the
+// rest — used on the About page so three side-by-side bios don't force the
+// section to the height of the longest one by default.
+function BioParagraphs({ paragraphs, note = C.goldText }) {
+  const [expanded, setExpanded] = useState(false);
+  const [first, ...rest] = paragraphs;
+  return (
+    <>
+      <p style={{ color: C.mid, lineHeight: 1.9, marginBottom: rest.length ? '1.1rem' : 0 }}>{first}</p>
+      {expanded && rest.map((para, i) => (
+        <p key={i} style={{ color: C.mid, lineHeight: 1.9, marginBottom: i < rest.length - 1 ? '1.1rem' : 0 }}>{para}</p>
+      ))}
+      {rest.length > 0 && (
+        <button
+          onClick={() => setExpanded(e => !e)}
+          style={{
+            display: 'block', marginTop: '0.85rem', background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+            fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
+            letterSpacing: '0.1em', textTransform: 'uppercase', color: note, transition: 'opacity 0.2s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+        >{expanded ? 'Read Less' : 'Read More'}</button>
+      )}
+    </>
+  );
+}
+
 // ─── WORDMARK ─────────────────────────────────────────────────────────────────
 // V♩RTUOSO — the quaver stands in for the "I". Everything is sized in `em` so
 // the note tracks whatever font-size the caller sets, and the accessible name
@@ -425,6 +484,181 @@ function Wordmark({ colour = C.nearBlack, note = C.goldSolid, style = {} }) {
       </span>
       <span style={{ color: colour }}>RTUOSO</span>
     </span>
+  );
+}
+
+// ─── QUAVER PHOTO FRAME ────────────────────────────────────────────────────────
+// Team/roster portraits cut to the same quaver silhouette as the wordmark's note:
+// a round notehead at the bottom carrying the stem and flag above it. Coordinates
+// are fractions of the frame's own box (objectBoundingBox), so the same shape
+// scales cleanly at any size without redrawing it.
+//
+// The notehead is deliberately the biggest, roundest part of the mark — that's
+// where a face reads clearly, so `facePosition` defaults to holding the subject
+// low in the frame (near the notehead) rather than centring the source photo.
+// Notehead enlarged and pulled up the frame so it actually catches a face
+// (cover-fit on this aspect ratio crops almost nothing vertically off the
+// source photo, so box-height fraction ≈ source-height fraction). Notehead
+// trimmed 15% back down from that pass, and the stem/flag scaled down and
+// re-anchored to its narrower centre so they read as one proportionate note
+// rather than an oversized stem and tail dwarfing the head.
+// Stem lengthened back out — after the notehead shrank and the stem was cut
+// nearly in half two passes ago, it was reading stubby against the flag.
+// (This is unrelated to the photo's zoom level: the image scale below crops
+// the source photo, the stem/notehead here are the fixed SVG silhouette —
+// changing one doesn't require changing the other.)
+// Stem width was left at 0.15 through several rounds of shrinking the notehead
+// underneath it (0.48 -> 0.408 -> 0.347 -> 0.312 -> 0.281) — proportionate to
+// the original notehead, badly oversized next to this one. Narrowed to match
+// (same ~0.37 width-to-rx ratio as the last checkpoint that read correctly),
+// re-centred on the same x so the flag's anchor point doesn't need to move,
+// and lengthened slightly to keep a solid overlap now the notehead is smaller.
+const QUAVER_SHAPE = {
+  notehead: { cx: 0.46, cy: 0.58, rx: 0.281, ry: 0.187, rotate: -8 },
+  stem: { x: 0.644, y: 0.04, width: 0.103, height: 0.45 },
+  flag: 'M 0.695,0.04 C 0.934,0.095 1.016,0.261 0.870,0.399 C 0.961,0.297 0.970,0.141 0.695,0.04 Z',
+};
+
+// Rendered once per page that uses <QuaverPhoto> — every instance references
+// this single clipPath by id, so it isn't duplicated per photo.
+function QuaverClipDefs() {
+  const { notehead: n, stem: s, flag } = QUAVER_SHAPE;
+  return (
+    <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+      <defs>
+        <clipPath id="quaverPhotoMask" clipPathUnits="objectBoundingBox">
+          <ellipse cx={n.cx} cy={n.cy} rx={n.rx} ry={n.ry} transform={`rotate(${n.rotate} ${n.cx} ${n.cy})`} />
+          <rect x={s.x} y={s.y} width={s.width} height={s.height} />
+          <path d={flag} />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+// imageScale shrinks the photo within its own box via transform, revealing a
+// margin of the frame's stone background around it — a "zoom out" for a
+// cover-fit image, since object-position alone can't do that (it only shifts
+// which window of the source is visible, not how much of it — and on this
+// frame's tall aspect ratio, cover-fit already crops almost nothing off the
+// source vertically, so object-position's Y value has no real effect here).
+//
+// transformOrigin anchors the scale to the notehead's OWN centre point, not a
+// fixed edge of the box. Anchoring to the box's bottom edge (an earlier
+// version of this) put the face in the right place at one particular scale,
+// but every other scale value slid the image toward the bottom edge instead
+// of staying centred in the notehead — the smaller the scale, the more of the
+// notehead's upper half went uncovered. Anchoring to the notehead's own
+// centre means the image shrinks (or grows) symmetrically around that point,
+// so the face stays centred in the notehead at any imageScale.
+// offsetX/offsetY: quick manual nudge, in percent of the frame's own box,
+// applied AFTER the notehead-anchored scale — so a positive offsetY moves the
+// photo down, offsetX right, independent of imageScale. Use these for small
+// corrections (a face sitting slightly off-centre); if the source photo is
+// framed too tight or too wide to begin with, re-crop the source instead —
+// no offset/scale combination can show content that isn't in the file.
+function QuaverPhoto({ photo, alt, placeholderLabel, facePosition = '50% 82%', imageScale = 0.60, offsetX = 0, offsetY = 0, maxWidth = 260 }) {
+  const { notehead: n } = QUAVER_SHAPE;
+  return (
+    <div style={{ maxWidth, margin: '0 auto' }}>
+      <div style={{ position: 'relative', aspectRatio: '1 / 1.9' }}>
+        <div style={{
+          position: 'absolute', inset: 0, clipPath: 'url(#quaverPhotoMask)', overflow: 'hidden',
+          // Always filled, photo or not: the scaled-down image doesn't cover
+          // the whole box, so a transparent background here left the
+          // uncovered slivers see-through to the page — breaking the note's
+          // silhouette right where there's no outline left to define its edge.
+          background: C.stone,
+        }}>
+          {photo && (
+            <img src={photo} alt={alt} style={{
+              width: '100%', height: '100%', objectFit: 'cover', objectPosition: facePosition,
+              transform: `scale(${imageScale}) translate(${offsetX}%, ${offsetY}%)`,
+              transformOrigin: `${n.cx * 100}% ${n.cy * 100}%`,
+            }} />
+          )}
+        </div>
+      </div>
+      {/* Caption sits outside the clipped shape — a name/label inside the mask
+          risks being cropped by the notehead's curve. */}
+      {!photo && placeholderLabel && (
+        <p style={{
+          textAlign: 'center', marginTop: '0.75rem', color: C.mid, fontSize: T.micro,
+          letterSpacing: '0.1em', textTransform: 'uppercase',
+        }}>{placeholderLabel}</p>
+      )}
+    </div>
+  );
+}
+
+// ─── DEV-ONLY: PHOTO ADJUSTER ───────────────────────────────────────────────
+// Sliders that drive a QuaverPhoto's scale/offset live, plus a Save button
+// that POSTs the values to the local endpoint in setupProxy.js, which writes
+// them straight into this file's own source. Only ever rendered when
+// `process.env.NODE_ENV === 'development'` (checked at each call site) — CRA
+// dead-code-eliminates that branch from production builds, and the save
+// endpoint itself only exists under `react-scripts start` in the first
+// place, so none of this can reach the live site either way.
+function PhotoAdjuster({ personKey, value, onChange }) {
+  const [status, setStatus] = useState('idle'); // idle | saving | saved | error
+
+  const save = async () => {
+    setStatus('saving');
+    try {
+      const res = await fetch('/__dev/save-photo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ personKey, ...value }),
+      });
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.error || 'Save failed');
+      setStatus('saved');
+      setTimeout(() => setStatus('idle'), 2500);
+    } catch (e) {
+      console.error('[PhotoAdjuster] save failed:', e);
+      setStatus('error');
+    }
+  };
+
+  const row = (label, key, min, max, step) => (
+    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 11, fontFamily: 'monospace', color: '#666' }}>
+      <span style={{ width: 52, flexShrink: 0 }}>{label}</span>
+      <input
+        type="range" min={min} max={max} step={step}
+        value={value[key]}
+        onChange={e => onChange({ ...value, [key]: parseFloat(e.target.value) })}
+        style={{ flex: 1 }}
+      />
+      <span style={{ width: 42, textAlign: 'right', flexShrink: 0 }}>{value[key]}</span>
+    </label>
+  );
+
+  const saveLabel = status === 'saving' ? 'Saving…'
+    : status === 'saved' ? 'Saved to App.js ✓'
+    : status === 'error' ? 'Save failed — retry'
+    : 'Save to file';
+
+  return (
+    <div style={{
+      marginTop: '0.75rem', padding: '0.6rem 0.75rem', border: '1px dashed #999',
+      background: '#fafafa', display: 'flex', flexDirection: 'column', gap: '0.35rem',
+    }}>
+      <div style={{ fontSize: 10, fontFamily: 'monospace', color: '#999', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        Dev only — adjust photo
+      </div>
+      {row('Scale', 'imageScale', 0.3, 1.0, 0.01)}
+      {row('Shift X', 'offsetX', -20, 20, 1)}
+      {row('Shift Y', 'offsetY', -20, 20, 1)}
+      <button
+        onClick={save}
+        disabled={status === 'saving'}
+        style={{
+          marginTop: '0.25rem', fontSize: 11, fontFamily: 'monospace', padding: '0.35rem 0.6rem',
+          background: status === 'saved' ? '#2a7' : status === 'error' ? '#c33' : '#333',
+          color: '#fff', border: 'none', cursor: status === 'saving' ? 'default' : 'pointer',
+        }}
+      >{saveLabel}</button>
+    </div>
   );
 }
 
@@ -921,11 +1155,6 @@ function HomePage({ setPage }) {
 
         {/* Hero content */}
         <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 2rem', maxWidth: 860 }}>
-          <p style={{
-            fontFamily: 'Outfit, sans-serif', fontSize: T.micro, letterSpacing: '0.3em',
-            textTransform: 'uppercase', color: 'rgba(255,255,255,0.82)', marginBottom: '1.25rem',
-          }}>Premium Entertainment Partnerships</p>
-
           {/* Centred name overlay */}
           <h1 style={{ margin: 0, lineHeight: 1 }}>
             <span style={{
@@ -983,17 +1212,19 @@ function HomePage({ setPage }) {
               onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.borderColor = 'rgba(255,255,255,0.5)'; }}
             >View Our Roster</button>
           </div>
-        </div>
 
-        {/* Scroll indicator */}
-        <div style={{
-          position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
-          color: 'rgba(255,255,255,0.78)', fontSize: T.micro, letterSpacing: '0.15em', textTransform: 'uppercase',
-        }}>
-          <span>Scroll</span>
-          <div style={{ width: 1, height: 40, background: 'rgba(255,255,255,0.3)', animation: 'scrollPulse 2s ease-in-out infinite' }} />
-          <style>{`@keyframes scrollPulse { 0%,100%{opacity:0.3;} 50%{opacity:1;} }`}</style>
+          {/* Scroll indicator — in-flow beneath the buttons, not pinned to the
+              hero's bottom edge. A fixed bottom offset overlapped the buttons
+              once the hero got shorter; sitting in the flow means it can never
+              collide with content above it, whatever the hero's height. */}
+          <div style={{
+            marginTop: '2.25rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
+            color: 'rgba(255,255,255,0.78)', fontSize: T.micro, letterSpacing: '0.15em', textTransform: 'uppercase',
+          }}>
+            <span>Scroll</span>
+            <div style={{ width: 1, height: 40, background: 'rgba(255,255,255,0.3)', animation: 'scrollPulse 2s ease-in-out infinite' }} />
+            <style>{`@keyframes scrollPulse { 0%,100%{opacity:0.3;} 50%{opacity:1;} }`}</style>
+          </div>
         </div>
       </div>
 
@@ -1285,8 +1516,20 @@ function AboutPage({ setPage }) {
   const sectionStyle = (bg = C.ivory) => ({ background: bg, padding: '4.25rem 2rem', position: 'relative', zIndex: 1 });
   const containerStyle = { maxWidth: 1100, margin: '0 auto' };
 
+  // Seeded from whatever's currently hardcoded on each <QuaverPhoto> below, so
+  // the sliders start where the page actually is, not at some other default.
+  // The PhotoAdjuster panels (dev-only) mutate this for a live preview; Save
+  // writes it into the JSX on disk via setupProxy.js.
+  const [photoAdjust, setPhotoAdjust] = useState({
+    jesse:    { imageScale: 0.60, offsetX: 0, offsetY: 0 },
+    alek:     { imageScale: 0.60, offsetX: 0, offsetY: 0 },
+    emmanuel: { imageScale: 0.62, offsetX: 0, offsetY: 0 },
+  });
+  const isDev = process.env.NODE_ENV === 'development';
+
   return (
     <div style={{ paddingTop: 72 }}>
+      <QuaverClipDefs />
 
       {/* ── HEADER ── */}
       <div style={{ ...sectionStyle(C.ivory) }}>
@@ -1297,34 +1540,110 @@ function AboutPage({ setPage }) {
             <GoldLine />
           </div>
 
-          {/* Founder + photo */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3.5rem', alignItems: 'center', marginBottom: '4.25rem' }}>
-            <div style={{
-              background: C.stone, aspectRatio: '4/5',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: C.mid, fontSize: T.small, letterSpacing: '0.1em', textTransform: 'uppercase',
-              border: `1px solid rgba(140,100,30,0.22)`,
-            }}>
-              {/* <img src={teamPhoto} alt="Jesse Appiah, founder of Virtuoso Entertainment" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> */}
-              [ Founder / Team Photo ]
-            </div>
+          {/* ── THE PEOPLE BEHIND VIRTUOSO ── */}
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <SectionLabel>The People Behind Virtuoso</SectionLabel>
+            <h2 style={{ fontSize: T.h3, marginBottom: '1.5rem' }}>
+              Built by people who live for the dance floor.
+            </h2>
+            <GoldLine />
+            <p style={{ color: C.mid, lineHeight: 1.9, maxWidth: 680, margin: '0 auto' }}>
+              We work with people we like. We work with beautiful people. Music carries the mood, energy and outlook of all those that hear it — the DJ is the orchestrator that takes people on the journey and curates the energy. When you book with us, our artists bring their energy into your world, connecting with your people and spreading the good times. We operate in <strong>London and Greater London</strong>, working with brands and venues that care about the experience they create.
+            </p>
+          </div>
+
+          {/* Founder + Operations Manager, side by side */}
+          <div className="team-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3.5rem', marginBottom: '4.25rem' }}>
+
+            {/* Jesse */}
             <div>
-              <SectionLabel>Founded by Jesse Appiah</SectionLabel>
-              <h2 style={{ fontSize: T.h3, marginBottom: '1.5rem' }}>
-                14 years on the decks. Built for every occasion.
-              </h2>
-              <GoldLine style={{ margin: '0 0 1.5rem' }} />
-              <p style={{ color: C.mid, lineHeight: 1.9, marginBottom: '1.25rem' }}>
-                Virtuoso Entertainment was founded by Jesse Appiah — a DJ and dancer with 14 years of experience spanning corporate events, bars, nightclubs, weddings, and pubs. That breadth of experience is baked into every artist on our roster.
-              </p>
-              <p style={{ color: C.mid, lineHeight: 1.9, marginBottom: '1.25rem' }}>
-                We work with people we like. We work with beautiful people. Music carries the mood, energy and outlook of all those that hear it — the DJ is the orchestrator that takes people on the journey and curates the energy. When you book with us, our artists bring their energy into your world, connecting with your people and spreading the good times.
-              </p>
-              <p style={{ color: C.mid, lineHeight: 1.9 }}>
-                We operate in <strong>London and Greater London</strong>, working with brands and venues that care about the experience they create.
-              </p>
+              {/* TEMP: DJ Appz's photo stood in here so the quaver-frame shape can
+                  be previewed with a real image before Jesse's own photo exists.
+                  Swap `photo` back to `null` (or in jessePhoto once imported)
+                  once it's checked. */}
+              <QuaverPhoto
+                photo={djAppzPhoto}
+                alt="Jesse Appiah, Founder of Virtuoso Entertainment"
+                placeholderLabel="[ Jesse — Photo ]"
+                {...photoAdjust.jesse}
+              />
+              {isDev && (
+                <PhotoAdjuster
+                  personKey="jesse"
+                  value={photoAdjust.jesse}
+                  onChange={v => setPhotoAdjust(p => ({ ...p, jesse: v }))}
+                />
+              )}
+              <div style={{ marginTop: '1.5rem' }} />
+              <SectionLabel>Founder</SectionLabel>
+              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '1rem' }}>Jesse Appiah</h3>
+              <GoldLine style={{ margin: '0 0 1.25rem' }} />
+              <BioParagraphs paragraphs={[
+                "Jesse's earliest memories of music take him back to the living room — his mother's CD player spinning Bob Marley, the smell of the house, the feeling of the music filling the room. Then came Michael Jackson. He'd watch the music videos on repeat, moonwalking across the floor and trying to crack every move.",
+                "Street dance followed naturally, soundtracked by Usher, Ne-Yo and Chris Brown — the artists who made you want to move before you even knew why. From the Step Up films to the dance floor, Jesse has spent over 10 years as a dancer, building an instinct for rhythm, energy and what makes a room come alive.",
+                'Five years behind the decks later, that instinct shapes every set — reading the room, feeling the energy, and taking people somewhere.',
+              ]} />
+            </div>
+
+            {/* Alek */}
+            <div>
+              {/* photo={alekPhoto} once imported. */}
+              <QuaverPhoto
+                photo={null}
+                alt="Aleksandar Shipman, Operations Manager at Virtuoso Entertainment"
+                placeholderLabel="[ Alek — Photo ]"
+                {...photoAdjust.alek}
+              />
+              {isDev && (
+                <PhotoAdjuster
+                  personKey="alek"
+                  value={photoAdjust.alek}
+                  onChange={v => setPhotoAdjust(p => ({ ...p, alek: v }))}
+                />
+              )}
+              <div style={{ marginTop: '1.5rem' }} />
+              <SectionLabel>Operations Manager</SectionLabel>
+              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '1rem' }}>Aleksandar Shipman</h3>
+              <GoldLine style={{ margin: '0 0 1.25rem' }} />
+              <BioParagraphs paragraphs={[
+                "Alek's earliest memories of music go back to school assembly halls — a trumpet in hand, keeping time in the brass band during his school days. That grounding stuck with him, even as his own taste pulled toward retro, pop and rock culture along the way.",
+                "He's not the one behind the decks — he's the one who makes sure everything around them runs properly. A people person through and through, Alek is usually the first to get a reluctant crowd onto the floor, and the one keeping the night on track while everyone else is enjoying it.",
+                'As Operations Manager, that same energy shapes how Virtuoso runs day to day — organised, personable, and always ready to get the floor moving when the moment calls for it.',
+              ]} />
+            </div>
+
+            {/* Emmanuel */}
+            <div>
+              {/* imageScale seeded at 0.62 — 0.611 is the exact point this
+                  photo's cover-fit crop starts covering the full notehead
+                  width; 0.62 clears that with a small margin. */}
+              <QuaverPhoto
+                photo={emmanuelPhoto}
+                alt="Emmanuel Ohuonu, Talent Acquisition Lead at Virtuoso Entertainment"
+                placeholderLabel="[ Emmanuel — Photo ]"
+                {...photoAdjust.emmanuel}
+              />
+              {isDev && (
+                <PhotoAdjuster
+                  personKey="emmanuel"
+                  value={photoAdjust.emmanuel}
+                  onChange={v => setPhotoAdjust(p => ({ ...p, emmanuel: v }))}
+                />
+              )}
+              <div style={{ marginTop: '1.5rem' }} />
+              <SectionLabel>Talent Acquisition Lead</SectionLabel>
+              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '1rem' }}>Emmanuel Ohuonu</h3>
+              <GoldLine style={{ margin: '0 0 1.25rem' }} />
+              <BioParagraphs paragraphs={[
+                "Emmanuel's earliest musical memories are rooted in secondary school, where he played the saxophone — an instrument that gave him an ear for melody, timing and the architecture of a good set. That foundation led him to study Music Industry Management at degree level, where he developed a sharp understanding of the business behind the music, alongside a genuine penchant for A&R and spotting talent before the room catches on.",
+                'From intimate venues to student events, Emmanuel built his experience behind the decks the hard way — earning the room rather than inheriting it. Sets at the Herefordshire Forum and hosting on university radio sharpened his ability to read a crowd, adapt in real time, and deliver exactly the right soundtrack for the moment. Specialising in Hip-Hop and contemporary R&B, he moves fluidly between the classics and the current — Usher, Ne-Yo and Chris Brown giving way to Drake, Brent Faiyaz, PARTYNEXTDOOR and SZA — in sets that feel both familiar and fresh.',
+              ]} />
             </div>
           </div>
+
+          <style>{`@media (max-width: 760px) {
+            .team-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+          }`}</style>
 
           {/* Stats */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', borderTop: `1px solid rgba(140,100,30,0.2)`, paddingTop: '2.75rem' }}>
@@ -1651,7 +1970,7 @@ function ArtistPage({ slug, setPage }) {
                     <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.5rem' }}>{m.title}</p>
                   )}
                   <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
-                    <iframe title={`${dj.name} — ${m.title || 'mix'}`} width="100%" height="120"
+                    <iframe title={`${dj.name} — ${m.title || 'mix'}`} width="100%" height={m.height || 120}
                             src={m.embed} frameBorder="0" loading="lazy"
                             allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
                             style={{ display: 'block' }} />
