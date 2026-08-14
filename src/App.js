@@ -28,6 +28,14 @@ import djAppzPhoto from './Assets/Roster/djappz-portrait.jpg';
 // source's own that object-position alone couldn't get the face to fill the
 // notehead — most of the frame would just show shirt.
 import emmanuelPhoto from './Assets/About bio/emmanuel-portrait.jpg';
+// jesse-portrait.jpg / aleks-portrait.jpg are cropped/compressed derivatives
+// of Jesse-bio.png (1086x1448) and Aleks-bio.png (1254x1254) — both kept as
+// masters, not imported (1.8-1.9MB PNGs, far too heavy to ship for a 260px
+// frame). Jesse's original had a lot of empty backdrop above/below the
+// subject, so it's cropped to head-and-shoulders; Aleks's was already a
+// well-framed square, so this is a straight resize, no crop.
+import jessePhoto from './Assets/About bio/jesse-portrait.jpg';
+import aleksPhoto from './Assets/About bio/aleks-portrait.jpg';
 
 // ─── PHOTOGRAPHY ─────────────────────────────────────────────────────────────
 // Web-sized derivatives of the originals in this folder. The masters
@@ -236,30 +244,6 @@ const SERVICES = [
     description: 'Exclusive private events — birthdays, weddings, celebrations. Elite talent for your most discerning guests.',
     features: ['Bespoke setlists', 'Luxury presentation', 'Dedicated point of contact'],
     photo: servicePrivate,
-  },
-];
-
-// ─── TESTIMONIALS ─────────────────────────────────────────────────────────────
-const TESTIMONIALS = [
-  {
-    quote: "Virtuoso transformed our Thursday nights. Attendance doubled within six weeks of the residency launching.",
-    author: "General Manager",
-    venue: "[Venue Name], London",
-  },
-  {
-    quote: "Professional from first contact to last song. Our guests commented all evening on how well the music matched the room.",
-    author: "Events Director",
-    venue: "[Venue Name], Manchester",
-  },
-  {
-    quote: "The team understood our brand instantly. We've renewed for a second year without hesitation.",
-    author: "Head of Hospitality",
-    venue: "[Venue Name], Birmingham",
-  },
-  {
-    quote: "Easily the most reliable entertainment partner we've worked with. No drama, no surprises — just excellent music.",
-    author: "Club Manager",
-    venue: "[Venue Name], Leeds",
   },
 ];
 
@@ -488,93 +472,57 @@ function Wordmark({ colour = C.nearBlack, note = C.goldSolid, style = {} }) {
 }
 
 // ─── QUAVER PHOTO FRAME ────────────────────────────────────────────────────────
-// Team/roster portraits cut to the same quaver silhouette as the wordmark's note:
-// a round notehead at the bottom carrying the stem and flag above it. Coordinates
-// are fractions of the frame's own box (objectBoundingBox), so the same shape
-// scales cleanly at any size without redrawing it.
+// Team/roster portraits cut to a tilted oval — a nod to the wordmark's quaver
+// notehead, without the stem/flag (dropped: they kept fighting the photo for
+// space and never read cleanly at this size). Coordinates are fractions of
+// the frame's own box (objectBoundingBox), so the shape scales cleanly at
+// any size without redrawing it.
 //
-// The notehead is deliberately the biggest, roundest part of the mark — that's
-// where a face reads clearly, so `facePosition` defaults to holding the subject
-// low in the frame (near the notehead) rather than centring the source photo.
-// Notehead enlarged and pulled up the frame so it actually catches a face
-// (cover-fit on this aspect ratio crops almost nothing vertically off the
-// source photo, so box-height fraction ≈ source-height fraction). Notehead
-// trimmed 15% back down from that pass, and the stem/flag scaled down and
-// re-anchored to its narrower centre so they read as one proportionate note
-// rather than an oversized stem and tail dwarfing the head.
-// Stem lengthened back out — after the notehead shrank and the stem was cut
-// nearly in half two passes ago, it was reading stubby against the flag.
-// (This is unrelated to the photo's zoom level: the image scale below crops
-// the source photo, the stem/notehead here are the fixed SVG silhouette —
-// changing one doesn't require changing the other.)
-// Stem width was left at 0.15 through several rounds of shrinking the notehead
-// underneath it (0.48 -> 0.408 -> 0.347 -> 0.312 -> 0.281) — proportionate to
-// the original notehead, badly oversized next to this one. Narrowed to match
-// (same ~0.37 width-to-rx ratio as the last checkpoint that read correctly),
-// re-centred on the same x so the flag's anchor point doesn't need to move,
-// and lengthened slightly to keep a solid overlap now the notehead is smaller.
+// The box is sized to the oval itself, not to a tall stem-shaped silhouette —
+// an earlier version reserved room above the notehead for a stem that's gone
+// now, which left a large empty gap of plain background at the top of every
+// card for no reason.
 const QUAVER_SHAPE = {
-  notehead: { cx: 0.46, cy: 0.58, rx: 0.281, ry: 0.187, rotate: -8 },
-  stem: { x: 0.644, y: 0.04, width: 0.103, height: 0.45 },
-  flag: 'M 0.695,0.04 C 0.934,0.095 1.016,0.261 0.870,0.399 C 0.961,0.297 0.970,0.141 0.695,0.04 Z',
+  notehead: { cx: 0.5, cy: 0.5, rx: 0.47, ry: 0.44, rotate: -8 },
 };
 
 // Rendered once per page that uses <QuaverPhoto> — every instance references
 // this single clipPath by id, so it isn't duplicated per photo.
 function QuaverClipDefs() {
-  const { notehead: n, stem: s, flag } = QUAVER_SHAPE;
+  const { notehead: n } = QUAVER_SHAPE;
   return (
     <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
       <defs>
         <clipPath id="quaverPhotoMask" clipPathUnits="objectBoundingBox">
           <ellipse cx={n.cx} cy={n.cy} rx={n.rx} ry={n.ry} transform={`rotate(${n.rotate} ${n.cx} ${n.cy})`} />
-          <rect x={s.x} y={s.y} width={s.width} height={s.height} />
-          <path d={flag} />
         </clipPath>
       </defs>
     </svg>
   );
 }
 
-// imageScale shrinks the photo within its own box via transform, revealing a
-// margin of the frame's stone background around it — a "zoom out" for a
-// cover-fit image, since object-position alone can't do that (it only shifts
-// which window of the source is visible, not how much of it — and on this
-// frame's tall aspect ratio, cover-fit already crops almost nothing off the
-// source vertically, so object-position's Y value has no real effect here).
-//
-// transformOrigin anchors the scale to the notehead's OWN centre point, not a
-// fixed edge of the box. Anchoring to the box's bottom edge (an earlier
-// version of this) put the face in the right place at one particular scale,
-// but every other scale value slid the image toward the bottom edge instead
-// of staying centred in the notehead — the smaller the scale, the more of the
-// notehead's upper half went uncovered. Anchoring to the notehead's own
-// centre means the image shrinks (or grows) symmetrically around that point,
-// so the face stays centred in the notehead at any imageScale.
-// offsetX/offsetY: quick manual nudge, in percent of the frame's own box,
-// applied AFTER the notehead-anchored scale — so a positive offsetY moves the
-// photo down, offsetX right, independent of imageScale. Use these for small
-// corrections (a face sitting slightly off-centre); if the source photo is
-// framed too tight or too wide to begin with, re-crop the source instead —
-// no offset/scale combination can show content that isn't in the file.
-function QuaverPhoto({ photo, alt, placeholderLabel, facePosition = '50% 82%', imageScale = 0.60, offsetX = 0, offsetY = 0, maxWidth = 260 }) {
-  const { notehead: n } = QUAVER_SHAPE;
+// Plain object-fit: cover — the imageScale/offsetX/offsetY transform system
+// this used to need existed specifically to compensate for the old tall,
+// stem-shaped box (cover-fit alone couldn't get a face to land in a narrow
+// oval sitting in the bottom third of a much taller frame). With the box now
+// sized to the oval itself, that problem doesn't exist — cover-fit crops a
+// normal portrait into a normal-ish oval the same way it would for any other
+// photo card on the site.
+function QuaverPhoto({ photo, alt, placeholderLabel, facePosition = '50% 25%', maxWidth = 260 }) {
   return (
     <div style={{ maxWidth, margin: '0 auto' }}>
-      <div style={{ position: 'relative', aspectRatio: '1 / 1.9' }}>
+      <div style={{ position: 'relative', aspectRatio: '1 / 1.08' }}>
         <div style={{
           position: 'absolute', inset: 0, clipPath: 'url(#quaverPhotoMask)', overflow: 'hidden',
-          // Always filled, photo or not: the scaled-down image doesn't cover
-          // the whole box, so a transparent background here left the
-          // uncovered slivers see-through to the page — breaking the note's
-          // silhouette right where there's no outline left to define its edge.
           background: C.stone,
         }}>
           {photo && (
             <img src={photo} alt={alt} style={{
               width: '100%', height: '100%', objectFit: 'cover', objectPosition: facePosition,
-              transform: `scale(${imageScale}) translate(${offsetX}%, ${offsetY}%)`,
-              transformOrigin: `${n.cx * 100}% ${n.cy * 100}%`,
+              // Monochrome, matching the brand-logo treatment elsewhere on the
+              // site — a slight contrast lift keeps a grayscale face from
+              // reading as flat/washed out.
+              filter: 'grayscale(1) contrast(1.08)',
             }} />
           )}
         </div>
@@ -592,13 +540,16 @@ function QuaverPhoto({ photo, alt, placeholderLabel, facePosition = '50% 82%', i
 }
 
 // ─── DEV-ONLY: PHOTO ADJUSTER ───────────────────────────────────────────────
-// Sliders that drive a QuaverPhoto's scale/offset live, plus a Save button
-// that POSTs the values to the local endpoint in setupProxy.js, which writes
-// them straight into this file's own source. Only ever rendered when
-// `process.env.NODE_ENV === 'development'` (checked at each call site) — CRA
-// dead-code-eliminates that branch from production builds, and the save
-// endpoint itself only exists under `react-scripts start` in the first
-// place, so none of this can reach the live site either way.
+// X/Y sliders that drive a QuaverPhoto's facePosition live, plus a Save button
+// that POSTs to the local endpoint in setupProxy.js, which writes the value
+// straight into this file's own source. Simpler than the version this
+// replaced: now that the frame is sized to fit the oval (no more tall empty
+// box), positioning is just plain object-position — no scale/offset transform
+// needed, so there's only X/Y to expose here.
+// Only ever rendered when `process.env.NODE_ENV === 'development'` (checked
+// at each call site) — CRA dead-code-eliminates that branch from production
+// builds, and the save endpoint itself only exists under `react-scripts
+// start` in the first place, so none of this can reach the live site either way.
 function PhotoAdjuster({ personKey, value, onChange }) {
   const [status, setStatus] = useState('idle'); // idle | saving | saved | error
 
@@ -620,16 +571,16 @@ function PhotoAdjuster({ personKey, value, onChange }) {
     }
   };
 
-  const row = (label, key, min, max, step) => (
+  const row = (label, key) => (
     <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 11, fontFamily: 'monospace', color: '#666' }}>
       <span style={{ width: 52, flexShrink: 0 }}>{label}</span>
       <input
-        type="range" min={min} max={max} step={step}
+        type="range" min={0} max={100} step={1}
         value={value[key]}
         onChange={e => onChange({ ...value, [key]: parseFloat(e.target.value) })}
         style={{ flex: 1 }}
       />
-      <span style={{ width: 42, textAlign: 'right', flexShrink: 0 }}>{value[key]}</span>
+      <span style={{ width: 34, textAlign: 'right', flexShrink: 0 }}>{value[key]}%</span>
     </label>
   );
 
@@ -644,11 +595,10 @@ function PhotoAdjuster({ personKey, value, onChange }) {
       background: '#fafafa', display: 'flex', flexDirection: 'column', gap: '0.35rem',
     }}>
       <div style={{ fontSize: 10, fontFamily: 'monospace', color: '#999', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-        Dev only — adjust photo
+        Dev only — adjust photo position
       </div>
-      {row('Scale', 'imageScale', 0.3, 1.0, 0.01)}
-      {row('Shift X', 'offsetX', -20, 20, 1)}
-      {row('Shift Y', 'offsetY', -20, 20, 1)}
+      {row('Position X', 'x')}
+      {row('Position Y', 'y')}
       <button
         onClick={save}
         disabled={status === 'saving'}
@@ -1108,13 +1058,7 @@ function Navbar({ activePage, setPage }) {
 
 // ─── HOME PAGE ────────────────────────────────────────────────────────────────
 function HomePage({ setPage }) {
-  const [testimonialIdx, setTestimonialIdx] = useState(0);
   const videoRef = useRef(null);
-
-  useEffect(() => {
-    const t = setInterval(() => setTestimonialIdx(i => (i + 1) % TESTIMONIALS.length), 5000);
-    return () => clearInterval(t);
-  }, []);
 
   const sectionStyle = (bg = C.ivory) => ({
     background: bg, padding: '4.25rem 2rem', position: 'relative', zIndex: 1,
@@ -1453,44 +1397,6 @@ function HomePage({ setPage }) {
         </div>
       </div>
 
-      {/* ── TESTIMONIALS ── */}
-      <div style={{ ...sectionStyle(C.stone) }}>
-        <div style={{ ...containerStyle, textAlign: 'center', maxWidth: 720 }}>
-          <SectionLabel>What Venues Say</SectionLabel>
-          <h2 style={{ fontSize: T.h3, marginBottom: '3rem' }}>Trusted by venues across the UK</h2>
-          <div style={{ position: 'relative', minHeight: 160 }}>
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} style={{
-                position: 'absolute', top: 0, left: 0, right: 0,
-                opacity: testimonialIdx === i ? 1 : 0,
-                transition: 'opacity 0.8s ease',
-                pointerEvents: testimonialIdx === i ? 'auto' : 'none',
-              }}>
-                <div style={{ fontSize: T.stat, color: C.goldText, lineHeight: 1, marginBottom: '0.5rem', fontFamily: 'Georgia, serif' }}>"</div>
-                <p style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, fontStyle: 'italic', color: C.nearBlack, lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                  {t.quote}
-                </p>
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.goldText, fontWeight: 600 }}>
-                  {t.author}
-                </div>
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: C.mid, marginTop: '0.25rem' }}>
-                  {t.venue}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '2rem' }}>
-            {TESTIMONIALS.map((_, i) => (
-              <button key={i} onClick={() => setTestimonialIdx(i)} style={{
-                width: i === testimonialIdx ? 24 : 8, height: 4,
-                background: i === testimonialIdx ? C.goldSolid : 'rgba(140,100,30,0.3)',
-                border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', borderRadius: 2,
-              }} />
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Partner logos now live in <BrandPanel /> directly beneath the hero. */}
 
       {/* ── CTA BANNER ── */}
@@ -1516,14 +1422,13 @@ function AboutPage({ setPage }) {
   const sectionStyle = (bg = C.ivory) => ({ background: bg, padding: '4.25rem 2rem', position: 'relative', zIndex: 1 });
   const containerStyle = { maxWidth: 1100, margin: '0 auto' };
 
-  // Seeded from whatever's currently hardcoded on each <QuaverPhoto> below, so
-  // the sliders start where the page actually is, not at some other default.
-  // The PhotoAdjuster panels (dev-only) mutate this for a live preview; Save
-  // writes it into the JSX on disk via setupProxy.js.
+  // Rough starting guesses based on where each face actually sits in its
+  // cropped photo, not QuaverPhoto's generic 50/25 default — refine with the
+  // sliders below once the page is up.
   const [photoAdjust, setPhotoAdjust] = useState({
-    jesse:    { imageScale: 0.60, offsetX: 0, offsetY: 0 },
-    alek:     { imageScale: 0.60, offsetX: 0, offsetY: 0 },
-    emmanuel: { imageScale: 0.62, offsetX: 0, offsetY: 0 },
+    jesse:    { x: 48, y: 35 },
+    alek:     { x: 55, y: 35 },
+    emmanuel: { x: 50, y: 25 },
   });
   const isDev = process.env.NODE_ENV === 'development';
 
@@ -1557,15 +1462,11 @@ function AboutPage({ setPage }) {
 
             {/* Jesse */}
             <div>
-              {/* TEMP: DJ Appz's photo stood in here so the quaver-frame shape can
-                  be previewed with a real image before Jesse's own photo exists.
-                  Swap `photo` back to `null` (or in jessePhoto once imported)
-                  once it's checked. */}
               <QuaverPhoto
-                photo={djAppzPhoto}
+                photo={jessePhoto}
                 alt="Jesse Appiah, Founder of Virtuoso Entertainment"
                 placeholderLabel="[ Jesse — Photo ]"
-                {...photoAdjust.jesse}
+                facePosition={`${photoAdjust.jesse.x}% ${photoAdjust.jesse.y}%`}
               />
               {isDev && (
                 <PhotoAdjuster
@@ -1587,12 +1488,11 @@ function AboutPage({ setPage }) {
 
             {/* Alek */}
             <div>
-              {/* photo={alekPhoto} once imported. */}
               <QuaverPhoto
-                photo={null}
+                photo={aleksPhoto}
                 alt="Aleksandar Shipman, Operations Manager at Virtuoso Entertainment"
                 placeholderLabel="[ Alek — Photo ]"
-                {...photoAdjust.alek}
+                facePosition={`${photoAdjust.alek.x}% ${photoAdjust.alek.y}%`}
               />
               {isDev && (
                 <PhotoAdjuster
@@ -1614,14 +1514,11 @@ function AboutPage({ setPage }) {
 
             {/* Emmanuel */}
             <div>
-              {/* imageScale seeded at 0.62 — 0.611 is the exact point this
-                  photo's cover-fit crop starts covering the full notehead
-                  width; 0.62 clears that with a small margin. */}
               <QuaverPhoto
                 photo={emmanuelPhoto}
                 alt="Emmanuel Ohuonu, Talent Acquisition Lead at Virtuoso Entertainment"
                 placeholderLabel="[ Emmanuel — Photo ]"
-                {...photoAdjust.emmanuel}
+                facePosition={`${photoAdjust.emmanuel.x}% ${photoAdjust.emmanuel.y}%`}
               />
               {isDev && (
                 <PhotoAdjuster
@@ -1686,23 +1583,12 @@ function AboutPage({ setPage }) {
         <div style={{ ...containerStyle, textAlign: 'center' }}>
           <SectionLabel>Who We Work With</SectionLabel>
           <h2 style={{ fontSize: T.h3, marginBottom: '1rem' }}>
-            Fashion parties. Influencer events. Private occasions.
+            Fashion parties. Influencer events. Bars and pubs. Private occasions.
           </h2>
           <GoldLine />
-          <p style={{ color: C.mid, maxWidth: 620, margin: '0 auto 3rem', lineHeight: 1.8 }}>
-            We do fashion parties, influencer parties, and private events — birthdays, weddings, and everything in between. We've worked with brands including <strong>Jubel</strong>, <strong>Boxpark</strong>, <strong>Proper Snacks</strong>, and <strong>Lightbox</strong>.
+          <p style={{ color: C.mid, maxWidth: 620, margin: '0 auto', lineHeight: 1.8 }}>
+            We do fashion parties, influencer parties, and private events — birthdays, weddings, and everything in between. We're just as much at home behind the bar, too — whether that's a one-off night or an ongoing residency in your bar or pub.
           </p>
-
-          {/* Brand logos strip */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '2.5rem', padding: '2rem', background: C.stone, border: `1px solid rgba(140,100,30,0.22)` }}>
-            {['Jubel', 'Boxpark', 'Proper Snacks', 'Lightbox'].map(brand => (
-              <div key={brand} style={{
-                fontFamily: 'Playfair Display, serif', fontSize: T.body, fontWeight: 600,
-                color: C.mid, letterSpacing: '0.05em',
-                /* Replace each with: <img src={brandLogo} alt={brand} style={{ height: 36, filter: 'grayscale(1)', mixBlendMode: 'multiply' }} /> */
-              }}>{brand}</div>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -2381,10 +2267,10 @@ function PartnerPage() {
               border: 'none', fontSize: T.xl, cursor: 'pointer', color: C.mid, lineHeight: 1,
             }}>×</button>
             <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.xl, marginBottom: '0.5rem' }}>Privacy Policy</h2>
-            <p style={{ fontSize: T.micro, color: C.mid, marginBottom: '1.5rem' }}>Last updated: [DATE] | Virtuoso Entertainment | [CITY], UK</p>
+            <p style={{ fontSize: T.micro, color: C.mid, marginBottom: '1.5rem' }}>Last updated: [DATE] | Virtuoso Entertainment | London, UK</p>
             <GoldLine style={{ margin: '0 0 1.5rem' }} />
             {[
-              { title: '1. Who We Are', body: 'Virtuoso Entertainment ("we", "us", "our") is an entertainment agency based in [CITY], UK. Our email address is Virtuoso-entertainment@outlook.com. We act as the data controller for personal information collected through this website.' },
+              { title: '1. Who We Are', body: 'Virtuoso Entertainment ("we", "us", "our") is an entertainment agency based in London, UK. Our email address is Virtuoso-entertainment@outlook.com. We act as the data controller for personal information collected through this website.' },
               { title: '2. What Data We Collect', body: 'When you submit a partnership enquiry, we collect: your name, venue name, email address, phone number (optional), venue location, and any information provided in your message. We do not collect payment details through this website.' },
               { title: '3. How We Use Your Data', body: 'We use your data to: respond to your partnership enquiry; provide information about our services; contact you regarding potential bookings or partnerships; and improve our services. We will not send unsolicited marketing without your consent.' },
               { title: '4. Legal Basis for Processing', body: 'We process your data on the basis of: (a) your consent, given by ticking the checkbox on our enquiry form; and (b) our legitimate interest in responding to business enquiries.' },
@@ -2448,10 +2334,10 @@ function Footer({ setPage }) {
           <div>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.goldOnDark, marginBottom: '1rem' }}>Contact</p>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: 'rgba(255,255,255,0.78)', lineHeight: 1.7, marginBottom: '0.75rem' }}>
-              Virtuoso-entertainment@outlook.com<br />[CITY], UK<br />[PHONE — optional]
+              Virtuoso-entertainment@outlook.com<br />London, UK<br />[PHONE — optional]
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
-              {['Instagram', 'Facebook', 'LinkedIn'].map(s => (
+              {['Instagram', 'LinkedIn'].map(s => (
                 <a key={s} href="#" style={{
                   fontFamily: 'Outfit, sans-serif', fontSize: T.micro, letterSpacing: '0.1em',
                   textTransform: 'uppercase', color: 'rgba(255,255,255,0.78)',
@@ -2467,12 +2353,11 @@ function Footer({ setPage }) {
         </div>
 
         {/* Bottom bar */}
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+        {/* Sole trader — no registration/company-number line. Add one back
+            once Virtuoso is actually incorporated. */}
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1.5rem' }}>
           <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: 'rgba(255,255,255,0.78)' }}>
             © {new Date().getFullYear()} Virtuoso Entertainment. All rights reserved.
-          </p>
-          <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: 'rgba(255,255,255,0.78)' }}>
-            Registered in England & Wales | [COMPANY NUMBER — if applicable]
           </p>
         </div>
       </div>
