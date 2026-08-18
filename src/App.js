@@ -19,6 +19,7 @@ import brandSimmons      from './Assets/Brands Worked/brand-simmons.png';
 // the source beats zooming with CSS transforms: the framing is fixed rather than
 // re-derived at every size, and it ships 88KB instead of 233KB.
 import djAppzPhoto from './Assets/Roster/djappz-portrait.jpg';
+import jordanPhoto from './Assets/Roster/Jordan-artist.png';
 
 // ─── ABOUT PAGE PHOTOGRAPHY ──────────────────────────────────────────────────
 // emmanuel-portrait.jpg is a 3:4 head-and-shoulders crop of the source (Emmanuel
@@ -113,8 +114,8 @@ const ROSTER = [
     slug: 'jordan',
     tagline: 'From the dance floor to the decks.',
     genres: ['Commercial', 'Latin', 'Pop'],
-    bio: 'Jordan brings a dancer’s instinct to the booth — before DJing, he competed and won at UK dance championships and performed for Monster Energy, and that read of a room shows in every set. Since launching his residency at Simmons Bar in October 2023, he has built a fast-growing reputation across London’s Latin, commercial and pop-leaning nightlife, adding a residency at Lightbox Vauxhall alongside BAILE TRAMA, ITSAFLIP, BAILE LONDON, Brixton Radio and the UK’s largest Latin festival. For venues, that means a DJ who carries a themed Latin night and a mainstream commercial floor with equal confidence.',
-    photo: null,          // photo to follow — will be added to src/Assets/Roster
+    bio: ‘Jordan brings a dancer’s instinct to the booth — before DJing, he competed and won at UK dance championships and performed for Monster Energy, and that read of a room shows in every set. Since launching his residency at Simmons Bar in October 2023, he has built a fast-growing reputation across London’s Latin, commercial and pop-leaning nightlife, adding a residency at Lightbox Vauxhall alongside BAILE TRAMA, ITSAFLIP, BAILE LONDON, Brixton Radio and the UK’s largest Latin festival. For venues, that means a DJ who carries a themed Latin night and a mainstream commercial floor with equal confidence.’,
+    photo: jordanPhoto,
     photoDecks: null,
     instagram: '@jordanblack_o',
     mixes: [
@@ -250,7 +251,7 @@ const SERVICES = [
 // ─── FAQ DATA ─────────────────────────────────────────────────────────────────
 const FAQS = [
   {
-    q: "How does a venue partnership with Virtuoso work?",
+    q: "How does a venue partnership with Virtuoso Collective work?",
     a: "We begin with a discovery call to understand your venue, audience, and goals. From there we propose a tailored entertainment package — residency, one-off events, or a hybrid. Once agreed, we handle talent, scheduling, and logistics while you remain the decision-maker throughout.",
   },
   {
@@ -259,7 +260,7 @@ const FAQS = [
   },
   {
     q: "What geographic areas do you cover?",
-    a: "We currently operate across [REGIONS — e.g. London, Birmingham, Manchester, Leeds]. If you're outside these areas, get in touch — we assess out-of-region bookings on a case-by-case basis.",
+    a: "We're primarily based around the Greater London area, and that's where most of our residencies and events sit. We can also provision DJs for cities across the UK given ample notice — get in touch with your dates and location and we'll let you know what's possible.",
   },
   {
     q: "Do you provide sound and production equipment?",
@@ -1099,24 +1100,23 @@ function HomePage({ setPage }) {
 
         {/* Hero content */}
         <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 2rem', maxWidth: 860 }}>
-          {/* Centred name overlay */}
+          {/* Logo wordmark overlay */}
+          <div style={{ margin: '0 auto 1.5rem', lineHeight: 1 }}>
+            <Wordmark colour={C.white} note={C.goldSolid} style={{
+              fontSize: '8rem',
+              filter: 'drop-shadow(0 2px 30px rgba(23,21,18,0.55))',
+            }} />
+          </div>
           <h1 style={{ margin: 0, lineHeight: 1 }}>
-            <span style={{
-              display: 'block',
-              fontFamily: 'Playfair Display, serif',
-              fontSize: T.heroName,
-              fontWeight: 700, letterSpacing: '0.02em', color: C.white,
-              textShadow: '0 2px 30px rgba(23,21,18,0.55)',
-            }}>Virtuoso</span>
             <span style={{
               display: 'block',
               fontFamily: 'Outfit, sans-serif',
               fontSize: T.heroSub,
               fontWeight: 300, letterSpacing: '0.42em',
               textTransform: 'uppercase', color: 'rgba(255,255,255,0.92)',
-              marginTop: '0.85rem', marginLeft: '0.42em',   // offset the trailing letter-space
+              marginLeft: '0.42em',   // offset the trailing letter-space
               textShadow: '0 1px 18px rgba(23,21,18,0.6)',
-            }}>Entertainment</span>
+            }}>Collective</span>
           </h1>
 
           {/* Tagline subheading */}
@@ -1192,7 +1192,7 @@ function HomePage({ setPage }) {
           grid, so the page opens with a voice instead of a feature list. */}
       <div style={{ ...sectionStyle(C.ivory), padding: '5rem 2rem 3.5rem' }}>
         <div style={{ maxWidth: 780, margin: '0 auto', textAlign: 'center' }}>
-          <SectionLabel>Virtuoso Entertainment</SectionLabel>
+          <SectionLabel>Virtuoso Collective</SectionLabel>
           <h2 style={{
             fontFamily: 'Playfair Display, serif',
             fontSize: T.statement,
@@ -1225,10 +1225,10 @@ function HomePage({ setPage }) {
             </h2>
             <GoldLine style={{ margin: '0 0 1.5rem' }} />
             <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '1rem' }}>
-              Virtuoso Entertainment is a premium agency connecting venues with hand-picked DJ talent and bespoke entertainment experiences. From weekly residencies to headline events, we manage everything — so your nights run seamlessly.
+              Virtuoso Collective is a premium agency connecting venues with hand-picked DJ talent and bespoke entertainment experiences. From weekly residencies to headline events, we manage everything — so your nights run seamlessly.
             </p>
             <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '2rem' }}>
-              Our roster represents some of the most respected selectors in the circuit, each vetted for professionalism, stage presence, and the ability to read a room. When you partner with Virtuoso, you get more than a DJ — you get a team that cares about your venue's reputation as much as you do.
+              Our roster represents some of the most respected selectors in the circuit, each vetted for professionalism, stage presence, and the ability to read a room. When you partner with Virtuoso Collective, you get more than a DJ — you get a team that cares about your venue's reputation as much as you do.
             </p>
             <button onClick={() => setPage('About')} style={{
               fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
@@ -1249,7 +1249,7 @@ function HomePage({ setPage }) {
           }}>
             <img
               src={introPhoto}
-              alt="A packed dance floor at a Virtuoso event"
+              alt="A packed dance floor at a Virtuoso Collective event"
               loading="lazy"
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
@@ -1265,36 +1265,6 @@ function HomePage({ setPage }) {
         }`}</style>
       </div>
 
-      {/* ── QUICK NAV ── */}
-      <div style={{ ...sectionStyle(C.stone), padding: '3rem 2rem' }}>
-        <div style={containerStyle}>
-          <div style={{ textAlign: 'center', marginBottom: '2.25rem' }}>
-            <SectionLabel>Explore</SectionLabel>
-            <h2 style={{ fontSize: T.h3 }}>Everything Virtuoso offers</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
-            {[
-              { label: 'Services', icon: '◈', page: 'Services' },
-              { label: 'Our Roster', icon: '◉', page: 'Roster' },
-              { label: 'About Us', icon: '◇', page: 'About' },
-              { label: 'FAQ', icon: '◎', page: 'FAQ' },
-              { label: 'Partner With Us', icon: '◆', page: 'Partner With Us' },
-            ].map(card => (
-              <div key={card.label} onClick={() => setPage(card.page)} style={{
-                background: C.white, padding: '2rem 1.5rem', textAlign: 'center', cursor: 'pointer',
-                border: `1px solid rgba(140,100,30,0.22)`, transition: 'all 0.25s ease',
-              }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(140,100,30,0.22)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
-              >
-                <div style={{ fontSize: T.xl, color: C.goldText, marginBottom: '0.75rem' }}>{card.icon}</div>
-                <div style={{ fontFamily: 'Playfair Display, serif', fontSize: T.body, fontWeight: 600 }}>{card.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* ── SERVICES PREVIEW ── */}
       <div style={sectionStyle(C.ivory)}>
         <div style={containerStyle}>
@@ -1303,16 +1273,22 @@ function HomePage({ setPage }) {
             <h2 style={{ fontSize: T.h2 }}>Entertainment for every occasion</h2>
             <GoldLine />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
+          {/* Cards emphasised: a gold top rule, a real shadow and a heavier
+              border give each box definition against the ivory background —
+              previously they read as faint outlines that barely separated
+              from the page. Icons dropped; the titles carry the cards. */}
+          <div className="service-cards" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.75rem' }}>
             {SERVICES.map(s => (
               <div key={s.id} style={{
-                background: C.white, padding: '2.5rem 2rem', border: `1px solid rgba(140,100,30,0.22)`,
+                background: C.white, padding: '2.25rem 1.75rem',
+                border: `2px solid rgba(140,100,30,0.5)`,
+                borderTop: `5px solid ${C.gold}`,
+                boxShadow: '0 4px 20px rgba(23,21,18,0.12)',
                 transition: 'all 0.25s ease',
               }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.transform = 'translateY(-3px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(140,100,30,0.22)'; e.currentTarget.style.transform = 'none'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.borderTopColor = C.gold; e.currentTarget.style.boxShadow = '0 8px 30px rgba(23,21,18,0.18)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(140,100,30,0.5)'; e.currentTarget.style.borderTopColor = C.gold; e.currentTarget.style.boxShadow = '0 4px 20px rgba(23,21,18,0.12)'; e.currentTarget.style.transform = 'none'; }}
               >
-                <div style={{ fontSize: T.h4, color: C.goldText, marginBottom: '1rem' }}>{s.icon}</div>
                 <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '0.75rem' }}>{s.title}</h3>
                 <p style={{ color: C.mid, fontSize: T.body, lineHeight: 1.7, marginBottom: '1.25rem' }}>{s.description}</p>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
@@ -1332,6 +1308,14 @@ function HomePage({ setPage }) {
               background: 'transparent', border: `1px solid ${C.gold}`, padding: '0.75rem 2rem', cursor: 'pointer',
             }}>View All Services</button>
           </div>
+          {/* On phones the auto-fit grid drops to a single column, which made
+              each card a tall full-width block with a lot of internal padding.
+              Tighter padding and gaps keep the section scannable rather than
+              forcing four long scrolls. */}
+          <style>{`@media (max-width: 600px) {
+            .service-cards { gap: 1rem !important; }
+            .service-cards > div { padding: 1.5rem 1.25rem !important; }
+          }`}</style>
         </div>
       </div>
 
@@ -1441,13 +1425,13 @@ function AboutPage({ setPage }) {
         <div style={containerStyle}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
             <SectionLabel>Our Story</SectionLabel>
-            <h1 style={{ fontSize: T.h1, marginBottom: '1rem' }}>About Virtuoso</h1>
+            <h1 style={{ fontSize: T.h1, marginBottom: '1rem' }}>About Virtuoso Collective</h1>
             <GoldLine />
           </div>
 
           {/* ── THE PEOPLE BEHIND VIRTUOSO ── */}
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <SectionLabel>The People Behind Virtuoso</SectionLabel>
+            <SectionLabel>The People Behind Virtuoso Collective</SectionLabel>
             <h2 style={{ fontSize: T.h3, marginBottom: '1.5rem' }}>
               Built by people who live for the dance floor.
             </h2>
@@ -1464,7 +1448,7 @@ function AboutPage({ setPage }) {
             <div>
               <QuaverPhoto
                 photo={jessePhoto}
-                alt="Jesse Appiah, Founder of Virtuoso Entertainment"
+                alt="Jesse Appiah, Founder of Virtuoso Collective"
                 placeholderLabel="[ Jesse — Photo ]"
                 facePosition={`${photoAdjust.jesse.x}% ${photoAdjust.jesse.y}%`}
               />
@@ -1490,7 +1474,7 @@ function AboutPage({ setPage }) {
             <div>
               <QuaverPhoto
                 photo={aleksPhoto}
-                alt="Aleksandar Shipman, Operations Manager at Virtuoso Entertainment"
+                alt="Aleksandar Shipman, Operations Manager at Virtuoso Collective"
                 placeholderLabel="[ Alek — Photo ]"
                 facePosition={`${photoAdjust.alek.x}% ${photoAdjust.alek.y}%`}
               />
@@ -1508,7 +1492,7 @@ function AboutPage({ setPage }) {
               <BioParagraphs paragraphs={[
                 "Alek's earliest memories of music go back to school assembly halls — a trumpet in hand, keeping time in the brass band during his school days. That grounding stuck with him, even as his own taste pulled toward retro, pop and rock culture along the way.",
                 "He's not the one behind the decks — he's the one who makes sure everything around them runs properly. A people person through and through, Alek is usually the first to get a reluctant crowd onto the floor, and the one keeping the night on track while everyone else is enjoying it.",
-                'As Operations Manager, that same energy shapes how Virtuoso runs day to day — organised, personable, and always ready to get the floor moving when the moment calls for it.',
+                'As Operations Manager, that same energy shapes how Virtuoso Collective runs day to day — organised, personable, and always ready to get the floor moving when the moment calls for it.',
               ]} />
             </div>
 
@@ -1516,7 +1500,7 @@ function AboutPage({ setPage }) {
             <div>
               <QuaverPhoto
                 photo={emmanuelPhoto}
-                alt="Emmanuel Ohuonu, Talent Acquisition Lead at Virtuoso Entertainment"
+                alt="Emmanuel Ohuonu, Talent Acquisition Lead at Virtuoso Collective"
                 placeholderLabel="[ Emmanuel — Photo ]"
                 facePosition={`${photoAdjust.emmanuel.x}% ${photoAdjust.emmanuel.y}%`}
               />
@@ -1660,7 +1644,7 @@ function ServicesPage({ setPage }) {
                   {s.photo
                     ? <img
                         src={s.photo}
-                        alt={`${s.title} — Virtuoso Entertainment`}
+                        alt={`${s.title} — Virtuoso Collective`}
                         loading="lazy"
                         style={{
                           width: '100%', height: '100%', objectFit: 'cover', display: 'block',
@@ -2123,7 +2107,7 @@ function PartnerPage() {
         </p>
         <div style={{ marginTop: '2rem', padding: '1.5rem', background: C.stone, border: `1px solid rgba(140,100,30,0.2)`, textAlign: 'left' }}>
           <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldText, marginBottom: '0.75rem' }}>What Happens Next</p>
-          {['Our team will review your enquiry', 'We’ll match you with suitable artists from the roster', 'A Virtuoso representative will contact you within 24 hours', 'We’ll schedule a discovery call at your convenience'].map((step, i) => (
+          {["Our team will review your enquiry", "We’ll match you with suitable artists from the roster", "A Virtuoso Collective representative will contact you within 24 hours", "We’ll schedule a discovery call at your convenience"].map((step, i) => (
             <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
               <span style={{ color: C.goldText, fontWeight: 600, fontSize: T.small, flexShrink: 0 }}>{i + 1}.</span>
               <span style={{ color: C.mid, fontSize: T.small }}>{step}</span>
@@ -2139,7 +2123,7 @@ function PartnerPage() {
       <div style={containerStyle}>
         <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
           <SectionLabel>Get In Touch</SectionLabel>
-          <h1 style={{ fontSize: T.h1 }}>Partner With Virtuoso</h1>
+          <h1 style={{ fontSize: T.h1 }}>Partner With Virtuoso Collective</h1>
           <GoldLine />
           <p style={{ color: C.mid, maxWidth: 500, margin: '0 auto', lineHeight: 1.7 }}>
             Tell us about your venue and what you're looking for. We'll be in touch within 24 hours.
@@ -2227,9 +2211,9 @@ function PartnerPage() {
               <input type="checkbox" checked={form.privacy} onChange={e => handleChange('privacy', e.target.checked)}
                 style={{ marginTop: '0.2rem', width: 16, height: 16, flexShrink: 0, accentColor: C.goldSolid }} />
               <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.mid, lineHeight: 1.6 }}>
-                I have read and agree to Virtuoso Entertainment's{' '}
+                I have read and agree to Virtuoso Collective's{' '}
                 <span onClick={() => setShowPrivacy(true)} style={{ color: C.goldText, cursor: 'pointer', textDecoration: 'underline' }}>Privacy Policy</span>.
-                {' '}I consent to my information being used to process this enquiry and for Virtuoso to contact me in relation to entertainment services. *
+                {' '}I consent to my information being used to process this enquiry and for Virtuoso Collective to contact me in relation to entertainment services. *
               </span>
             </label>
           </div>
@@ -2267,10 +2251,10 @@ function PartnerPage() {
               border: 'none', fontSize: T.xl, cursor: 'pointer', color: C.mid, lineHeight: 1,
             }}>×</button>
             <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.xl, marginBottom: '0.5rem' }}>Privacy Policy</h2>
-            <p style={{ fontSize: T.micro, color: C.mid, marginBottom: '1.5rem' }}>Last updated: [DATE] | Virtuoso Entertainment | London, UK</p>
+            <p style={{ fontSize: T.micro, color: C.mid, marginBottom: '1.5rem' }}>Last updated: [DATE] | Virtuoso Collective | London, UK</p>
             <GoldLine style={{ margin: '0 0 1.5rem' }} />
             {[
-              { title: '1. Who We Are', body: 'Virtuoso Entertainment ("we", "us", "our") is an entertainment agency based in London, UK. Our email address is Virtuoso-entertainment@outlook.com. We act as the data controller for personal information collected through this website.' },
+              { title: '1. Who We Are', body: 'Virtuoso Collective ("we", "us", "our") is an entertainment agency based in London, UK. Our email address is Virtuoso-entertainment@outlook.com. We act as the data controller for personal information collected through this website.' },
               { title: '2. What Data We Collect', body: 'When you submit a partnership enquiry, we collect: your name, venue name, email address, phone number (optional), venue location, and any information provided in your message. We do not collect payment details through this website.' },
               { title: '3. How We Use Your Data', body: 'We use your data to: respond to your partnership enquiry; provide information about our services; contact you regarding potential bookings or partnerships; and improve our services. We will not send unsolicited marketing without your consent.' },
               { title: '4. Legal Basis for Processing', body: 'We process your data on the basis of: (a) your consent, given by ticking the checkbox on our enquiry form; and (b) our legitimate interest in responding to business enquiries.' },
@@ -2334,7 +2318,7 @@ function Footer({ setPage }) {
           <div>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.goldOnDark, marginBottom: '1rem' }}>Contact</p>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: 'rgba(255,255,255,0.78)', lineHeight: 1.7, marginBottom: '0.75rem' }}>
-              Virtuoso-entertainment@outlook.com<br />London, UK<br />[PHONE — optional]
+              Virtuoso-entertainment@outlook.com<br />London, UK
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
               {['Instagram', 'LinkedIn'].map(s => (
@@ -2357,7 +2341,7 @@ function Footer({ setPage }) {
             once Virtuoso is actually incorporated. */}
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1.5rem' }}>
           <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: 'rgba(255,255,255,0.78)' }}>
-            © {new Date().getFullYear()} Virtuoso Entertainment. All rights reserved.
+            © {new Date().getFullYear()} Virtuoso Collective. All rights reserved.
           </p>
         </div>
       </div>
