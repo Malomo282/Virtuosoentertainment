@@ -84,7 +84,7 @@ const ROSTER = [
     photoDecks: null,     // import djAppzDecks from './Assets/Roster/djappz-decks.jpg'
     focus: '50% 8%',      // photo is already 3:4, so this only bites on square crops (nav thumbnail)
     face:  '43% 44%',     // where his face sits in the frame — used by the thumbnail
-    thumbZoom: 2.8,       // push in for the 32px nav thumbnail only
+    thumbZoom: 1.8,       // push in for the 32px nav thumbnail only
     instagram: '@djappz',
     mixes: [
       {
