@@ -14,7 +14,7 @@ import brandLightbox     from './Assets/Brands Worked/brand-lightbox.png';
 import brandSimmons      from './Assets/Brands Worked/brand-simmons.png';
 
 // ─── ROSTER PHOTOGRAPHY ──────────────────────────────────────────────────────
-import djAppzPhoto from './Assets/Roster/DJ Appz.png';
+import djAppzPhoto from './Assets/Roster/djappz.png';
 import jordanPhoto from './Assets/Roster/Jordan-artist.png';
 
 // ─── ABOUT PAGE PHOTOGRAPHY ──────────────────────────────────────────────────
