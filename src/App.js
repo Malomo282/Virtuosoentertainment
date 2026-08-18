@@ -114,7 +114,7 @@ const ROSTER = [
     slug: 'jordan',
     tagline: 'From the dance floor to the decks.',
     genres: ['Commercial', 'Latin', 'Pop'],
-    bio: ‘Jordan brings a dancer’s instinct to the booth — before DJing, he competed and won at UK dance championships and performed for Monster Energy, and that read of a room shows in every set. Since launching his residency at Simmons Bar in October 2023, he has built a fast-growing reputation across London’s Latin, commercial and pop-leaning nightlife, adding a residency at Lightbox Vauxhall alongside BAILE TRAMA, ITSAFLIP, BAILE LONDON, Brixton Radio and the UK’s largest Latin festival. For venues, that means a DJ who carries a themed Latin night and a mainstream commercial floor with equal confidence.’,
+    bio: "Jordan brings a dancer’s instinct to the booth — before DJing, he competed and won at UK dance championships and performed for Monster Energy, and that read of a room shows in every set. Since launching his residency at Simmons Bar in October 2023, he has built a fast-growing reputation across London’s Latin, commercial and pop-leaning nightlife, adding a residency at Lightbox Vauxhall alongside BAILE TRAMA, ITSAFLIP, BAILE LONDON, Brixton Radio and the UK’s largest Latin festival. For venues, that means a DJ who carries a themed Latin night and a mainstream commercial floor with equal confidence.",
     photo: jordanPhoto,
     photoDecks: null,
     instagram: '@jordanblack_o',
