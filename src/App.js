@@ -971,14 +971,14 @@ function Navbar({ activePage, setPage }) {
           </div>
 
           {/* CTA */}
-          <button onClick={() => setPage('Partner With Us')} style={{
+          <button onClick={() => setPage('Work With Us')} style={{
             fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
             letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
             background: C.goldSolid, padding: '0.6rem 1.4rem', border: 'none', cursor: 'pointer', transition: 'opacity 0.2s',
           }}
             onMouseEnter={e => e.target.style.opacity = '0.85'}
             onMouseLeave={e => e.target.style.opacity = '1'}
-          >Partner With Us</button>
+          >Work With Us</button>
         </div>
 
         {/* Hamburger */}
@@ -1036,10 +1036,10 @@ function Navbar({ activePage, setPage }) {
             )}
           </div>
 
-          <span onClick={() => { setPage('Partner With Us'); setMobileOpen(false); }} style={{
+          <span onClick={() => { setPage('Work With Us'); setMobileOpen(false); }} style={{
             fontFamily: 'Playfair Display, serif', fontSize: T.h4, fontWeight: 600,
-            color: activePage === 'Partner With Us' ? C.goldText : C.nearBlack, cursor: 'pointer', padding: '0.6rem 0',
-          }}>Partner With Us</span>
+            color: activePage === 'Work With Us' ? C.goldText : C.nearBlack, cursor: 'pointer', padding: '0.6rem 0',
+          }}>Work With Us</span>
         </div>
       </div>
 
@@ -1133,7 +1133,7 @@ function HomePage({ setPage }) {
             Curated DJ talent and entertainment experiences for venues that take their atmosphere seriously.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button onClick={() => setPage('Partner With Us')} style={{
+            <button onClick={() => setPage('Work With Us')} style={{
               fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
               letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
               background: C.goldSolid, border: 'none', padding: '1rem 2.5rem', cursor: 'pointer',
@@ -1387,7 +1387,7 @@ function HomePage({ setPage }) {
         <p style={{ color: C.white, maxWidth: 480, margin: '0 auto 2.5rem', fontSize: T.body, fontWeight: 400 }}>
           Submit a partnership enquiry and we'll be in touch within 24 hours.
         </p>
-        <button onClick={() => setPage('Partner With Us')} style={{
+        <button onClick={() => setPage('Work With Us')} style={{
           fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
           letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldText,
           background: C.white, border: 'none', padding: '1rem 2.5rem', cursor: 'pointer',
@@ -1575,11 +1575,11 @@ function AboutPage({ setPage }) {
       {/* ── CTA ── */}
       <div style={{ ...sectionStyle(C.stone), textAlign: 'center' }}>
         <SectionLabel>Get Started</SectionLabel>
-        <h2 style={{ fontSize: T.h3, marginBottom: '1rem' }}>Partner with us today</h2>
+        <h2 style={{ fontSize: T.h3, marginBottom: '1rem' }}>Work with us today</h2>
         <p style={{ color: C.mid, maxWidth: 500, margin: '0 auto 2rem', lineHeight: 1.7 }}>
           Based in London and Greater London — ready to bring the energy to your next event or venue.
         </p>
-        <button onClick={() => setPage('Partner With Us')} style={{
+        <button onClick={() => setPage('Work With Us')} style={{
           fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
           letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
           background: C.goldSolid, border: 'none', padding: '1rem 2.5rem', cursor: 'pointer',
@@ -1627,7 +1627,7 @@ function ServicesPage({ setPage }) {
                       </li>
                     ))}
                   </ul>
-                  <button onClick={() => setPage('Partner With Us')} style={{
+                  <button onClick={() => setPage('Work With Us')} style={{
                     fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
                     letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldText,
                     background: 'transparent', border: `1px solid ${C.gold}`, padding: '0.75rem 1.75rem', cursor: 'pointer',
@@ -1669,7 +1669,7 @@ function ServicesPage({ setPage }) {
         <p style={{ color: C.white, maxWidth: 480, margin: '0 auto 2.5rem', fontWeight: 400 }}>
           Tell us about your venue and we'll recommend the right entertainment solution.
         </p>
-        <button onClick={() => setPage('Partner With Us')} style={{
+        <button onClick={() => setPage('Work With Us')} style={{
           fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
           letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldText,
           background: C.white, border: 'none', padding: '1rem 2.5rem', cursor: 'pointer',
@@ -1846,7 +1846,7 @@ function ArtistPage({ slug, setPage }) {
             </div>
           )}
 
-          <button onClick={() => setPage('Partner With Us')} style={{
+          <button onClick={() => setPage('Work With Us')} style={{
             fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
             letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
             background: C.goldSolid, border: 'none', padding: '1rem 2.25rem', cursor: 'pointer',
@@ -1971,7 +1971,7 @@ function RosterPage({ setPage }) {
         <p style={{ color: 'rgba(255,255,255,0.78)', maxWidth: 480, margin: '0 auto 2rem', lineHeight: 1.7, fontSize: T.body }}>
           Submit a partnership enquiry, let us know which artist caught your eye, and we'll be in touch within 24 hours.
         </p>
-        <button onClick={() => setPage('Partner With Us')} style={{
+        <button onClick={() => setPage('Work With Us')} style={{
           fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
           letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
           background: C.goldSolid, border: 'none', padding: '1rem 2.5rem', cursor: 'pointer',
@@ -2034,7 +2034,7 @@ function FAQPage() {
 }
 
 // ─── PARTNER PAGE (ENQUIRY FORM) ──────────────────────────────────────────────
-function PartnerPage() {
+function WorkWithUsPage() {
   const [form, setForm] = useState({
     venueName: '', contactName: '', email: '', phone: '',
     venueType: '', location: '', capacity: '', preferredDate: '',
@@ -2291,7 +2291,7 @@ function Footer({ setPage }) {
           {/* Nav */}
           <div>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.goldOnDark, marginBottom: '1rem' }}>Navigate</p>
-            {['Home', 'About', 'Services', 'Roster', 'FAQ', 'Partner With Us'].map(item => (
+            {['Home', 'About', 'Services', 'Roster', 'FAQ', 'Work With Us'].map(item => (
               <div key={item} onClick={() => { setPage(item); window.scrollTo(0, 0); }} style={{
                 fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: 'rgba(255,255,255,0.78)',
                 marginBottom: '0.5rem', cursor: 'pointer', transition: 'color 0.2s',
@@ -2350,7 +2350,7 @@ function Footer({ setPage }) {
 // Hash routing, so every page — artist profiles especially — has a real URL that
 // can be shared and bookmarked, and the browser back button behaves. Internally
 // a page is either a nav label ('About') or 'artist:<slug>'.
-const PAGES = ['Home', 'About', 'Services', 'Roster', 'FAQ', 'Partner With Us'];
+const PAGES = ['Home', 'About', 'Services', 'Roster', 'FAQ', 'Work With Us'];
 
 const pageToHash = (p) => {
   if (p.startsWith('artist:')) return `#/artist/${p.slice(7)}`;
@@ -2399,7 +2399,7 @@ export default function App() {
       case 'Services':        return <ServicesPage setPage={setPageAndScroll} />;
       case 'Roster':          return <RosterPage setPage={setPageAndScroll} />;
       case 'FAQ':             return <FAQPage />;
-      case 'Partner With Us': return <PartnerPage />;
+      case 'Work With Us': return <WorkWithUsPage />;
       default:                return <HomePage setPage={setPageAndScroll} />;
     }
   };
