@@ -1095,11 +1095,11 @@ function HomePage({ setPage }) {
         }} />
 
         {/* Hero content */}
-        <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 2rem', maxWidth: 860 }}>
+        <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '3rem 2rem 0', maxWidth: 860 }}>
           {/* Logo wordmark overlay */}
           <div style={{ margin: '0 auto 1.5rem', lineHeight: 1 }}>
             <Wordmark colour={C.white} note={C.goldSolid} style={{
-              fontSize: '8rem',
+              fontSize: '5.5rem',
               filter: 'drop-shadow(0 2px 30px rgba(23,21,18,0.55))',
             }} />
           </div>
