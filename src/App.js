@@ -1158,7 +1158,7 @@ function HomePage({ setPage }) {
               once the hero got shorter; sitting in the flow means it can never
               collide with content above it, whatever the hero's height. */}
           <div style={{
-            marginTop: '2.25rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
+            marginTop: '0.75rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
             color: 'rgba(255,255,255,0.78)', fontSize: T.micro, letterSpacing: '0.15em', textTransform: 'uppercase',
           }}>
             <span>Scroll</span>
