@@ -14,11 +14,7 @@ import brandLightbox     from './Assets/Brands Worked/brand-lightbox.png';
 import brandSimmons      from './Assets/Brands Worked/brand-simmons.png';
 
 // ─── ROSTER PHOTOGRAPHY ──────────────────────────────────────────────────────
-// djappz-portrait.jpg is a 3:4 head-and-torso crop of the full-length original
-// (djappz-bio.jpeg, kept as the master and deliberately not imported). Cropping
-// the source beats zooming with CSS transforms: the framing is fixed rather than
-// re-derived at every size, and it ships 88KB instead of 233KB.
-import djAppzPhoto from './Assets/Roster/djappz-portrait.jpg';
+import djAppzPhoto from './Assets/Roster/DJ Appz.png';
 import jordanPhoto from './Assets/Roster/Jordan-artist.png';
 
 // ─── ABOUT PAGE PHOTOGRAPHY ──────────────────────────────────────────────────
