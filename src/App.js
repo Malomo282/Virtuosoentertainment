@@ -1146,15 +1146,30 @@ function HomePage({ setPage }) {
             margin: '1.5rem auto 0', fontWeight: 400, lineHeight: 1.5,
             textShadow: '0 1px 18px rgba(23,21,18,0.6)',
           }}>
-            Great nights aren't left to chance.
+            More than music
           </p>
-          <p style={{
-            fontFamily: 'Outfit, sans-serif', fontSize: T.body,
-            color: 'rgba(255,255,255,0.88)', maxWidth: 560,
-            margin: '0.85rem auto 2rem', fontWeight: 300, lineHeight: 1.7,
-          }}>
-            Curated DJ talent and entertainment experiences for venues that take their atmosphere seriously.
-          </p>
+          <div style={{ maxWidth: 720, margin: '0.85rem auto 2rem' }}>
+            <p style={{
+              fontFamily: 'Outfit, sans-serif', fontSize: T.body,
+              color: 'rgba(255,255,255,0.88)', fontWeight: 300, lineHeight: 1.7,
+              marginBottom: '1rem',
+            }}>
+              We place DJs in venues across London — from residencies, launch nights and private parties to weddings and corporate events — and stay involved after the booking is confirmed.
+            </p>
+            <p style={{
+              fontFamily: 'Outfit, sans-serif', fontSize: T.body,
+              color: 'rgba(255,255,255,0.88)', fontWeight: 300, lineHeight: 1.7,
+              marginBottom: '1rem',
+            }}>
+              We handle programming, equipment, timings and the transition from speeches to the first track, making sure the night runs smoothly.
+            </p>
+            <p style={{
+              fontFamily: 'Outfit, sans-serif', fontSize: T.body,
+              color: 'rgba(255,255,255,0.88)', fontWeight: 300, lineHeight: 1.7,
+            }}>
+              Every DJ on our roster is vetted for skill and professionalism. They can read a room, adapt quickly and represent your venue properly.
+            </p>
+          </div>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button onClick={() => setPage('Work With Us')} style={{
               fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
