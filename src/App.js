@@ -1432,6 +1432,13 @@ function AboutPage({ setPage }) {
             <GoldLine />
           </div>
 
+          {/* ── PREAMBLE ── */}
+          <div style={{ textAlign: 'center', marginBottom: '3.5rem', maxWidth: 800, margin: '0 auto 3.5rem' }}>
+            <p style={{ color: C.mid, lineHeight: 1.8, fontSize: T.body }}>
+              Providing DJs, curating playlists and coordinating a seamless experience is the key to lasting memories. We help our clients find consistency, quality and reliability for their events. Our musically inclined team is experienced in delivering premium talent, adept in holding the dancefloor.
+            </p>
+          </div>
+
           {/* ── THE PEOPLE BEHIND VIRTUOSO ── */}
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <SectionLabel>The People Behind Virtuoso Collective</SectionLabel>
@@ -1439,9 +1446,6 @@ function AboutPage({ setPage }) {
               Built by people who live for the dance floor.
             </h2>
             <GoldLine />
-            <p style={{ color: C.mid, lineHeight: 1.9, maxWidth: 680, margin: '0 auto' }}>
-              We work with people we like. We work with beautiful people. Music carries the mood, energy and outlook of all those that hear it — the DJ is the orchestrator that takes people on the journey and curates the energy. When you book with us, our artists bring their energy into your world, connecting with your people and spreading the good times. We operate in <strong>London and Greater London</strong>, working with brands and venues that care about the experience they create.
-            </p>
           </div>
 
           {/* Founder + Operations Manager, side by side */}
