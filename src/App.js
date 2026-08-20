@@ -1960,10 +1960,7 @@ function RosterPage({ setPage }) {
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '2.5rem 2.5rem 3.5rem' }}>
         <div style={{
           display: 'grid',
-          // Capped rather than 1fr, so cards stay a consistent, modest size
-          // instead of stretching to fill the row when the roster is small.
-          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 240px))',
-          justifyContent: 'start',
+          gridTemplateColumns: 'repeat(4, 1fr)',
           gap: '2.5rem 2rem',
         }}>
           {LIVE_ROSTER.map(dj => (
