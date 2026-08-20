@@ -270,6 +270,10 @@ const FAQS = [
     q: "How quickly can you staff an event?",
     a: "For planned events we recommend four to six weeks' notice. For urgent bookings, contact us directly — subject to availability, we can often move within 72 hours.",
   },
+  {
+    q: "Can I provide my own playlist?",
+    a: "Absolutely! I actively encourage you to provide a playlist. Whether it's big or small, anywhere from 20 to 200 songs, it helps to put a microscope on exactly the music you love. I will then use it as a blueprint to compliment it. You may also provide genres.",
+  },
 ];
 
 // ─── PARTNERS / BRAND LOGOS ───────────────────────────────────────────────────
@@ -1986,42 +1990,30 @@ function RosterPage({ setPage }) {
 }
 
 function FAQPage() {
-  const [openIdx, setOpenIdx] = useState(null);
-  const containerStyle = { maxWidth: 780, margin: '0 auto' };
+  const containerStyle = { maxWidth: 920, margin: '0 auto' };
 
   return (
     <div style={{ paddingTop: 72, background: C.ivory, minHeight: '100vh', padding: '5.5rem 2rem 4.25rem', position: 'relative', zIndex: 1 }}>
       <div style={containerStyle}>
-        <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <SectionLabel>Got Questions?</SectionLabel>
           <h1 style={{ fontSize: T.h1 }}>Frequently Asked Questions</h1>
           <GoldLine />
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '2rem' }}>
           {FAQS.map((faq, i) => (
             <div key={i} style={{
-              background: C.white, border: `1px solid ${openIdx === i ? C.gold : 'rgba(140,100,30,0.22)'}`,
-              transition: 'border-color 0.25s',
+              background: C.white, border: `2px solid rgba(140,100,30,0.3)`, borderTop: `4px solid ${C.gold}`,
+              padding: '2rem', transition: 'box-shadow 0.3s ease',
+              boxShadow: '0 2px 8px rgba(23,21,18,0.08)',
             }}>
-              <button onClick={() => setOpenIdx(openIdx === i ? null : i)} style={{
-                width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                padding: '1.5rem 1.75rem', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
-              }}>
-                <span style={{ fontFamily: 'Playfair Display, serif', fontSize: T.body, fontWeight: 600, color: C.nearBlack, flex: 1, paddingRight: '1rem' }}>
-                  {faq.q}
-                </span>
-                <span style={{
-                  color: C.goldText, fontSize: T.lead, fontWeight: 300, flexShrink: 0,
-                  transition: 'transform 0.3s ease', transform: openIdx === i ? 'rotate(45deg)' : 'none',
-                }}>+</span>
-              </button>
-              {openIdx === i && (
-                <div style={{ padding: '0 1.75rem 1.5rem' }}>
-                  <div style={{ height: 1, background: `rgba(140,100,30,0.2)`, marginBottom: '1.25rem' }} />
-                  <p style={{ color: C.mid, lineHeight: 1.8, fontSize: T.body }}>{faq.a}</p>
-                </div>
-              )}
+              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.body, fontWeight: 600, color: C.nearBlack, marginBottom: '1rem', lineHeight: 1.5 }}>
+                {faq.q}
+              </h3>
+              <p style={{ color: C.mid, lineHeight: 1.8, fontSize: T.small }}>
+                {faq.a}
+              </p>
             </div>
           ))}
         </div>
