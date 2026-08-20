@@ -880,7 +880,7 @@ function Navbar({ activePage, setPage }) {
     textShadow: overHero ? '0 1px 12px rgba(23,21,18,0.7)' : 'none',
   });
 
-  const topNavItems = ['Home', 'About', 'Services', 'FAQ'];
+  const topNavItems = ['Home', 'About Us', 'Services', 'FAQ'];
 
   return (
     <>
@@ -1267,7 +1267,7 @@ function HomePage({ setPage }) {
             <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '2rem' }}>
               Every artist on our roster has been vetted for the same thing — not just taste, but the judgement to read a floor and change course without being asked. You get a team that treats your venue's reputation as carefully as you do.
             </p>
-            <button onClick={() => setPage('About')} style={{
+            <button onClick={() => setPage('About Us')} style={{
               fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
               letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldText,
               background: 'transparent', border: `1px solid ${C.gold}`, padding: '0.75rem 1.75rem', cursor: 'pointer',
@@ -2365,7 +2365,7 @@ function Footer({ setPage }) {
           {/* Nav */}
           <div>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.goldOnDark, marginBottom: '1rem' }}>Navigate</p>
-            {['Home', 'About', 'Services', 'Roster', 'FAQ', 'Work With Us'].map(item => (
+            {['Home', 'About Us', 'Services', 'Roster', 'FAQ', 'Work With Us'].map(item => (
               <div key={item} onClick={() => { setPage(item); window.scrollTo(0, 0); }} style={{
                 fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: 'rgba(255,255,255,0.78)',
                 marginBottom: '0.5rem', cursor: 'pointer', transition: 'color 0.2s',
@@ -2424,7 +2424,7 @@ function Footer({ setPage }) {
 // Hash routing, so every page — artist profiles especially — has a real URL that
 // can be shared and bookmarked, and the browser back button behaves. Internally
 // a page is either a nav label ('About') or 'artist:<slug>'.
-const PAGES = ['Home', 'About', 'Services', 'Roster', 'FAQ', 'Work With Us'];
+const PAGES = ['Home', 'About Us', 'Services', 'Roster', 'FAQ', 'Work With Us'];
 
 const pageToHash = (p) => {
   if (p.startsWith('artist:')) return `#/artist/${p.slice(7)}`;
@@ -2469,7 +2469,7 @@ export default function App() {
     }
     switch (page) {
       case 'Home':            return <HomePage setPage={setPageAndScroll} />;
-      case 'About':           return <AboutPage setPage={setPageAndScroll} />;
+      case 'About Us':        return <AboutPage setPage={setPageAndScroll} />;
       case 'Services':        return <ServicesPage setPage={setPageAndScroll} />;
       case 'Roster':          return <RosterPage setPage={setPageAndScroll} />;
       case 'FAQ':             return <FAQPage />;
