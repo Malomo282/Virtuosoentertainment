@@ -236,9 +236,9 @@ const SERVICES = [
   },
   {
     id: 4,
-    title: 'Private Hire',
+    title: 'Private Events & Parties',
     icon: '◎',
-    description: 'Exclusive private events — birthdays, weddings, celebrations. Elite talent for your most discerning guests.',
+    description: 'Premium DJ services for your private events and parties — birthdays, weddings, anniversaries, and celebrations. Curated entertainment tailored to your guests.',
     features: ['Bespoke setlists', 'Luxury presentation', 'Dedicated point of contact'],
     photo: servicePrivate,
   },
