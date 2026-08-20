@@ -1078,6 +1078,7 @@ function Navbar({ activePage, setPage }) {
 // ─── HOME PAGE ────────────────────────────────────────────────────────────────
 function HomePage({ setPage }) {
   const videoRef = useRef(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
 
   const sectionStyle = (bg = C.ivory) => ({
     background: bg, padding: '4.25rem 2rem', position: 'relative', zIndex: 1,
@@ -1353,43 +1354,87 @@ function HomePage({ setPage }) {
             <h2 style={{ fontSize: T.h2, color: C.white }}>Meet the roster</h2>
             <GoldLine />
           </div>
-          {/* auto-FILL with a capped track, not auto-fit with 1fr: auto-fit
-              collapses the empty tracks, so a single artist would stretch to the
-              full 1100px container (a 1100x1467 photo). */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 240px))',
-            justifyContent: 'center',
-            gap: '1.5rem',
-          }}>
-            {LIVE_ROSTER.slice(0, 3).map(dj => (
-              <div key={dj.id}
-                onClick={() => setPage(`artist:${dj.slug}`)}
-                role="link"
-                tabIndex={0}
-                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPage(`artist:${dj.slug}`); } }}
-                style={{ position: 'relative', overflow: 'hidden', aspectRatio: '3/4', background: C.stone, cursor: 'pointer' }}
-                onMouseEnter={e => { e.currentTarget.querySelector('.dj-overlay').style.opacity = '1'; }}
-                onMouseLeave={e => { e.currentTarget.querySelector('.dj-overlay').style.opacity = '0'; }}
-              >
-                {dj.photo
-                  ? <img src={dj.photo} alt={dj.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: dj.focus || 'center' }} />
-                  : <div style={{ width: '100%', height: '100%', background: C.stone, display: 'flex', alignItems: 'center', justifyContent: 'center', color: C.mid, fontSize: T.micro, letterSpacing: '0.1em', textTransform: 'uppercase' }}>[ DJ Photo ]</div>
-                }
-                <div className="dj-overlay" style={{
-                  position: 'absolute', inset: 0, background: `rgba(23,21,18,0.88)`,
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                  opacity: 0, transition: 'opacity 0.3s ease', padding: '1.5rem',
-                }}>
-                  <h3 style={{ fontFamily: 'Playfair Display, serif', color: C.white, fontSize: T.lead, marginBottom: '0.5rem' }}>{dj.name}</h3>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'center' }}>
-                    {dj.genres.map(g => <span key={g} style={{ fontSize: T.micro, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldOnDark, border: `1px solid ${C.goldOnDark}`, padding: '0.2rem 0.5rem' }}>{g}</span>)}
+          {/* Carousel display */}
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', marginBottom: '2rem' }}>
+            {/* Previous button */}
+            <button
+              onClick={() => setCarouselIndex((carouselIndex - 1 + LIVE_ROSTER.length) % LIVE_ROSTER.length)}
+              style={{
+                background: C.goldSolid, border: 'none', width: '40px', height: '40px', borderRadius: '50%',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: C.nearBlack, fontSize: '18px', fontWeight: 'bold', transition: 'opacity 0.2s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+              onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+            >
+              ‹
+            </button>
+
+            {/* Artist card */}
+            <div style={{ width: '240px', height: '320px', flexShrink: 0 }}>
+              {(() => {
+                const dj = LIVE_ROSTER[carouselIndex];
+                return (
+                  <div key={dj.id}
+                    onClick={() => setPage(`artist:${dj.slug}`)}
+                    role="link"
+                    tabIndex={0}
+                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPage(`artist:${dj.slug}`); } }}
+                    style={{ position: 'relative', overflow: 'hidden', aspectRatio: '3/4', background: C.stone, cursor: 'pointer', height: '100%' }}
+                    onMouseEnter={e => { e.currentTarget.querySelector('.dj-overlay').style.opacity = '1'; }}
+                    onMouseLeave={e => { e.currentTarget.querySelector('.dj-overlay').style.opacity = '0'; }}
+                  >
+                    {dj.photo
+                      ? <img src={dj.photo} alt={dj.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: dj.focus || 'center' }} />
+                      : <div style={{ width: '100%', height: '100%', background: C.stone, display: 'flex', alignItems: 'center', justifyContent: 'center', color: C.mid, fontSize: T.micro, letterSpacing: '0.1em', textTransform: 'uppercase' }}>[ DJ Photo ]</div>
+                    }
+                    <div className="dj-overlay" style={{
+                      position: 'absolute', inset: 0, background: `rgba(23,21,18,0.88)`,
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                      opacity: 0, transition: 'opacity 0.3s ease', padding: '1.5rem',
+                    }}>
+                      <h3 style={{ fontFamily: 'Playfair Display, serif', color: C.white, fontSize: T.lead, marginBottom: '0.5rem' }}>{dj.name}</h3>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'center' }}>
+                        {dj.genres.map(g => <span key={g} style={{ fontSize: T.micro, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldOnDark, border: `1px solid ${C.goldOnDark}`, padding: '0.2rem 0.5rem' }}>{g}</span>)}
+                      </div>
+                    </div>
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1rem', background: 'linear-gradient(transparent, rgba(23,21,18,0.8))' }}>
+                      <h3 style={{ fontFamily: 'Playfair Display, serif', color: C.white, fontSize: T.body }}>{dj.name}</h3>
+                    </div>
                   </div>
-                </div>
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1rem', background: 'linear-gradient(transparent, rgba(23,21,18,0.8))' }}>
-                  <h3 style={{ fontFamily: 'Playfair Display, serif', color: C.white, fontSize: T.body }}>{dj.name}</h3>
-                </div>
-              </div>
+                );
+              })()}
+            </div>
+
+            {/* Next button */}
+            <button
+              onClick={() => setCarouselIndex((carouselIndex + 1) % LIVE_ROSTER.length)}
+              style={{
+                background: C.goldSolid, border: 'none', width: '40px', height: '40px', borderRadius: '50%',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: C.nearBlack, fontSize: '18px', fontWeight: 'bold', transition: 'opacity 0.2s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+              onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+            >
+              ›
+            </button>
+          </div>
+
+          {/* Carousel dots indicator */}
+          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginBottom: '1rem' }}>
+            {LIVE_ROSTER.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCarouselIndex(i)}
+                style={{
+                  width: '10px', height: '10px', borderRadius: '50%', border: 'none',
+                  background: i === carouselIndex ? C.goldSolid : 'rgba(255,255,255,0.4)',
+                  cursor: 'pointer', transition: 'background 0.3s',
+                }}
+                onMouseEnter={e => { if (i !== carouselIndex) e.currentTarget.style.background = 'rgba(255,255,255,0.6)'; }}
+                onMouseLeave={e => { if (i !== carouselIndex) e.currentTarget.style.background = 'rgba(255,255,255,0.4)'; }}
+              />
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: '1.75rem' }}>
