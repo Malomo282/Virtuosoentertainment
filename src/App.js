@@ -1127,7 +1127,7 @@ function HomePage({ setPage }) {
             margin: '1.5rem auto 0', fontWeight: 400, lineHeight: 1.5,
             textShadow: '0 1px 18px rgba(23,21,18,0.6)',
           }}>
-            Atmosphere is a craft.
+            Great nights aren't left to chance.
           </p>
           <p style={{
             fontFamily: 'Outfit, sans-serif', fontSize: T.body,
@@ -1224,8 +1224,14 @@ function HomePage({ setPage }) {
               The entertainment partner venues trust.
             </h2>
             <GoldLine style={{ margin: '0 0 1.5rem' }} />
+            <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '1rem' }}>
+              We place DJs in venues across London — from residencies and launch nights to birthday parties, weddings and corporate events — and stay involved long after the booking is confirmed.
+            </p>
+            <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '1rem' }}>
+              From programming and equipment to timings and the handover from speeches to the first record, we manage the details that shape how the night feels.
+            </p>
             <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '2rem' }}>
-              Providing DJs, curating playlists and coordinating a seamless experience is the key to lasting memories. We help our clients find consistency, quality and reliability for their events. Our musically inclined team is experienced in delivering premium talent, adept in holding the dancefloor.
+              Every artist on our roster has been vetted for the same thing — not just taste, but the judgement to read a floor and change course without being asked. You get a team that treats your venue's reputation as carefully as you do.
             </p>
             <button onClick={() => setPage('About')} style={{
               fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
