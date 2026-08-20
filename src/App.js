@@ -1220,11 +1220,8 @@ function HomePage({ setPage }) {
               The entertainment partner venues trust.
             </h2>
             <GoldLine style={{ margin: '0 0 1.5rem' }} />
-            <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '1rem' }}>
-              Virtuoso Collective is a premium agency connecting venues with hand-picked DJ talent and bespoke entertainment experiences. From weekly residencies to headline events, we manage everything — so your nights run seamlessly.
-            </p>
             <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '2rem' }}>
-              Our roster represents some of the most respected selectors in the circuit, each vetted for professionalism, stage presence, and the ability to read a room. When you partner with Virtuoso Collective, you get more than a DJ — you get a team that cares about your venue's reputation as much as you do.
+              Providing DJs, curating playlists and coordinating a seamless experience is the key to lasting memories. We help our clients find consistency, quality and reliability for their events. Our musically inclined team is experienced in delivering premium talent, adept in holding the dancefloor.
             </p>
             <button onClick={() => setPage('About')} style={{
               fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
