@@ -80,7 +80,7 @@ const ROSTER = [
     slug: 'dj-appz',
     tagline: 'The sound of every room.',
     genres: ['R&B', 'Hip-Hop', 'Neo-Soul', 'Afrobeats', 'Dancehall', 'House'],
-    bio: 'A London DJ and former professional dancer, Appz came to the booth from the floor — and it shows in how he works a room. Four years in, his sets move through R&B, hip-hop, neo-soul, afrobeats and dancehall, built around reading a crowd rather than running a prepared tracklist. He is a regular across some of London’s busiest rooms, including Boxpark, Dirty Martini, Lightbox Vauxhall, Simmons Bars, All Bar One and Proper Snacks, alongside weddings, private parties and corporate events UK-wide. For venues, that means a DJ who holds a floor on a quiet Thursday as reliably as a full Saturday.',
+    bio: ‘A London DJ and former professional dancer, Appz came to the booth from the floor — and it shows in how he works a room. Five years in, his sets move through R&B, hip-hop, neo-soul, afrobeats and dancehall, built around reading a crowd rather than running a prepared tracklist. He is a regular across some of London’s busiest rooms, including Boxpark, Dirty Martini, Lightbox Vauxhall, Simmons Bars, All Bar One and Proper Snacks, alongside weddings, private parties and corporate events UK-wide. For venues, that means a DJ who holds a floor on a quiet Thursday as reliably as a full Saturday.’,
     photo: djAppzPhoto,
     photoDecks: null,     // import djAppzDecks from './Assets/Roster/djappz-decks.jpg'
     focus: '50% 8%',      // photo is already 3:4, so this only bites on square crops (nav thumbnail)
