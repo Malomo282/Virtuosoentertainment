@@ -2324,15 +2324,15 @@ function WorkWithUsPage() {
             <p style={{ fontSize: T.micro, color: C.mid, marginBottom: '1.5rem' }}>Last updated: [DATE] | Virtuoso Collective | London, UK</p>
             <GoldLine style={{ margin: '0 0 1.5rem' }} />
             {[
-              { title: '1. Who We Are', body: 'Virtuoso Collective ("we", "us", "our") is an entertainment agency based in London, UK. Our email address is Virtuoso-entertainment@outlook.com. We act as the data controller for personal information collected through this website.' },
+              { title: '1. Who We Are', body: 'Virtuoso Collective ("we", "us", "our") is an entertainment agency based in London, UK. Our email address is jesse@virtuosocollective.co.uk. We act as the data controller for personal information collected through this website.' },
               { title: '2. What Data We Collect', body: 'When you submit a partnership enquiry, we collect: your name, venue name, email address, phone number (optional), venue location, and any information provided in your message. We do not collect payment details through this website.' },
               { title: '3. How We Use Your Data', body: 'We use your data to: respond to your partnership enquiry; provide information about our services; contact you regarding potential bookings or partnerships; and improve our services. We will not send unsolicited marketing without your consent.' },
               { title: '4. Legal Basis for Processing', body: 'We process your data on the basis of: (a) your consent, given by ticking the checkbox on our enquiry form; and (b) our legitimate interest in responding to business enquiries.' },
               { title: '5. Data Retention', body: 'We retain enquiry data for a maximum of 24 months unless a partnership is formed, in which case we retain relevant data for the duration of the partnership plus seven years for legal and accounting purposes.' },
-              { title: '6. Your Rights', body: 'Under UK GDPR, you have the right to: access your personal data; rectify inaccurate data; request erasure; restrict processing; data portability; and object to processing. To exercise any of these rights, contact us at Virtuoso-entertainment@outlook.com.' },
+              { title: '6. Your Rights', body: 'Under UK GDPR, you have the right to: access your personal data; rectify inaccurate data; request erasure; restrict processing; data portability; and object to processing. To exercise any of these rights, contact us at jesse@virtuosocollective.co.uk.' },
               { title: '7. Third Parties', body: 'We use EmailJS to deliver enquiry form submissions. Your data is transmitted securely and is not sold to any third party. We do not use your data for advertising or profiling.' },
               { title: '8. Cookies', body: 'This website does not currently use tracking cookies or analytics cookies. Essential browser functionality only.' },
-              { title: '9. Contact Us', body: 'For any privacy-related queries, contact us at Virtuoso-entertainment@outlook.com. You also have the right to lodge a complaint with the Information Commissioner\'s Office (ICO) at ico.org.uk.' },
+              { title: '9. Contact Us', body: 'For any privacy-related queries, contact us at jesse@virtuosocollective.co.uk. You also have the right to lodge a complaint with the Information Commissioner\'s Office (ICO) at ico.org.uk.' },
             ].map(s => (
               <div key={s.title} style={{ marginBottom: '1.5rem' }}>
                 <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.body, marginBottom: '0.5rem' }}>{s.title}</h3>
@@ -2388,7 +2388,7 @@ function Footer({ setPage }) {
           <div>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.goldOnDark, marginBottom: '1rem' }}>Contact</p>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: 'rgba(255,255,255,0.78)', lineHeight: 1.7, marginBottom: '0.75rem' }}>
-              Virtuoso-entertainment@outlook.com<br />London, UK
+              jesse@virtuosocollective.co.uk<br />London, UK
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
               {['Instagram', 'LinkedIn'].map(s => (
