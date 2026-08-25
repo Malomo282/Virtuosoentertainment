@@ -2407,9 +2407,10 @@ function Footer({ setPage }) {
         </div>
 
         {/* Bottom bar */}
-        {/* Sole trader — no registration/company-number line. Add one back
-            once Virtuoso is actually incorporated. */}
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1.5rem' }}>
+          <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: 'rgba(255,255,255,0.78)', marginBottom: '0.5rem' }}>
+            VIRTUOSO COLLECTIVE LTD
+          </p>
           <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: 'rgba(255,255,255,0.78)' }}>
             © {new Date().getFullYear()} Virtuoso Collective. All rights reserved.
           </p>
