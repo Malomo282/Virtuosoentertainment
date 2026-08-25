@@ -1370,11 +1370,11 @@ function HomePage({ setPage }) {
           </div>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 240px))',
+            gridTemplateColumns: 'repeat(4, 1fr)',
             justifyContent: 'center',
             gap: '1.5rem',
           }}>
-            {LIVE_ROSTER.slice(0, 3).map(dj => (
+            {LIVE_ROSTER.slice(0, 4).map(dj => (
               <div key={dj.id}
                 onClick={() => setPage(`artist:${dj.slug}`)}
                 role="link"
