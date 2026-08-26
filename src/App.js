@@ -2310,21 +2310,20 @@ function BookADJPage() {
     setStatus('sending');
     try {
       await emailjs.send(EJS.serviceId, EJS.templateNotify, {
-        venue_name: 'DJ Booking - ' + form.eventType,
-        contact_name: form.name,
-        email: form.email,
+        from_name: form.name,
+        from_email: form.email,
         phone: form.phone || 'Not provided',
-        venue_type: form.eventType,
-        location: form.eventLocation,
-        capacity: form.guestCount,
-        preferred_date: form.eventDate,
-        service_interest: form.musicStyle || 'Not specified',
-        message: form.message,
+        event_type: form.eventType,
+        date: form.eventDate,
+        venue: form.eventLocation,
+        guests: form.guestCount,
+        budget: form.budget || 'Not specified',
+        notes: form.musicStyle && form.eventRequirements ? `${form.musicStyle}\n\n${form.eventRequirements}` : form.eventRequirements || form.musicStyle || 'No additional notes',
       }, EJS.publicKey);
       await emailjs.send(EJS.serviceId, EJS.templateReply, {
-        contact_name: form.name,
-        email: form.email,
-        venue_name: form.eventType + ' Event',
+        from_name: form.name,
+        from_email: form.email,
+        event_type: form.eventType,
       }, EJS.publicKey);
       setStatus('success');
     } catch (err) {
