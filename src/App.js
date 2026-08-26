@@ -311,9 +311,9 @@ const PARTNERS = [
 // ─── STATS ────────────────────────────────────────────────────────────────────
 const STATS = [
   { value: 'Premium', label: 'Curated DJ Roster' },
-  { value: '100+', label: 'Events Delivered' },
-  { value: '20+', label: 'Venue Partnerships' },
-  { value: '5★', label: 'Average Client Rating' },   // a rating scale, not a count — not something to halve
+  { value: '100+', label: 'Events Across Our Collective' },
+  { value: '20+', label: 'Venues Worked With' },
+  { value: '25+', label: 'Years of Combined Experience' },
 ];
 
 // ─── COLOUR TOKENS ───────────────────────────────────────────────────────────
