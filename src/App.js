@@ -826,7 +826,7 @@ const BrandPanel = () => (
 );
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
-function Navbar({ activePage, setPage, contactDropdown, setContactDropdown, mobileContactOpen, setMobileContactOpen }) {
+function Navbar({ activePage, setPage, contactDropdown, setContactDropdown, mobileContactOpen, setMobileContactOpen, setPageAndScroll }) {
   const [scrolled, setScrolled]         = useState(false);
   const [mobileOpen, setMobileOpen]     = useState(false);
   const [rosterOpen, setRosterOpen]     = useState(false);   // desktop dropdown
@@ -2931,7 +2931,7 @@ export default function App() {
 
   return (
     <>
-      <Navbar activePage={navPage} setPage={setPageAndScroll} contactDropdown={contactDropdown} setContactDropdown={setContactDropdown} mobileContactOpen={mobileContactOpen} setMobileContactOpen={setMobileContactOpen} />
+      <Navbar activePage={navPage} setPage={setPageAndScroll} contactDropdown={contactDropdown} setContactDropdown={setContactDropdown} mobileContactOpen={mobileContactOpen} setMobileContactOpen={setMobileContactOpen} setPageAndScroll={setPageAndScroll} />
       <main>{renderPage()}</main>
       <Footer setPage={setPageAndScroll} />
     </>
