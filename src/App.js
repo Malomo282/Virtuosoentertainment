@@ -2297,7 +2297,7 @@ function TalentCommunityPage() {
 function BookADJPage() {
   const [form, setForm] = useState({
     name: '', email: '', phone: '', eventType: '', eventDate: '', eventLocation: '',
-    guestCount: '', musicStyle: '', eventRequirements: '', budget: '', message: '', privacy: false,
+    guestCount: '', musicStyle: '', eventRequirements: '', privacy: false,
   });
   const [status, setStatus] = useState('idle');
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -2317,7 +2317,6 @@ function BookADJPage() {
         date: form.eventDate,
         venue: form.eventLocation,
         guests: form.guestCount,
-        budget: form.budget || 'Not specified',
         notes: form.musicStyle && form.eventRequirements ? `${form.musicStyle}\n\n${form.eventRequirements}` : form.eventRequirements || form.musicStyle || 'No additional notes',
       }, EJS.publicKey);
       await emailjs.send(EJS.serviceId, EJS.templateReply, {
@@ -2465,18 +2464,6 @@ function BookADJPage() {
                 placeholder="e.g. House, Hip-Hop, Soul, Pop — or leave blank for recommendations"
                 value={form.musicStyle}
                 onChange={e => handleChange('musicStyle', e.target.value)}
-                style={inputStyle}
-                onFocus={e => e.target.style.borderColor = C.goldSolid}
-                onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'}
-              />
-            </div>
-            <div>
-              <label style={labelStyle}>Budget / Rate Range (if appropriate)</label>
-              <input
-                type="text"
-                placeholder="e.g. £300 - £500"
-                value={form.budget}
-                onChange={e => handleChange('budget', e.target.value)}
                 style={inputStyle}
                 onFocus={e => e.target.style.borderColor = C.goldSolid}
                 onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'}
