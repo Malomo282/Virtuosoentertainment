@@ -2528,7 +2528,18 @@ function BookADJPage() {
           )}
         </div>
       </div>
-      <PrivacyPolicyModal show={showPrivacy} onClose={() => setShowPrivacy(false)} />
+      {/* Privacy Policy Modal */}
+      {showPrivacy && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
+          <div style={{ background: C.white, borderRadius: '8px', maxHeight: '80vh', overflowY: 'auto', padding: '2rem', maxWidth: '500px' }}>
+            <button onClick={() => setShowPrivacy(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', fontSize: T.xl, cursor: 'pointer', color: C.mid }}>×</button>
+            <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.xl, marginBottom: '1rem' }}>Privacy Policy</h2>
+            <p style={{ fontSize: T.small, color: C.mid, lineHeight: 1.7 }}>
+              By submitting your booking enquiry, you agree to our privacy policy. We'll use your information to review your request and contact you about available DJ options for your event.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
