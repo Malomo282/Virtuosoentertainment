@@ -90,6 +90,11 @@ const ROSTER = [
     instagram: '@djappz',
     mixes: [
       {
+        title: 'DJ Appz Reel',
+        embed: 'https://www.youtube.com/embed/S3ddF5MkTQk',
+        type: 'youtube',
+      },
+      {
         title: 'Retune Episode 3 — R&B, Hip-Hop, 90s & 2000s',
         embed: 'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FDJAppz%2Fretune-episode-3-rnb-hip-hop-90s-2000s%2F',
       },
