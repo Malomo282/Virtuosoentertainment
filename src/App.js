@@ -1002,10 +1002,14 @@ function Navbar({ activePage, setPage, contactDropdown, setContactDropdown, mobi
               fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
               letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
               background: C.goldSolid, padding: '0.6rem 1.4rem', border: 'none', cursor: 'pointer', transition: 'opacity 0.2s',
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
             }}
               onMouseEnter={e => e.target.style.opacity = '0.85'}
               onMouseLeave={e => e.target.style.opacity = '1'}
-            >Contact</button>
+            >
+              Contact
+              <span style={{ fontSize: T.body, transition: 'transform 0.25s', transform: contactDropdown ? 'rotate(180deg)' : 'none' }}>▼</span>
+            </button>
             {contactDropdown && (
               <div style={{
                 position: 'absolute', top: '100%', right: 0, marginTop: '0.5rem',
