@@ -777,18 +777,18 @@ function MonoLogo({ src, alt, colour = C.ink }) {
 // accent. There is deliberately no colour-on-hover state.
 const BrandPanel = () => (
   <section
-    aria-label="Brands our DJs have worked with"
+    aria-label="Brands we have worked with"
     style={{
       background: C.ivory,
       borderTop: `1px solid ${C.line}`,
       borderBottom: `1px solid ${C.line}`,
-      padding: ‘3.5rem 2rem’,
-      position: ‘relative’,
+      padding: '3.5rem 2rem',
+      position: 'relative',
       zIndex: 1,
     }}
   >
-    <div style={{ maxWidth: 1100, margin: ‘0 auto’, textAlign: ‘center’ }}>
-      <SectionLabel>Brands Our DJs Have Worked With</SectionLabel>
+    <div style={{ maxWidth: 1100, margin: '0 auto', textAlign: 'center' }}>
+      <SectionLabel>Brands We’ve Worked With</SectionLabel>
 
       <div style={{
         display: 'grid',
