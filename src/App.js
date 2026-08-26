@@ -1918,6 +1918,11 @@ function RosterPage({ setPage }) {
         <p style={{ color: C.mid, maxWidth: 520, lineHeight: 1.7, fontSize: T.body }}>
           A curated collective of professional DJs — each selected for technical skill, audience awareness, and stage presence.
         </p>
+        <button onClick={() => setPage('Join the Roster')} style={{
+          marginTop: '1.5rem', fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
+          letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
+          background: C.goldSolid, border: 'none', padding: '0.75rem 1.75rem', cursor: 'pointer',
+        }}>Interested in Joining?</button>
       </div>
 
       {/* ── ARTIST INDEX ── */}
@@ -2055,6 +2060,173 @@ function FAQPage() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+// ─── TALENT COMMUNITY PAGE (JOIN THE ROSTER) ──────────────────────────────────
+function TalentCommunityPage() {
+  const [form, setForm] = useState({
+    artistName: '', genre: '', email: '', phone: '',
+    experience: '', location: '', bio: '', links: '', privacy: false,
+  });
+  const [status, setStatus] = useState('idle');
+  const [showPrivacy, setShowPrivacy] = useState(false);
+
+  const handleChange = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  const handleSubmit = async () => {
+    if (!form.privacy) { alert('Please accept the privacy policy to submit your application.'); return; }
+    if (!form.artistName || !form.email || !form.genre) { alert('Please fill in all required fields.'); return; }
+    setStatus('sending');
+    try {
+      await emailjs.send(EJS.serviceId, EJS.templateNotify, {
+        venue_name: "Talent Community Application",
+        contact_name: form.artistName,
+        email: form.email,
+        phone: form.phone || 'Not provided',
+        venue_type: form.genre,
+        location: form.location,
+        capacity: form.experience,
+        preferred_date: '',
+        service_interest: 'Roster Application',
+        message: form.bio + '\n\nLinks: ' + (form.links || 'None provided'),
+      }, EJS.publicKey);
+      await emailjs.send(EJS.serviceId, EJS.templateReply, {
+        contact_name: form.artistName,
+        email: form.email,
+        venue_name: "Virtuoso Collective Roster",
+      }, EJS.publicKey);
+      setStatus('success');
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+    }
+  };
+
+  const inputStyle = {
+    width: '100%', padding: '0.9rem 1.1rem', fontFamily: 'Outfit, sans-serif',
+    fontSize: T.body, color: C.nearBlack, background: C.white,
+    border: `1px solid rgba(140,100,30,0.25)`, outline: 'none',
+    transition: 'border-color 0.2s',
+  };
+
+  const labelStyle = {
+    fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
+    letterSpacing: '0.12em', textTransform: 'uppercase', color: C.mid,
+    display: 'block', marginBottom: '0.4rem',
+  };
+
+  const containerStyle = { maxWidth: 780, margin: '0 auto' };
+
+  if (status === 'success') return (
+    <div style={{ paddingTop: 72, minHeight: '100vh', background: C.ivory, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4.25rem 2rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ textAlign: 'center', maxWidth: 560 }}>
+        <div style={{ fontSize: T.h1, marginBottom: '1.5rem' }}>◎</div>
+        <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.stat, marginBottom: '1rem' }}>Application Received</h1>
+        <GoldLine />
+        <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '1rem' }}>
+          Thank you, <strong>{form.artistName}</strong>. We've received your application to join Virtuoso Collective and will review it shortly.
+        </p>
+        <p style={{ color: C.mid, lineHeight: 1.8, fontSize: T.body }}>
+          A confirmation has been sent to <strong>{form.email}</strong>. If you don't see it, please check your spam folder.
+        </p>
+        <div style={{ marginTop: '2rem', padding: '1.5rem', background: C.stone, border: `1px solid rgba(140,100,30,0.2)`, textAlign: 'left' }}>
+          <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldText, marginBottom: '0.75rem' }}>What Happens Next</p>
+          {["Our team will review your application", "We'll assess your sound and style", "If we're a good fit, a member of our team will contact you within 5 business days", "We'll discuss opportunities and next steps"].map((step, i) => (
+            <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+              <span style={{ color: C.goldText, fontWeight: 600, fontSize: T.small, flexShrink: 0 }}>{i + 1}.</span>
+              <span style={{ color: C.mid, fontSize: T.small }}>{step}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ paddingTop: 72, background: C.ivory, minHeight: '100vh', padding: '5.5rem 2rem 4.25rem', position: 'relative', zIndex: 1 }}>
+      <div style={containerStyle}>
+        <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
+          <SectionLabel>Join Our Community</SectionLabel>
+          <h1 style={{ fontSize: T.h1 }}>Apply to Join the Roster</h1>
+          <GoldLine />
+          <p style={{ color: C.mid, maxWidth: 500, margin: '0 auto', lineHeight: 1.7 }}>
+            We're always looking for talented DJs to join Virtuoso Collective. Tell us about yourself and your sound.
+          </p>
+        </div>
+
+        <div style={{ background: C.white, padding: '3rem', border: `1px solid rgba(140,100,30,0.22)` }}>
+          {/* Artist Details */}
+          <div style={{ marginBottom: '2.5rem' }}>
+            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '1.5rem', paddingBottom: '0.75rem', borderBottom: `1px solid rgba(140,100,30,0.2)` }}>Artist Details</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+              {[
+                { label: 'Artist Name *', key: 'artistName', placeholder: 'Your stage name' },
+                { label: 'Primary Genre *', key: 'genre', placeholder: 'e.g., House, Hip-Hop, R&B' },
+                { label: 'Email Address *', key: 'email', placeholder: 'your@email.com', type: 'email' },
+                { label: 'Phone', key: 'phone', placeholder: '+44 (optional)' },
+                { label: 'Years of Experience', key: 'experience', placeholder: 'e.g., 5 years' },
+                { label: 'Location', key: 'location', placeholder: 'City/Region' },
+              ].map(f => (
+                <div key={f.key}>
+                  <label style={labelStyle}>{f.label}</label>
+                  <input type={f.type || 'text'} placeholder={f.placeholder} value={form[f.key]} onChange={e => handleChange(f.key, e.target.value)} style={inputStyle} onFocus={e => e.target.style.borderColor = C.gold} onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bio & Links */}
+          <div style={{ marginBottom: '2.5rem' }}>
+            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '1.5rem', paddingBottom: '0.75rem', borderBottom: `1px solid rgba(140,100,30,0.2)` }}>About You</h3>
+            <div style={{ marginBottom: '1.25rem' }}>
+              <label style={labelStyle}>Tell us about your sound & experience</label>
+              <textarea placeholder="Describe your music style, influences, key venues you've played at, and why you'd like to join Virtuoso Collective..." value={form.bio} onChange={e => handleChange('bio', e.target.value)} style={{ ...inputStyle, minHeight: '120px', fontFamily: 'Outfit, sans-serif', resize: 'vertical' }} onFocus={e => e.target.style.borderColor = C.gold} onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'} />
+            </div>
+            <div>
+              <label style={labelStyle}>Links to Your Work</label>
+              <input type="text" placeholder="Links to mixes, socials, or portfolio (comma separated)" value={form.links} onChange={e => handleChange('links', e.target.value)} style={inputStyle} onFocus={e => e.target.style.borderColor = C.gold} onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'} />
+            </div>
+          </div>
+
+          {/* Privacy & Submit */}
+          <div style={{ borderTop: `1px solid rgba(140,100,30,0.2)`, paddingTop: '1.5rem' }}>
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '1.5rem', cursor: 'pointer' }}>
+              <input type="checkbox" checked={form.privacy} onChange={e => handleChange('privacy', e.target.checked)} style={{ marginTop: '0.3rem', cursor: 'pointer', width: 18, height: 18 }} />
+              <span style={{ color: C.mid, fontSize: T.small, lineHeight: 1.6 }}>
+                I agree to the <button onClick={() => setShowPrivacy(true)} style={{ background: 'none', border: 'none', color: C.goldText, cursor: 'pointer', textDecoration: 'underline', fontFamily: 'inherit', fontSize: 'inherit' }}>privacy policy</button>
+              </span>
+            </label>
+            <button onClick={handleSubmit} disabled={status === 'sending'} style={{
+              width: '100%', padding: '1.1rem', fontFamily: 'Outfit, sans-serif', fontSize: T.body, fontWeight: 600,
+              letterSpacing: '0.1em', textTransform: 'uppercase', background: C.goldSolid, color: C.nearBlack,
+              border: 'none', cursor: status === 'sending' ? 'not-allowed' : 'pointer', opacity: status === 'sending' ? 0.7 : 1,
+              transition: 'opacity 0.2s',
+            }}>
+              {status === 'sending' ? 'Submitting Application…' : 'Submit Application'}
+            </button>
+            {status === 'error' && (
+              <p style={{ color: 'rgb(220,38,38)', marginTop: '1rem', textAlign: 'center' }}>
+                Something went wrong. Please try again or contact us directly.
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Privacy Policy Modal */}
+      {showPrivacy && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
+          <div style={{ background: C.white, borderRadius: '8px', maxHeight: '80vh', overflowY: 'auto', padding: '2rem', maxWidth: '500px' }}>
+            <button onClick={() => setShowPrivacy(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', fontSize: T.xl, cursor: 'pointer', color: C.mid }}>×</button>
+            <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.xl, marginBottom: '1rem' }}>Privacy Policy</h2>
+            <p style={{ fontSize: T.small, color: C.mid, lineHeight: 1.7 }}>
+              By submitting this application, you agree to our <a href="#" onClick={e => { e.preventDefault(); }} style={{ color: C.goldText, textDecoration: 'underline' }}>privacy policy</a>. We'll use your information to review your application and contact you about opportunities with Virtuoso Collective.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -2426,6 +2598,7 @@ export default function App() {
       case 'Services':        return <ServicesPage setPage={setPageAndScroll} />;
       case 'Roster':          return <RosterPage setPage={setPageAndScroll} />;
       case 'FAQ':             return <FAQPage />;
+      case 'Join the Roster':  return <TalentCommunityPage />;
       case 'Work With Us': return <WorkWithUsPage />;
       default:                return <HomePage setPage={setPageAndScroll} />;
     }
