@@ -2459,7 +2459,7 @@ function BookADJPage() {
               </div>
             </div>
             <div style={{ marginBottom: '1.25rem' }}>
-              <label style={labelStyle}>Music Style / Preferred Genres (if applicable)</label>
+              <label style={labelStyle}>Preferred Music Style / Genres</label>
               <input
                 type="text"
                 placeholder="e.g. House, Hip-Hop, Soul, Pop — or leave blank for recommendations"
