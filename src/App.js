@@ -2377,11 +2377,11 @@ function BookADJPage() {
     <div style={{ paddingTop: 72, background: C.ivory, minHeight: '100vh', padding: '5.5rem 2rem 4.25rem', position: 'relative', zIndex: 1 }}>
       <div style={containerStyle}>
         <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
-          <SectionLabel>Book Your DJ</SectionLabel>
-          <h1 style={{ fontSize: T.h1 }}>Find the Right DJ for Your Event</h1>
+          <SectionLabel>Book A DJ</SectionLabel>
+          <h1 style={{ fontSize: T.h1 }}>Tell us about your event</h1>
           <GoldLine />
-          <p style={{ color: C.mid, maxWidth: 500, margin: '0 auto', lineHeight: 1.7 }}>
-            Tell us about your event and we will help match you with the perfect DJ from our curated collective. We will be in touch within 24 hours.
+          <p style={{ color: C.mid, maxWidth: 560, margin: '0 auto', lineHeight: 1.7 }}>
+            Tell us about your event and we'll help match you with the right DJ from our curated collective.
           </p>
         </div>
 
