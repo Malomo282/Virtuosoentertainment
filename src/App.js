@@ -2829,7 +2829,7 @@ function Footer({ setPage }) {
           <div>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.goldOnDark, marginBottom: '1rem' }}>Contact</p>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: 'rgba(255,255,255,0.78)', lineHeight: 1.7, marginBottom: '0.75rem' }}>
-              <a href="mailto:jesse@virtuosocollective.co.uk" style={{ color: 'rgba(255,255,255,0.78)', textDecoration: 'none', transition: 'color 0.2s', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = C.goldOnDark} onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.78)'}>jesse@virtuosocollective.co.uk</a><br />London, UK
+              <a href="mailto:jesse@virtuosocollective.co.uk" style={{ color: 'rgba(255,255,255,0.78)', textDecoration: 'none', transition: 'color 0.2s', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = C.goldOnDark} onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.78)'}>jesse@virtuosocollective.co.uk</a><br />124-128 City Road<br />London<br />EC1V 2NX
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
               {['Instagram', 'LinkedIn'].map(s => (
