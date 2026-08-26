@@ -230,35 +230,39 @@ const filled = v => (typeof v === 'string' && /\[[^\]]*\]/.test(v) ? null : v) |
 const SERVICES = [
   {
     id: 1,
-    title: 'Venue Residencies',
+    title: 'Weddings',
     icon: '◈',
-    description: 'Ongoing DJ residencies for bars, clubs, and lounges. We handle scheduling, logistics, and talent — you focus on your guests.',
-    features: ['Curated talent matching', 'Flexible scheduling', 'Consistent brand alignment'],
-    photo: serviceResidencies,
+    tagline: 'From the first entrance to the final record.',
+    description: 'Premium DJ services for your wedding day. From ceremony to celebration, we create the perfect soundtrack for your special moments.',
+    features: ['Bespoke setlists', 'Seamless coordination', 'Dedicated attention'],
+    photo: servicePrivate,
   },
   {
     id: 2,
-    title: 'Event Productions',
+    title: 'Birthdays & Private Events',
     icon: '◉',
-    description: 'Full-service event nights from concept to close. Themed events, launch parties, and branded experiences built around your venue.',
-    features: ['Creative direction', 'Sound & production coordination', 'Promotion support'],
+    tagline: 'A soundtrack built around the people in the room.',
+    description: 'Create the perfect atmosphere for your celebration. Whether intimate or lavish, we tailor the music to match your guests and the vibe you want.',
+    features: ['Guest-focused curation', 'Flexible setlists', 'Luxury presentation'],
     photo: serviceEvents,
   },
   {
     id: 3,
-    title: 'Corporate Functions',
+    title: 'Corporate & Brand Events',
     icon: '◇',
-    description: 'Premium entertainment for corporate clients hosted at your venue. We provide polished, professional DJs calibrated to your audience.',
-    features: ['Client-appropriate talent', 'Seamless professionalism', 'Pre-event briefings'],
+    tagline: 'Professional, adaptable and audience-aware.',
+    description: 'Premium entertainment for corporate events, product launches, and brand experiences. Polished talent calibrated to your audience and objectives.',
+    features: ['Professional presentation', 'Audience adaptation', 'Seamless integration'],
     photo: serviceCorporate,
   },
   {
     id: 4,
-    title: 'Private Events & Parties',
+    title: 'Venues & Residencies',
     icon: '◎',
-    description: 'Premium DJ services for your private events and parties — birthdays, weddings, anniversaries, and celebrations. Curated entertainment tailored to your guests.',
-    features: ['Bespoke setlists', 'Luxury presentation', 'Dedicated point of contact'],
-    photo: servicePrivate,
+    tagline: 'Consistent programming and DJs who understand the room.',
+    description: 'Build a signature sound for your venue. From residencies to one-off events, we handle talent, scheduling, and logistics while you focus on your guests.',
+    features: ['Curated talent matching', 'Flexible scheduling', 'Consistent brand alignment'],
+    photo: serviceResidencies,
   },
 ];
 
@@ -992,15 +996,49 @@ function Navbar({ activePage, setPage }) {
             </div>
           </div>
 
-          {/* CTA */}
-          <button onClick={() => setPage('Work With Us')} style={{
-            fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
-            letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
-            background: C.goldSolid, padding: '0.6rem 1.4rem', border: 'none', cursor: 'pointer', transition: 'opacity 0.2s',
-          }}
-            onMouseEnter={e => e.target.style.opacity = '0.85'}
-            onMouseLeave={e => e.target.style.opacity = '1'}
-          >Work With Us</button>
+          {/* CTA - Contact Dropdown */}
+          <div style={{ position: 'relative', display: 'inline-block' }}>
+            <button onClick={() => setContactDropdown(!contactDropdown)} style={{
+              fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
+              letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
+              background: C.goldSolid, padding: '0.6rem 1.4rem', border: 'none', cursor: 'pointer', transition: 'opacity 0.2s',
+            }}
+              onMouseEnter={e => e.target.style.opacity = '0.85'}
+              onMouseLeave={e => e.target.style.opacity = '1'}
+            >Contact</button>
+            {contactDropdown && (
+              <div style={{
+                position: 'absolute', top: '100%', right: 0, marginTop: '0.5rem',
+                background: C.white, border: `1px solid rgba(140,100,30,0.3)`, borderRadius: '2px',
+                boxShadow: '0 4px 16px rgba(23,21,18,0.15)', zIndex: 1000, minWidth: '220px',
+              }}>
+                <button onClick={() => setPageAndScroll('Book A DJ')} style={{
+                  display: 'block', width: '100%', textAlign: 'left', padding: '1rem 1.25rem',
+                  fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
+                  color: C.nearBlack, background: 'transparent', border: 'none', cursor: 'pointer',
+                  borderBottom: `1px solid rgba(140,100,30,0.15)`, transition: 'background 0.2s',
+                }}
+                  onMouseEnter={e => e.target.style.background = 'rgba(140,100,30,0.08)'}
+                  onMouseLeave={e => e.target.style.background = 'transparent'}
+                >
+                  <div style={{ letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Book a DJ</div>
+                  <div style={{ fontSize: T.micro, color: C.mid, fontWeight: 400 }}>For your event</div>
+                </button>
+                <button onClick={() => setPageAndScroll('Partner With Virtuoso')} style={{
+                  display: 'block', width: '100%', textAlign: 'left', padding: '1rem 1.25rem',
+                  fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
+                  color: C.nearBlack, background: 'transparent', border: 'none', cursor: 'pointer',
+                  transition: 'background 0.2s',
+                }}
+                  onMouseEnter={e => e.target.style.background = 'rgba(140,100,30,0.08)'}
+                  onMouseLeave={e => e.target.style.background = 'transparent'}
+                >
+                  <div style={{ letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Partner with Virtuoso</div>
+                  <div style={{ fontSize: T.micro, color: C.mid, fontWeight: 400 }}>Business partnerships</div>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Hamburger */}
@@ -1058,10 +1096,29 @@ function Navbar({ activePage, setPage }) {
             )}
           </div>
 
-          <span onClick={() => { setPage('Work With Us'); setMobileOpen(false); }} style={{
-            fontFamily: 'Playfair Display, serif', fontSize: T.h4, fontWeight: 600,
-            color: activePage === 'Work With Us' ? C.goldText : C.nearBlack, cursor: 'pointer', padding: '0.6rem 0',
-          }}>Work With Us</span>
+          <div>
+            <span onClick={() => setMobileContactOpen(!mobileContactOpen)} style={{
+              fontFamily: 'Playfair Display, serif', fontSize: T.h4, fontWeight: 600,
+              color: (activePage === 'Book A DJ' || activePage === 'Partner With Virtuoso') ? C.goldText : C.nearBlack,
+              cursor: 'pointer', padding: '0.6rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem',
+            }}>
+              Contact
+              <span style={{ fontSize: T.body, transition: 'transform 0.25s', transform: mobileContactOpen ? 'rotate(180deg)' : 'none' }}>▾</span>
+            </span>
+
+            {mobileContactOpen && (
+              <div style={{ padding: '0.5rem 0 1rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                <span onClick={() => { setPage('Book A DJ'); setMobileOpen(false); setMobileContactOpen(false); }} style={{
+                  fontFamily: 'Outfit, sans-serif', fontSize: T.body, fontWeight: 500,
+                  color: C.mid, cursor: 'pointer', padding: '0.4rem 0',
+                }}>Book a DJ</span>
+                <span onClick={() => { setPage('Partner With Virtuoso'); setMobileOpen(false); setMobileContactOpen(false); }} style={{
+                  fontFamily: 'Outfit, sans-serif', fontSize: T.body, fontWeight: 500,
+                  color: C.mid, cursor: 'pointer', padding: '0.4rem 0',
+                }}>Partner with Virtuoso</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -1325,7 +1382,8 @@ function HomePage({ setPage }) {
                 onMouseEnter={e => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.borderTopColor = C.gold; e.currentTarget.style.boxShadow = '0 8px 30px rgba(23,21,18,0.18)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(140,100,30,0.5)'; e.currentTarget.style.borderTopColor = C.gold; e.currentTarget.style.boxShadow = '0 4px 20px rgba(23,21,18,0.12)'; e.currentTarget.style.transform = 'none'; }}
               >
-                <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '0.75rem' }}>{s.title}</h3>
+                <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '0.5rem' }}>{s.title}</h3>
+                {s.tagline && <p style={{ color: C.goldText, fontSize: T.small, lineHeight: 1.6, marginBottom: '1rem', fontStyle: 'italic' }}>{s.tagline}</p>}
                 <p style={{ color: C.mid, fontSize: T.body, lineHeight: 1.7, marginBottom: '1.25rem' }}>{s.description}</p>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   {s.features.map(f => (
@@ -1465,7 +1523,7 @@ function AboutPage({ setPage }) {
           {/* ── PREAMBLE ── */}
           <div style={{ textAlign: 'center', marginBottom: '3.5rem', maxWidth: 800, margin: '0 auto 3.5rem' }}>
             <p style={{ color: C.mid, lineHeight: 1.8, fontSize: T.body }}>
-              Providing DJs, curating playlists and coordinating a seamless experience is the key to lasting memories. We help our clients find consistency, quality and reliability for their events. Our musically inclined team is experienced in delivering premium talent, adept in holding the dancefloor.
+              Providing DJs, curating playlists and coordinating a seamless experience is the key to lasting memories. We help our clients find consistency, quality and reliability for their events. Our musically inclined team is experienced in delivering premium talent, adept in reading the room.
             </p>
           </div>
 
@@ -2231,6 +2289,250 @@ function TalentCommunityPage() {
   );
 }
 
+// ─── BOOK A DJ PAGE (CLIENT ENQUIRY FORM) ────────────────────────────────────────
+function BookADJPage() {
+  const [form, setForm] = useState({
+    name: '', email: '', phone: '', eventType: '', eventDate: '', eventLocation: '',
+    guestCount: '', musicStyle: '', eventRequirements: '', budget: '', message: '', privacy: false,
+  });
+  const [status, setStatus] = useState('idle');
+  const [showPrivacy, setShowPrivacy] = useState(false);
+
+  const handleChange = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  const handleSubmit = async () => {
+    if (!form.privacy) { alert('Please accept the privacy policy to submit your booking enquiry.'); return; }
+    if (!form.name || !form.email || !form.eventType) { alert('Please fill in all required fields.'); return; }
+    setStatus('sending');
+    try {
+      await emailjs.send(EJS.serviceId, EJS.templateNotify, {
+        venue_name: 'DJ Booking - ' + form.eventType,
+        contact_name: form.name,
+        email: form.email,
+        phone: form.phone || 'Not provided',
+        venue_type: form.eventType,
+        location: form.eventLocation,
+        capacity: form.guestCount,
+        preferred_date: form.eventDate,
+        service_interest: form.musicStyle || 'Not specified',
+        message: form.message,
+      }, EJS.publicKey);
+      await emailjs.send(EJS.serviceId, EJS.templateReply, {
+        contact_name: form.name,
+        email: form.email,
+        venue_name: form.eventType + ' Event',
+      }, EJS.publicKey);
+      setStatus('success');
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+    }
+  };
+
+  const inputStyle = {
+    width: '100%', padding: '0.9rem 1.1rem', fontFamily: 'Outfit, sans-serif',
+    fontSize: T.body, color: C.nearBlack, background: C.white,
+    border: `1px solid rgba(140,100,30,0.25)`, outline: 'none',
+    transition: 'border-color 0.2s',
+  };
+
+  const labelStyle = {
+    fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600,
+    letterSpacing: '0.12em', textTransform: 'uppercase', color: C.mid,
+    display: 'block', marginBottom: '0.4rem',
+  };
+
+  const containerStyle = { maxWidth: 780, margin: '0 auto' };
+
+  if (status === 'success') return (
+    <div style={{ paddingTop: 72, minHeight: '100vh', background: C.ivory, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4.25rem 2rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ textAlign: 'center', maxWidth: 560 }}>
+        <div style={{ fontSize: T.h1, marginBottom: '1.5rem' }}>◆</div>
+        <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.stat, marginBottom: '1rem' }}>Booking Enquiry Received</h1>
+        <GoldLine />
+        <p style={{ color: C.mid, lineHeight: 1.8, marginBottom: '1rem' }}>
+          Thank you, <strong>{form.name}</strong>. We have received your booking enquiry for your <strong>{form.eventType}</strong> and will be in touch within 24 hours.
+        </p>
+        <p style={{ color: C.mid, lineHeight: 1.8, fontSize: T.body }}>
+          A confirmation has been sent to <strong>{form.email}</strong>. If you don't see it, please check your spam folder.
+        </p>
+        <div style={{ marginTop: '2rem', padding: '1.5rem', background: C.stone, border: `1px solid rgba(140,100,30,0.2)`, textAlign: 'left' }}>
+          <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldText, marginBottom: '0.75rem' }}>What Happens Next</p>
+          {['Our team reviews your event details', 'We match you with the right DJ from our collective', 'A Virtuoso Collective representative will contact you within 24 hours', 'We will confirm availability and discuss your event needs'].map((step, i) => (
+            <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+              <span style={{ color: C.goldText, fontWeight: 600, fontSize: T.small, flexShrink: 0 }}>{i + 1}.</span>
+              <span style={{ color: C.mid, fontSize: T.small }}>{step}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ paddingTop: 72, background: C.ivory, minHeight: '100vh', padding: '5.5rem 2rem 4.25rem', position: 'relative', zIndex: 1 }}>
+      <div style={containerStyle}>
+        <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
+          <SectionLabel>Book Your DJ</SectionLabel>
+          <h1 style={{ fontSize: T.h1 }}>Find the Right DJ for Your Event</h1>
+          <GoldLine />
+          <p style={{ color: C.mid, maxWidth: 500, margin: '0 auto', lineHeight: 1.7 }}>
+            Tell us about your event and we will help match you with the perfect DJ from our curated collective. We will be in touch within 24 hours.
+          </p>
+        </div>
+
+        <div style={{ background: C.white, padding: '3rem', border: `1px solid rgba(140,100,30,0.22)` }}>
+          {/* Event & Personal Details */}
+          <div style={{ marginBottom: '2.5rem' }}>
+            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '1.5rem', paddingBottom: '0.75rem', borderBottom: `1px solid rgba(140,100,30,0.2)` }}>Your Details</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+              {[
+                { label: 'Name *', key: 'name', placeholder: 'Your name' },
+                { label: 'Email *', key: 'email', placeholder: 'your@email.com', type: 'email' },
+                { label: 'Phone Number', key: 'phone', placeholder: '+44 7xxx xxxxxx', type: 'tel' },
+              ].map(field => (
+                <div key={field.key} style={{ gridColumn: field.key === 'name' ? '1 / 2' : 'auto' }}>
+                  <label style={labelStyle}>{field.label}</label>
+                  <input
+                    type={field.type || 'text'}
+                    placeholder={field.placeholder}
+                    value={form[field.key]}
+                    onChange={e => handleChange(field.key, e.target.value)}
+                    style={inputStyle}
+                    onFocus={e => e.target.style.borderColor = C.goldSolid}
+                    onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Event Details */}
+          <div style={{ marginBottom: '2.5rem' }}>
+            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '1.5rem', paddingBottom: '0.75rem', borderBottom: `1px solid rgba(140,100,30,0.2)` }}>Event Details</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.25rem' }}>
+              <div>
+                <label style={labelStyle}>Event Type *</label>
+                <select value={form.eventType} onChange={e => handleChange('eventType', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }}>
+                  <option value="">Select event type</option>
+                  {['Wedding', 'Birthday', 'Anniversary', 'Corporate Event', 'Brand Event', 'Private Party', 'Other'].map(v => <option key={v} value={v}>{v}</option>)}
+                </select>
+              </div>
+              <div>
+                <label style={labelStyle}>Event Date *</label>
+                <input
+                  type="date"
+                  value={form.eventDate}
+                  onChange={e => handleChange('eventDate', e.target.value)}
+                  min={new Date().toISOString().split('T')[0]}
+                  style={inputStyle}
+                  onFocus={e => e.target.style.borderColor = C.goldSolid}
+                  onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'}
+                />
+              </div>
+              <div>
+                <label style={labelStyle}>Event Location</label>
+                <input
+                  type="text"
+                  placeholder="City, postcode or venue name"
+                  value={form.eventLocation}
+                  onChange={e => handleChange('eventLocation', e.target.value)}
+                  style={inputStyle}
+                  onFocus={e => e.target.style.borderColor = C.goldSolid}
+                  onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'}
+                />
+              </div>
+              <div>
+                <label style={labelStyle}>Guest Count (Approx)</label>
+                <input
+                  type="number"
+                  placeholder="e.g. 50"
+                  value={form.guestCount}
+                  onChange={e => handleChange('guestCount', e.target.value)}
+                  style={inputStyle}
+                  onFocus={e => e.target.style.borderColor = C.goldSolid}
+                  onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'}
+                />
+              </div>
+            </div>
+            <div style={{ marginBottom: '1.25rem' }}>
+              <label style={labelStyle}>Music Style / Preferred Genres (if applicable)</label>
+              <input
+                type="text"
+                placeholder="e.g. House, Hip-Hop, Soul, Pop — or leave blank for recommendations"
+                value={form.musicStyle}
+                onChange={e => handleChange('musicStyle', e.target.value)}
+                style={inputStyle}
+                onFocus={e => e.target.style.borderColor = C.goldSolid}
+                onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'}
+              />
+            </div>
+            <div>
+              <label style={labelStyle}>Budget / Rate Range (if appropriate)</label>
+              <input
+                type="text"
+                placeholder="e.g. £300 - £500"
+                value={form.budget}
+                onChange={e => handleChange('budget', e.target.value)}
+                style={inputStyle}
+                onFocus={e => e.target.style.borderColor = C.goldSolid}
+                onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'}
+              />
+            </div>
+          </div>
+
+          {/* Event Requirements */}
+          <div style={{ marginBottom: '2.5rem' }}>
+            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: T.lead, marginBottom: '1.5rem', paddingBottom: '0.75rem', borderBottom: `1px solid rgba(140,100,30,0.2)` }}>Additional Information</h3>
+            <div>
+              <label style={labelStyle}>Event Requirements & Notes</label>
+              <textarea
+                rows={5}
+                placeholder="Tell us about your event atmosphere, any specific songs or artists you love, special moments (first dance, cake cutting, toasts), production requirements, or anything else we should know..."
+                value={form.eventRequirements}
+                onChange={e => handleChange('eventRequirements', e.target.value)}
+                style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.7 }}
+                onFocus={e => e.target.style.borderColor = C.goldSolid}
+                onBlur={e => e.target.style.borderColor = 'rgba(140,100,30,0.25)'}
+              />
+            </div>
+          </div>
+
+          {/* Privacy */}
+          <div style={{ marginBottom: '2rem', padding: '1.25rem', background: C.stone, border: `1px solid rgba(140,100,30,0.22)` }}>
+            <label style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', cursor: 'pointer' }}>
+              <input type="checkbox" checked={form.privacy} onChange={e => handleChange('privacy', e.target.checked)}
+                style={{ marginTop: '0.2rem', width: 16, height: 16, flexShrink: 0, accentColor: C.goldSolid }} />
+              <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.mid, lineHeight: 1.6 }}>
+                I have read and agree to Virtuoso Collective's{' '}
+                <span onClick={() => setShowPrivacy(true)} style={{ color: C.goldText, cursor: 'pointer', textDecoration: 'underline' }}>Privacy Policy</span>.
+                {' '}I consent to my information being used to process this booking enquiry and for Virtuoso Collective to contact me regarding this event. *
+              </span>
+            </label>
+          </div>
+
+          {/* Submit */}
+          <button onClick={handleSubmit} disabled={status === 'sending'} style={{
+            width: '100%', fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
+            letterSpacing: '0.12em', textTransform: 'uppercase', color: C.white,
+            background: status === 'sending' ? C.mid : C.goldSolid,
+            border: 'none', padding: '1.25rem', cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+            transition: 'background 0.2s',
+          }}>
+            {status === 'sending' ? 'Sending Enquiry…' : 'Send Booking Enquiry'}
+          </button>
+          {status === 'error' && (
+            <p style={{ color: '#c0392b', fontSize: T.small, textAlign: 'center', marginTop: '1rem' }}>
+              Something went wrong. Please try again or email us directly at jesse@virtuosocollective.co.uk.
+            </p>
+          )}
+        </div>
+      </div>
+      <PrivacyPolicyModal show={showPrivacy} onClose={() => setShowPrivacy(false)} />
+    </div>
+  );
+}
+
 // ─── PARTNER PAGE (ENQUIRY FORM) ──────────────────────────────────────────────
 function WorkWithUsPage() {
   const [form, setForm] = useState({
@@ -2549,7 +2851,7 @@ function Footer({ setPage }) {
 // Hash routing, so every page — artist profiles especially — has a real URL that
 // can be shared and bookmarked, and the browser back button behaves. Internally
 // a page is either a nav label ('About') or 'artist:<slug>'.
-const PAGES = ['Home', 'About Us', 'Services', 'Roster', 'FAQ', 'Work With Us'];
+const PAGES = ['Home', 'About Us', 'Services', 'Roster', 'FAQ', 'Book A DJ', 'Partner With Virtuoso'];
 
 const pageToHash = (p) => {
   if (p.startsWith('artist:')) return `#/artist/${p.slice(7)}`;
@@ -2567,8 +2869,11 @@ const hashToPage = (hash) => {
 
 export default function App() {
   const [page, setPage] = useState(() => hashToPage(window.location.hash));
+  const [contactDropdown, setContactDropdown] = useState(false);
+  const [mobileContactOpen, setMobileContactOpen] = useState(false);
 
   const setPageAndScroll = (p) => {
+    setContactDropdown(false);
     setPage(p);
     if (window.location.hash !== pageToHash(p)) window.location.hash = pageToHash(p);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2599,7 +2904,9 @@ export default function App() {
       case 'Roster':          return <RosterPage setPage={setPageAndScroll} />;
       case 'FAQ':             return <FAQPage />;
       case 'Join the Roster':  return <TalentCommunityPage />;
-      case 'Work With Us': return <WorkWithUsPage />;
+      case 'Book A DJ':        return <BookADJPage />;
+      case 'Partner With Virtuoso': return <WorkWithUsPage />;
+      case 'Work With Us':     return <WorkWithUsPage />;
       default:                return <HomePage setPage={setPageAndScroll} />;
     }
   };
