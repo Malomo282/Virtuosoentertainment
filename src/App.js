@@ -2866,6 +2866,7 @@ function Footer({ setPage }) {
 // Hash routing, so every page — artist profiles especially — has a real URL that
 // can be shared and bookmarked, and the browser back button behaves. Internally
 // a page is either a nav label ('About') or 'artist:<slug>'.
+// Navigation pages with contact dropdown routing
 const PAGES = ['Home', 'About Us', 'Services', 'Roster', 'FAQ', 'Book A DJ', 'Partner With Virtuoso'];
 
 const pageToHash = (p) => {
