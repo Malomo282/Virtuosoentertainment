@@ -91,8 +91,9 @@ const ROSTER = [
     mixes: [
       {
         title: 'DJ Appz Reel',
-        embed: 'https://www.youtube.com/embed/S3ddF5MkTQk',
+        embed: 'https://www.youtube.com/embed/tcQXc_Lp8yE',
         type: 'youtube',
+        height: 600,
       },
       {
         title: 'Retune Episode 3 — R&B, Hip-Hop, 90s & 2000s',
@@ -1956,7 +1957,7 @@ function ArtistPage({ slug, setPage }) {
                     <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.5rem' }}>{m.title}</p>
                   )}
                   <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
-                    <iframe title={`${dj.name} — ${m.title || 'mix'}`} width="100%" height={m.height || 120}
+                    <iframe title={`${dj.name} — ${m.title || 'mix'}`} width="100%" height={m.height || 450}
                             src={m.embed} frameBorder="0" loading="lazy"
                             allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
                             style={{ display: 'block' }} />
