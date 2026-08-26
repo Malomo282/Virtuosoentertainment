@@ -183,15 +183,15 @@ const ROSTER = [
   },
   {
     id: 7,
+    draft: true,
     name: 'DJ Pierre',
     slug: 'dj-pierre',
     tagline: 'Sleek, seamless, every set.',
     genres: ['House', 'R&B', 'Commercial', 'Pop', 'Retro'],
-    // Placeholder profile — real facts, no photo/links yet. Add photo, instagram
-    // and mixes, then this reads exactly like DJ Appz's entry above.
+    // Archived — not currently available
     bio: 'DJ Pierre has built his reputation behind the decks in bars across London — including Dirty Martini, Boom Battle Bar and London Cocktail Club — with a body of work that extends UK-wide. Wherever the booking, his sets stay sleek and seamless — a through-line across a broad range that spans house, R&B, commercial, pop, retro and more. For venues, that versatility means one DJ who can hold a varied crowd rather than a single narrow lane.',
-    photo: null,          // import djPierrePhoto from './Assets/Roster/djpierre-portrait.jpg'
-    photoDecks: null,     // import djPierreDecks from './Assets/Roster/djpierre-decks.jpg'
+    photo: null,
+    photoDecks: null,
     instagram: '@[handle]',
     mixes: [],
     mixcloudEmbed: null,
@@ -2340,7 +2340,7 @@ function Footer({ setPage }) {
           <div>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.goldOnDark, marginBottom: '1rem' }}>Contact</p>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: 'rgba(255,255,255,0.78)', lineHeight: 1.7, marginBottom: '0.75rem' }}>
-              jesse@virtuosocollective.co.uk<br />London, UK
+              <a href="mailto:jesse@virtuosocollective.co.uk" style={{ color: 'rgba(255,255,255,0.78)', textDecoration: 'none', transition: 'color 0.2s', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = C.goldOnDark} onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.78)'}>jesse@virtuosocollective.co.uk</a><br />London, UK
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
               {['Instagram', 'LinkedIn'].map(s => (
