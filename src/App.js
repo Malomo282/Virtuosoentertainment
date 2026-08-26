@@ -1016,7 +1016,7 @@ function Navbar({ activePage, setPage, contactDropdown, setContactDropdown, mobi
                 background: C.white, border: `1px solid rgba(140,100,30,0.3)`, borderRadius: '2px',
                 boxShadow: '0 4px 16px rgba(23,21,18,0.15)', zIndex: 1000, minWidth: '220px',
               }}>
-                <button onClick={() => setPageAndScroll('Book A DJ')} style={{
+                <button onClick={() => { setPage('Book A DJ'); setContactDropdown(false); }} style={{
                   display: 'block', width: '100%', textAlign: 'left', padding: '1rem 1.25rem',
                   fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
                   color: C.nearBlack, background: 'transparent', border: 'none', cursor: 'pointer',
@@ -1028,7 +1028,7 @@ function Navbar({ activePage, setPage, contactDropdown, setContactDropdown, mobi
                   <div style={{ letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Book a DJ</div>
                   <div style={{ fontSize: T.micro, color: C.mid, fontWeight: 400 }}>For your event</div>
                 </button>
-                <button onClick={() => setPageAndScroll('Partner With Virtuoso')} style={{
+                <button onClick={() => { setPage('Partner With Virtuoso'); setContactDropdown(false); }} style={{
                   display: 'block', width: '100%', textAlign: 'left', padding: '1rem 1.25rem',
                   fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
                   color: C.nearBlack, background: 'transparent', border: 'none', cursor: 'pointer',
