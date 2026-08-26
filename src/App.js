@@ -79,6 +79,7 @@ const ROSTER = [
     name: 'DJ Appz',
     slug: 'dj-appz',
     tagline: 'The sound of every room.',
+    bestFor: 'Weddings · Corporate · Private Events · Venues',
     genres: ['R&B', 'Hip-Hop', 'Neo-Soul', 'Afrobeats', 'Dancehall', 'House'],
     bio: "A London DJ and former professional dancer, Appz came to the booth from the floor — and it shows in how he works a room. Five years in, his sets move through R&B, hip-hop, neo-soul, afrobeats and dancehall, built around reading a crowd rather than running a prepared tracklist. He is a regular across some of London’s busiest rooms, including Boxpark, Dirty Martini, Lightbox Vauxhall, Simmons Bars, All Bar One and Proper Snacks, alongside weddings, private parties and corporate events UK-wide. For venues, that means a DJ who holds a floor on a quiet Thursday as reliably as a full Saturday.",
     photo: djAppzPhoto,
@@ -110,6 +111,7 @@ const ROSTER = [
     name: 'Jordan',
     slug: 'jordan',
     tagline: 'From the dance floor to the decks.',
+    bestFor: 'Private Events · Venues',
     genres: ['Commercial', 'Latin', 'Pop'],
     bio: "Jordan brings a dancer’s instinct to the booth — before DJing, he competed and won at UK dance championships and performed for Monster Energy, and that read of a room shows in every set. Since launching his residency at Simmons Bar in October 2023, he has built a fast-growing reputation across London’s Latin, commercial and pop-leaning nightlife, adding a residency at Lightbox Vauxhall alongside BAILE TRAMA, ITSAFLIP, BAILE LONDON, Brixton Radio and the UK’s largest Latin festival. For venues, that means a DJ who carries a themed Latin night and a mainstream commercial floor with equal confidence.",
     photo: jordanPhoto,
@@ -202,6 +204,7 @@ const ROSTER = [
     name: 'DJ Ramos',
     slug: 'dj-ramos',
     tagline: '25+ years of open format mastery.',
+    bestFor: 'Weddings · Corporate · Private Events · Venues',
     genres: ['Hip-Hop', 'R&B', 'House', 'Afrobeats', 'Dancehall', 'Garage', 'Disco', 'Commercial'],
     bio: 'DJ Ramos has been an open format DJ for 25+ years. Playing across a variety of popular bars and clubs around London, such as Ministry of Sound, Bar Solo, and Scarla.\n\nAlso a professional and experienced DJ for corporate events, previously mixing for companies such as Google and Mattel. Mixing for The Jump Off gave DJ Ramos the platform to showcase his free styling talents on the turntables, whilst contestants battled on the dance floor. DJ Ramos was also part of the Sony BMG street team back in 2005, working with Hip-Hop and RnB artists like Chris Brown and Ciara. In his spare time he\'s also a videographer and has worked with artists such as RnB singer Lloyd, NDubz & British actress Thandiwe Newton. Whilst his musical taste is deeply rooted in Hip-hop, he is not limited to just this genre. Being very experienced in DJing at weddings and special occasions, he is very talented in mixing and playing an eclectic range of music. DJ Ramos can deliver a range of top tunes to create a buzzing atmosphere and keep any crowd on the dance floor.',
     photo: djRamosPhoto,
@@ -1456,9 +1459,9 @@ function HomePage({ setPage }) {
                   opacity: 0, transition: 'opacity 0.3s ease', padding: '1.5rem',
                 }}>
                   <h3 style={{ fontFamily: 'Playfair Display, serif', color: C.white, fontSize: T.lead, marginBottom: '0.5rem' }}>{dj.name}</h3>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'center' }}>
-                    {dj.genres.map(g => <span key={g} style={{ fontSize: T.micro, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.goldOnDark, border: `1px solid ${C.goldOnDark}`, padding: '0.2rem 0.5rem' }}>{g}</span>)}
-                  </div>
+                  {dj.bestFor && (
+                    <p style={{ fontSize: T.small, color: C.goldOnDark, marginBottom: '0.75rem', fontWeight: 500 }}>Best for: {dj.bestFor}</p>
+                  )}
                 </div>
                 <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1rem', background: 'linear-gradient(transparent, rgba(23,21,18,0.8))' }}>
                   <h3 style={{ fontFamily: 'Playfair Display, serif', color: C.white, fontSize: T.body }}>{dj.name}</h3>
@@ -1864,6 +1867,15 @@ function ArtistPage({ slug, setPage }) {
               fontFamily: 'Playfair Display, serif', fontStyle: 'italic',
               fontSize: T.lead, color: C.mid, marginBottom: '1.25rem',
             }}>{filled(dj.tagline)}</p>
+          )}
+
+          {dj.bestFor && (
+            <p style={{
+              fontFamily: 'Outfit, sans-serif', fontSize: T.body, fontWeight: 600,
+              letterSpacing: '0.05em', color: C.goldText, marginBottom: '1.5rem',
+            }}>
+              Best for: {dj.bestFor}
+            </p>
           )}
 
           <GoldLine style={{ margin: '0 0 1.75rem' }} />
