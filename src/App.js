@@ -14,9 +14,22 @@ import brandLightbox     from './Assets/Brands Worked/brand-lightbox.png';
 import brandSimmons      from './Assets/Brands Worked/brand-simmons.png';
 
 // ─── ROSTER PHOTOGRAPHY ──────────────────────────────────────────────────────
-import djAppzPhoto from './Assets/Roster/djappz.png';
-import jordanPhoto from './Assets/Roster/Jordan-artist.png';
-import djRamosPhoto from './Assets/Roster/DJRamosnew.png';
+// Primary photos (artist portraits)
+import djAppzPhoto from './Assets/Roster/djappz/djappz-artist.png';
+import jordanPhoto from './Assets/Roster/Jordan/Jordan-artist.png';
+import djRamosPhoto from './Assets/Roster/djramos/DJRamos-artist.png';
+
+// DJ Appz secondary images
+import djAppzPrivate from './Assets/Roster/djappz/djappz-private.jpeg';
+import djAppzWedding from './Assets/Roster/djappz/djappz-wedding2.jpg';
+
+// Jordan secondary images
+import jordanDj from './Assets/Roster/Jordan/jordan-Dj.jpeg';
+import jordanKeni from './Assets/Roster/Jordan/jordan-keni2.jpeg';
+
+// DJ Ramos secondary images
+import djRamos1 from './Assets/Roster/djramos/DJRamos1.jpeg';
+import djRamos2 from './Assets/Roster/djramos/DJRamos2.jpeg';
 
 // ─── ABOUT PAGE PHOTOGRAPHY ──────────────────────────────────────────────────
 // emmanuel-portrait.jpg is a 3:4 head-and-shoulders crop of the source (Emmanuel
@@ -76,18 +89,19 @@ const EJS = {
 const ROSTER = [
   {
     id: 1,
-    name: 'DJ Appz',
-    slug: 'dj-appz',
-    tagline: 'The sound of every room.',
-    bestFor: 'Weddings · Corporate · Private Events · Venues',
-    genres: ['R&B', 'Hip-Hop', 'Afrobeats', 'Dancehall', 'House', 'Disco', 'Commercial'],
+    name: "DJ Appz",
+    slug: "dj-appz",
+    tagline: "The sound of every room.",
+    bestFor: "Weddings · Corporate · Private Events · Venues",
+    genres: ["R&B", "Hip-Hop", "Afrobeats", "Dancehall", "House", "Disco", "Commercial"],
     bio: "A London DJ and former professional dancer, Appz came to the booth from the floor — and it shows in how he works a room. Five years in, his sets move through R&B, hip-hop, afrobeats, dancehall and house, built around reading a crowd rather than running a prepared tracklist. He is a regular across some of London’s busiest rooms, including Boxpark, Dirty Martini, Lightbox Vauxhall, Simmons Bars, All Bar One and Proper Snacks, alongside weddings, private parties and corporate events UK-wide. For venues, that means a DJ who holds a floor on a quiet Thursday as reliably as a full Saturday.",
     photo: djAppzPhoto,
-    photoDecks: null,     // import djAppzDecks from './Assets/Roster/djappz-decks.jpg'
-    focus: '50% 8%',      // photo is already 3:4, so this only bites on square crops (nav thumbnail)
-    face:  '43% 44%',     // where his face sits in the frame — used by the thumbnail
+    secondaryPhotos: [djAppzPrivate, djAppzWedding],
+    photoDecks: null,     // import djAppzDecks from ‘./Assets/Roster/djappz-decks.jpg’
+    focus: "50% 8%",      // photo is already 3:4, so this only bites on square crops (nav thumbnail)
+    face:  "43% 44%",     // where his face sits in the frame — used by the thumbnail
     thumbZoom: 1.4,       // push in for the 32px nav thumbnail only
-    instagram: '@djappz',
+    instagram: "@djappz",
     videos: [
       {
         title: 'DJ Appz Reel',
@@ -120,15 +134,16 @@ const ROSTER = [
   },
   {
     id: 2,
-    name: 'Jordan',
-    slug: 'jordan',
-    tagline: 'From the dance floor to the decks.',
-    bestFor: 'Private Events · Venues',
-    genres: ['Commercial', 'Latin', 'Pop'],
+    name: "Jordan",
+    slug: "jordan",
+    tagline: "From the dance floor to the decks.",
+    bestFor: "Private Events · Venues",
+    genres: ["Commercial", "Latin", "Pop"],
     bio: "Jordan brings a dancer’s instinct to the booth — before DJing, he competed and won at UK dance championships and performed for Monster Energy, and that read of a room shows in every set. Since launching his residency at Simmons Bar in October 2023, he has built a fast-growing reputation across London’s Latin, commercial and pop-leaning nightlife, adding a residency at Lightbox Vauxhall alongside BAILE TRAMA, ITSAFLIP, BAILE LONDON, Brixton Radio and the UK’s largest Latin festival. For venues, that means a DJ who carries a themed Latin night and a mainstream commercial floor with equal confidence.",
     photo: jordanPhoto,
+    secondaryPhotos: [jordanDj, jordanKeni],
     photoDecks: null,
-    instagram: '@jordanblack_o',
+    instagram: "@jordanblack_o",
     mixes: [
       {
         title: 'Listen on SoundCloud',
@@ -213,18 +228,19 @@ const ROSTER = [
   },
   {
     id: 8,
-    name: 'DJ Ramos',
-    slug: 'dj-ramos',
-    tagline: '25+ years of open format mastery.',
-    bestFor: 'Weddings · Corporate · Private Events · Venues',
-    genres: ['Hip-Hop', 'R&B', 'House', 'Afrobeats', 'Dancehall', 'Garage', 'Disco', 'Commercial'],
-    bio: 'DJ Ramos has been an open format DJ for 25+ years. Playing across a variety of popular bars and clubs around London, such as Ministry of Sound, Bar Solo, and Scarla.\n\nAlso a professional and experienced DJ for corporate events, previously mixing for companies such as Google and Mattel. Mixing for The Jump Off gave DJ Ramos the platform to showcase his free styling talents on the turntables, whilst contestants battled on the dance floor. DJ Ramos was also part of the Sony BMG street team back in 2005, working with Hip-Hop and RnB artists like Chris Brown and Ciara. In his spare time he\'s also a videographer and has worked with artists such as RnB singer Lloyd, NDubz & British actress Thandiwe Newton. Whilst his musical taste is deeply rooted in Hip-hop, he is not limited to just this genre. Being very experienced in DJing at weddings and special occasions, he is very talented in mixing and playing an eclectic range of music. DJ Ramos can deliver a range of top tunes to create a buzzing atmosphere and keep any crowd on the dance floor.',
+    name: "DJ Ramos",
+    slug: "dj-ramos",
+    tagline: "25+ years of open format mastery.",
+    bestFor: "Weddings · Corporate · Private Events · Venues",
+    genres: ["Hip-Hop", "R&B", "House", "Afrobeats", "Dancehall", "Garage", "Disco", "Commercial"],
+    bio: "DJ Ramos has been an open format DJ for 25+ years. Playing across a variety of popular bars and clubs around London, such as Ministry of Sound, Bar Solo, and Scarla.\n\nAlso a professional and experienced DJ for corporate events, previously mixing for companies such as Google and Mattel. Mixing for The Jump Off gave DJ Ramos the platform to showcase his free styling talents on the turntables, whilst contestants battled on the dance floor. DJ Ramos was also part of the Sony BMG street team back in 2005, working with Hip-Hop and RnB artists like Chris Brown and Ciara. In his spare time he's also a videographer and has worked with artists such as RnB singer Lloyd, NDubz & British actress Thandiwe Newton. Whilst his musical taste is deeply rooted in Hip-hop, he is not limited to just this genre. Being very experienced in DJing at weddings and special occasions, he is very talented in mixing and playing an eclectic range of music. DJ Ramos can deliver a range of top tunes to create a buzzing atmosphere and keep any crowd on the dance floor.",
     photo: djRamosPhoto,
+    secondaryPhotos: [djRamos1, djRamos2],
     photoDecks: null,     // import djRamosDecks from './Assets/Roster/djramos-decks.jpg'
-    focus: '50% 15%',     // photo is portrait-oriented, face centered
-    face:  '50% 35%',     // where his face sits in the frame
+    focus: "50% 15%",     // photo is portrait-oriented, face centered
+    face:  "50% 35%",     // where his face sits in the frame
     thumbZoom: 1.6,       // push in for the 32px nav thumbnail
-    instagram: '@[handle]',
+    instagram: "@[handle]",
     mixes: [],
     mixcloudEmbed: null,
     mixcloudUser: '[mixcloud-username]',
@@ -1852,21 +1868,43 @@ function ArtistPage({ slug, setPage }) {
         maxWidth: 1000, margin: '0 auto', padding: '0 2rem 4rem',
         display: 'grid', gridTemplateColumns: '300px 1fr', gap: '3.5rem', alignItems: 'start',
       }}>
-        {/* Photo — deliberately restrained; this is a profile, not a hero. */}
-        <div style={{
-          aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
-          border: `1px solid ${C.line}`, position: 'sticky', top: 96,
-        }}>
-          {dj.photo
-            ? <img src={dj.photo} alt={dj.name} style={{
-                width: '100%', height: '100%', objectFit: 'cover',
-                objectPosition: dj.focus || 'center',
-              }} />
-            : <div aria-hidden="true" style={{
-                width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: 'Playfair Display, serif', fontSize: T.hero, fontWeight: 700, color: 'rgba(23,21,18,0.08)',
-              }}>{dj.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</div>
-          }
+        {/* Photo column with main portrait and secondary images grid */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {/* Main photo — sticky during scroll */}
+          <div style={{
+            aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+            border: `1px solid ${C.line}`, position: 'sticky', top: 96,
+          }}>
+            {dj.photo
+              ? <img src={dj.photo} alt={dj.name} style={{
+                  width: '100%', height: '100%', objectFit: 'cover',
+                  objectPosition: dj.focus || 'center',
+                }} />
+              : <div aria-hidden="true" style={{
+                  width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontFamily: 'Playfair Display, serif', fontSize: T.hero, fontWeight: 700, color: 'rgba(23,21,18,0.08)',
+                }}>{dj.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</div>
+            }
+          </div>
+
+          {/* Secondary images grid — 2-up layout */}
+          {dj.secondaryPhotos && dj.secondaryPhotos.length > 0 && (
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem',
+            }}>
+              {dj.secondaryPhotos.slice(0, 2).map((photo, i) => (
+                <div key={i} style={{
+                  aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+                  border: `1px solid ${C.line}`,
+                }}>
+                  <img src={photo} alt={`${dj.name} portrait ${i + 1}`} style={{
+                    width: '100%', height: '100%', objectFit: 'cover',
+                    objectPosition: 'center',
+                  }} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Detail */}
