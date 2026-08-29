@@ -1976,32 +1976,32 @@ function ArtistPage({ slug, setPage }) {
             </div>
           )}
 
-          {/* Mixes */}
-          {mixes.length > 0 && (
-            <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginBottom: '2.5rem' }}>
-              <SectionLabel>{mixes.length > 1 ? 'Selected Mixes' : 'Latest Mix'}</SectionLabel>
-              {mixes.map((m, i) => (
-                <div key={i} style={{ marginTop: '1rem' }}>
-                  {m.title && mixes.length > 1 && (
-                    <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.5rem' }}>{m.title}</p>
-                  )}
-                  <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
-                    <iframe title={`${dj.name} — ${m.title || 'mix'}`} width="100%" height={m.height || 450}
-                            src={m.embed} frameBorder="0" loading="lazy"
-                            allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
-                            style={{ display: 'block' }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
           <button onClick={() => setPage('Work With Us')} style={{
             fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
             letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
             background: C.goldSolid, border: 'none', padding: '1rem 2.25rem', cursor: 'pointer',
           }}>Book {dj.name.split(' ').slice(-1)[0]}</button>
         </div>
+
+        {/* Mixes (moved below photo in left column) */}
+        {mixes.length > 0 && (
+          <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginTop: '2rem' }}>
+            <SectionLabel>{mixes.length > 1 ? 'Selected Mixes' : 'Latest Mix'}</SectionLabel>
+            {mixes.map((m, i) => (
+              <div key={i} style={{ marginTop: '1rem' }}>
+                {m.title && mixes.length > 1 && (
+                  <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.5rem' }}>{m.title}</p>
+                )}
+                <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
+                  <iframe title={`${dj.name} — ${m.title || 'mix'}`} width="100%" height={m.height || 225}
+                          src={m.embed} frameBorder="0" loading="lazy"
+                          allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
+                          style={{ display: 'block' }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <style>{`@media (max-width: 760px) {

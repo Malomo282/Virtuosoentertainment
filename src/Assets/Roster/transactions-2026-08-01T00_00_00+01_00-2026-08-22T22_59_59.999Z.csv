@@ -1,0 +1,14 @@
+Transaction ID,Date,Time,Type,Name,Emoji,Category,Amount,Currency,Local amount,Local currency,Notes and #tags,Address,Receipt,Description,Category split,Money Out,Money In,Balance,Balance currency
+mm_0000B8u5aAomZ7LumaJy7x,31/07/2026,18:36:15,Bank transfer,COY GROUP LIMITED,,Income,500.00,GBP,500.00,GBP,Bukunola Fehintola,,,Bukunola Fehintola,,,500.00,541.75,GBP
+mm_0000B8u5aE1ediSEN1uSZf,31/07/2026,18:36:15,Pot transfer,FY25-26 Pot,,Transfers,-150.00,GBP,-150.00,GBP,,,,,,-150.00,,391.75,GBP
+mm_0000B8vusHt6JDMAxQzmMN,01/08/2026,15:45:41,Monzo-to-Monzo,Harry Appiah,,Transfers,-300.00,GBP,-300.00,GBP,,,,Harry Appiah,,-300.00,,91.75,GBP
+mm_0000B8wDjLOlmhbVlbvBKM,01/08/2026,19:16:58,Card payment,Capcut,,Software,-21.99,GBP,-21.99,GBP,,,,CAPCUT                 DUBLIN 2      IRL,,-21.99,,69.76,GBP
+mm_0000B9388aGoOF11CmoyxO,05/08/2026,03:17:16,Direct Debit,GoCardless,💸,Bills,-35.00,GBP,-35.00,GBP,BRIXTONCOMMU-PCGTZ,,,BRIXTONCOMMU-PCGTZ,,-35.00,,34.76,GBP
+mm_0000B9MQPpCxauo9MSKcuz,14/08/2026,10:41:36,Faster payment,GENRE MUSIC LIMITED,,Income,160.00,GBP,160.00,GBP,July 26,,,July 26,,,160.00,194.76,GBP
+mm_0000B9MQPsPTgpn7isNDQQ,14/08/2026,10:41:36,Pot transfer,FY25-26 Pot,,Transfers,-48.00,GBP,-48.00,GBP,,,,,,-48.00,,146.76,GBP
+mm_0000B9QgC5XSSMqwnZ69IX,16/08/2026,11:57:14,business-account-billing,,,Services,-9.00,GBP,-9.00,GBP,Fee for period from 16th August 2026 to 15th September 2026,,https://mondo-production-image-uploads.s3.eu-west-1.amazonaws.com/v2/user_00009acHaTXSDnQ6MjoENt/qHY29b8d6Vz7AeU3C13S-0000B9QgC3Z9n5PNMd0ctd_August_2026.pdf,Monzo Business Pro,,-9.00,,137.76,GBP
+mm_0000B9RXlzxvwv64APaC6j,16/08/2026,21:57:36,Card payment,Google Play,💻,Software,-1.99,GBP,-1.99,GBP,,Bishopsgate,,Google Play Apps       London        GBR,,-1.99,,135.77,GBP
+mm_0000B9XMFQQWc4cicu5iNd,19/08/2026,17:16:43,Bank transfer,COY GROUP LIMITED,,Income,400.00,GBP,400.00,GBP,Bukunola Fehintola,,,Bukunola Fehintola,,,400.00,535.77,GBP
+mm_0000B9XMFTwXXVaM0KPNRd,19/08/2026,17:16:44,Pot transfer,FY25-26 Pot,,Transfers,-120.00,GBP,-120.00,GBP,,,,,,-120.00,,415.77,GBP
+mm_0000B9bfNkxoogW5J66WpP,21/08/2026,19:09:58,Bank transfer,COY GROUP LIMITED,,Income,250.00,GBP,250.00,GBP,Bukunola Fehintola,,,Bukunola Fehintola,,,250.00,665.77,GBP
+mm_0000B9bfNp19kCXIdnR7Io,21/08/2026,19:09:59,Pot transfer,FY25-26 Pot,,Transfers,-75.00,GBP,-75.00,GBP,,,,,,-75.00,,590.77,GBP
