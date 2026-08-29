@@ -88,13 +88,19 @@ const ROSTER = [
     face:  '43% 44%',     // where his face sits in the frame — used by the thumbnail
     thumbZoom: 1.4,       // push in for the 32px nav thumbnail only
     instagram: '@djappz',
-    mixes: [
+    videos: [
       {
         title: 'DJ Appz Reel',
         embed: 'https://www.youtube.com/embed/tcQXc_Lp8yE',
-        type: 'youtube',
         height: 600,
       },
+      {
+        title: 'KFC & Proper Corn Brand Launch Campaign',
+        embed: 'https://www.youtube.com/embed/OOB4K2lTrxQ',
+        height: 600,
+      },
+    ],
+    mixes: [
       {
         title: 'Retune Episode 3 — R&B, Hip-Hop, 90s & 2000s',
         embed: 'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FDJAppz%2Fretune-episode-3-rnb-hip-hop-90s-2000s%2F',
@@ -1818,6 +1824,9 @@ function ArtistPage({ slug, setPage }) {
     ? dj.mixes
     : (dj.mixcloudEmbed ? [{ title: 'Latest Mix', embed: dj.mixcloudEmbed }] : []);
 
+  // Videos (YouTube reels/campaigns)
+  const videos = dj.videos || [];
+
   const linkStyle = {
     fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.mid,
     display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
@@ -1944,6 +1953,26 @@ function ArtistPage({ slug, setPage }) {
                   <span aria-hidden="true">◎</span> Mixcloud
                 </a>
               )}
+            </div>
+          )}
+
+          {/* Videos */}
+          {videos.length > 0 && (
+            <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginBottom: '2.5rem' }}>
+              <SectionLabel>{videos.length > 1 ? 'Videos & Reels' : 'Video'}</SectionLabel>
+              {videos.map((v, i) => (
+                <div key={i} style={{ marginTop: '1.5rem' }}>
+                  {v.title && (
+                    <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.75rem' }}>{v.title}</p>
+                  )}
+                  <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
+                    <iframe title={`${dj.name} — ${v.title || 'video'}`} width="100%" height={v.height || 600}
+                            src={v.embed} frameBorder="0" loading="lazy"
+                            allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
+                            style={{ display: 'block' }} />
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
