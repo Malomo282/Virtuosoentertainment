@@ -1863,52 +1863,12 @@ function ArtistPage({ slug, setPage }) {
         >← Back to Roster</span>
       </div>
 
-      {/* ── PROFILE ── */}
-      <div className="artist-grid" style={{
-        maxWidth: 1000, margin: '0 auto', padding: '0 2rem 4rem',
-        display: 'grid', gridTemplateColumns: '300px 1fr', gap: '3.5rem', alignItems: 'start',
+      {/* ── PROFILE — Single column layout ── */}
+      <div style={{
+        maxWidth: 800, margin: '0 auto', padding: '0 2rem 4rem',
       }}>
-        {/* Photo column with main portrait and secondary images grid */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {/* Main photo — sticky during scroll */}
-          <div style={{
-            aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
-            border: `1px solid ${C.line}`, position: 'sticky', top: 96,
-          }}>
-            {dj.photo
-              ? <img src={dj.photo} alt={dj.name} style={{
-                  width: '100%', height: '100%', objectFit: 'cover',
-                  objectPosition: dj.focus || 'center',
-                }} />
-              : <div aria-hidden="true" style={{
-                  width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: 'Playfair Display, serif', fontSize: T.hero, fontWeight: 700, color: 'rgba(23,21,18,0.08)',
-                }}>{dj.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</div>
-            }
-          </div>
-
-          {/* Secondary images grid — 2-up layout */}
-          {dj.secondaryPhotos && dj.secondaryPhotos.length > 0 && (
-            <div style={{
-              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem',
-            }}>
-              {dj.secondaryPhotos.slice(0, 2).map((photo, i) => (
-                <div key={i} style={{
-                  aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
-                  border: `1px solid ${C.line}`,
-                }}>
-                  <img src={photo} alt={`${dj.name} portrait ${i + 1}`} style={{
-                    width: '100%', height: '100%', objectFit: 'cover',
-                    objectPosition: 'center',
-                  }} />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Detail */}
-        <div>
+        {/* Header: Name, tagline, best for, genres */}
+        <div style={{ marginBottom: '2.5rem' }}>
           <SectionLabel>DJ</SectionLabel>
           <h1 style={{
             fontFamily: 'Playfair Display, serif', fontSize: T.h1,
@@ -1945,8 +1905,49 @@ function ArtistPage({ slug, setPage }) {
               ))}
             </div>
           )}
+        </div>
 
-          {/* Bio */}
+        {/* Photo section — main + secondary images */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
+          {/* Main photo */}
+          <div style={{
+            maxWidth: '100%', aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+            border: `1px solid ${C.line}`,
+          }}>
+            {dj.photo
+              ? <img src={dj.photo} alt={dj.name} style={{
+                  width: '100%', height: '100%', objectFit: 'cover',
+                  objectPosition: dj.focus || 'center',
+                }} />
+              : <div aria-hidden="true" style={{
+                  width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontFamily: 'Playfair Display, serif', fontSize: T.hero, fontWeight: 700, color: 'rgba(23,21,18,0.08)',
+                }}>{dj.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</div>
+            }
+          </div>
+
+          {/* Secondary images grid — 2-up layout */}
+          {dj.secondaryPhotos && dj.secondaryPhotos.length > 0 && (
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem',
+            }}>
+              {dj.secondaryPhotos.slice(0, 2).map((photo, i) => (
+                <div key={i} style={{
+                  aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+                  border: `1px solid ${C.line}`,
+                }}>
+                  <img src={photo} alt={`${dj.name} portrait ${i + 1}`} style={{
+                    width: '100%', height: '100%', objectFit: 'cover',
+                    objectPosition: 'center',
+                  }} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Bio section */}
+        <div>
           {filled(dj.bio) ? (
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.body, color: C.mid, lineHeight: 1.85, marginBottom: '2rem' }}>
               {filled(dj.bio)}
@@ -1994,7 +1995,7 @@ function ArtistPage({ slug, setPage }) {
             </div>
           )}
 
-          {/* Videos */}
+          {/* Videos — reduced by 30% */}
           {videos.length > 0 && (
             <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginBottom: '2.5rem' }}>
               <SectionLabel>{videos.length > 1 ? 'Videos & Reels' : 'Video'}</SectionLabel>
@@ -2004,7 +2005,7 @@ function ArtistPage({ slug, setPage }) {
                     <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.75rem' }}>{v.title}</p>
                   )}
                   <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
-                    <iframe title={`${dj.name} — ${v.title || 'video'}`} width="100%" height={v.height || 600}
+                    <iframe title={`${dj.name} — ${v.title || 'video'}`} width="100%" height={v.height ? Math.round(v.height * 0.7) : 420}
                             src={v.embed} frameBorder="0" loading="lazy"
                             allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
                             style={{ display: 'block' }} />
@@ -2021,7 +2022,7 @@ function ArtistPage({ slug, setPage }) {
           }}>Book {dj.name.split(' ').slice(-1)[0]}</button>
         </div>
 
-        {/* Mixes (moved below photo in left column) */}
+        {/* Mixes section */}
         {mixes.length > 0 && (
           <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginTop: '2rem' }}>
             <SectionLabel>{mixes.length > 1 ? 'Selected Mixes' : 'Latest Mix'}</SectionLabel>
@@ -2041,11 +2042,6 @@ function ArtistPage({ slug, setPage }) {
           </div>
         )}
       </div>
-
-      <style>{`@media (max-width: 760px) {
-        .artist-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
-        .artist-grid > div:first-child { position: static !important; max-width: 320px; }
-      }`}</style>
     </div>
   );
 }
