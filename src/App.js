@@ -2036,8 +2036,8 @@ function ArtistPage({ slug, setPage }) {
             {/* Mixcloud Playlist (if available) */}
             {dj.mixcloudPlaylist && (
               <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden', marginBottom: '2rem' }}>
-                <iframe title={`${dj.name} — Mixcloud Playlist`} width="100%" height={500}
-                        src={`https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=${dj.mixcloudPlaylist}`}
+                <iframe title={`${dj.name} — Mixcloud Playlist`} width="100%" height={800}
+                        src={`https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=${dj.mixcloudPlaylist}`}
                         frameBorder="0" loading="lazy"
                         allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
                         style={{ display: 'block' }} />
