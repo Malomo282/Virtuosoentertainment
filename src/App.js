@@ -28,8 +28,8 @@ import jordanDj from './Assets/Roster/Jordan/jordan-Dj.jpeg';
 import jordanKeni from './Assets/Roster/Jordan/jordan-keni2.jpeg';
 
 // DJ Ramos secondary images
-import djRamos1 from './Assets/Roster/djramos/DJRamos1.jpeg';
 import djRamos2 from './Assets/Roster/djramos/DJRamos2.jpeg';
+import djRamos3 from './Assets/Roster/djramos/DJRamos3.jpeg';
 
 // ─── ABOUT PAGE PHOTOGRAPHY ──────────────────────────────────────────────────
 // emmanuel-portrait.jpg is a 3:4 head-and-shoulders crop of the source (Emmanuel
@@ -241,7 +241,7 @@ const ROSTER = [
     genres: ["Hip-Hop", "R&B", "House", "Afrobeats", "Dancehall", "Garage", "Disco", "Commercial"],
     bio: "DJ Ramos has been an open format DJ for 25+ years. Playing across a variety of popular bars and clubs around London, such as Ministry of Sound, Bar Solo, and Scarla.\n\nAlso a professional and experienced DJ for corporate events, previously mixing for companies such as Google and Mattel. Mixing for The Jump Off gave DJ Ramos the platform to showcase his free styling talents on the turntables, whilst contestants battled on the dance floor. DJ Ramos was also part of the Sony BMG street team back in 2005, working with Hip-Hop and RnB artists like Chris Brown and Ciara. In his spare time he's also a videographer and has worked with artists such as RnB singer Lloyd, NDubz & British actress Thandiwe Newton. Whilst his musical taste is deeply rooted in Hip-hop, he is not limited to just this genre. Being very experienced in DJing at weddings and special occasions, he is very talented in mixing and playing an eclectic range of music. DJ Ramos can deliver a range of top tunes to create a buzzing atmosphere and keep any crowd on the dance floor.",
     photo: djRamosPhoto,
-    secondaryPhotos: [djRamos1, djRamos2],
+    secondaryPhotos: [djRamos3, djRamos2],
     photoDecks: null,     // import djRamosDecks from './Assets/Roster/djramos-decks.jpg'
     focus: "50% 15%",     // photo is portrait-oriented, face centered
     face:  "50% 35%",     // where his face sits in the frame
