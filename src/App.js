@@ -2011,7 +2011,7 @@ function ArtistPage({ slug, setPage }) {
         )}
 
         {/* Bio section */}
-        <div>
+        <div style={{ borderTop: `2px solid ${C.goldSolid}`, paddingTop: '2.5rem', marginTop: '2.5rem' }}>
           {filled(dj.bio) ? (
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.body, color: C.mid, lineHeight: 1.85, marginBottom: '2rem' }}>
               {filled(dj.bio)}
@@ -2061,7 +2061,7 @@ function ArtistPage({ slug, setPage }) {
 
           {/* Videos & Reels Carousel */}
           {videos.length > 0 && (
-            <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginBottom: '2.5rem' }}>
+            <div style={{ borderTop: `2px solid ${C.goldSolid}`, paddingTop: '2.5rem', marginTop: '2.5rem', marginBottom: '2.5rem' }}>
               <SectionLabel>{videos.length > 1 ? 'Videos & Reels' : 'Video'}</SectionLabel>
 
               <div style={{ marginTop: '1.5rem' }}>
@@ -2129,7 +2129,7 @@ function ArtistPage({ slug, setPage }) {
 
         {/* Mixes section — mini widgets */}
         {mixes.length > 0 && (
-          <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginTop: '2rem' }}>
+          <div style={{ borderTop: `2px solid ${C.goldSolid}`, paddingTop: '2.5rem', marginTop: '2.5rem' }}>
             <SectionLabel>{mixes.length > 1 ? 'Mixes' : 'Latest Mix'}</SectionLabel>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
