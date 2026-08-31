@@ -1986,24 +1986,57 @@ function ArtistPage({ slug, setPage }) {
               )}
             </div>
 
-            {/* Lightbox Modal */}
+            {/* Lightbox Modal with Carousel */}
             {selectedImageIndex !== null && (
               <div
                 onClick={() => setSelectedImageIndex(null)}
                 style={{
                   position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
                   background: 'rgba(0,0,0,0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  zIndex: 1000, cursor: 'pointer', padding: '2rem',
+                  zIndex: 1000, cursor: 'pointer', padding: '2rem', flexDirection: 'column', gap: '1.5rem',
                 }}
               >
-                <div onClick={e => e.stopPropagation()} style={{ maxWidth: '90%', maxHeight: '90vh' }}>
+                <div onClick={e => e.stopPropagation()} style={{ maxWidth: '100%', maxHeight: '54vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <img
                     src={[dj.photo, ...(dj.secondaryPhotos || []).slice(0, 2)][selectedImageIndex]}
                     alt={`${dj.name} enlarged`}
                     style={{
-                      width: '100%', height: '100%', objectFit: 'contain',
+                      maxWidth: '100%', maxHeight: '100%', objectFit: 'contain',
                     }}
                   />
+                </div>
+
+                {/* Carousel Controls */}
+                <div onClick={e => e.stopPropagation()} style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                  <button
+                    onClick={() => setSelectedImageIndex(prev => (prev - 1 + 3) % 3)}
+                    style={{
+                      fontFamily: 'Outfit, sans-serif', fontSize: T.body, fontWeight: 600,
+                      color: C.white, background: C.goldSolid, border: 'none', padding: '0.75rem 1.5rem',
+                      cursor: 'pointer', transition: 'opacity 0.2s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                  >
+                    ← Previous
+                  </button>
+
+                  <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.white }}>
+                    {selectedImageIndex + 1} of 3
+                  </span>
+
+                  <button
+                    onClick={() => setSelectedImageIndex(prev => (prev + 1) % 3)}
+                    style={{
+                      fontFamily: 'Outfit, sans-serif', fontSize: T.body, fontWeight: 600,
+                      color: C.white, background: C.goldSolid, border: 'none', padding: '0.75rem 1.5rem',
+                      cursor: 'pointer', transition: 'opacity 0.2s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                  >
+                    Next →
+                  </button>
                 </div>
               </div>
             )}
