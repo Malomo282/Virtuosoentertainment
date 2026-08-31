@@ -1824,6 +1824,7 @@ function ServicesPage({ setPage }) {
 // genre tags and mix links; the roster page is just an index into these.
 function ArtistPage({ slug, setPage }) {
   const dj = LIVE_ROSTER.find(a => a.slug === slug);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
   // Deep link to an artist who is unpublished or renamed — fail gracefully
   // rather than crashing on an undefined lookup.
@@ -1913,58 +1914,99 @@ function ArtistPage({ slug, setPage }) {
           )}
         </div>
 
-        {/* Photo section — primary centered with secondary flanking */}
+        {/* Photo gallery — three equal columns, click to enlarge */}
         {(dj.photo || dj.secondaryPhotos?.length > 0) && (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1.4fr 1fr',
-            gap: '1rem',
-            marginBottom: '2.5rem',
-            alignItems: 'start',
-          }}>
-            {/* Secondary photo 1 (left) */}
-            {dj.secondaryPhotos && dj.secondaryPhotos.length > 0 && (
-              <div style={{
-                aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
-                border: `1px solid ${C.line}`,
-              }}>
-                <img src={dj.secondaryPhotos[0]} alt={`${dj.name} portrait 1`} style={{
-                  width: '100%', height: '100%', objectFit: 'cover',
-                  objectPosition: 'center',
-                }} />
-              </div>
-            )}
-
-            {/* Main photo — centered and larger */}
+          <>
             <div style={{
-              aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
-              border: `1px solid ${C.line}`,
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr 1fr',
+              gap: '1rem',
+              marginBottom: '2.5rem',
             }}>
-              {dj.photo
-                ? <img src={dj.photo} alt={dj.name} style={{
+              {/* Photo 1 */}
+              <div
+                onClick={() => setSelectedImageIndex(0)}
+                style={{
+                  aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+                  border: `1px solid ${C.line}`, cursor: 'pointer',
+                  transition: 'opacity 0.2s ease',
+                }}
+                onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+              >
+                {dj.photo
+                  ? <img src={dj.photo} alt={dj.name} style={{
+                      width: '100%', height: '100%', objectFit: 'cover',
+                      objectPosition: dj.focus || 'center',
+                    }} />
+                  : <div aria-hidden="true" style={{
+                      width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontFamily: 'Playfair Display, serif', fontSize: T.hero, fontWeight: 700, color: 'rgba(23,21,18,0.08)',
+                    }}>{dj.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</div>
+                }
+              </div>
+
+              {/* Photo 2 */}
+              {dj.secondaryPhotos && dj.secondaryPhotos.length > 0 && (
+                <div
+                  onClick={() => setSelectedImageIndex(1)}
+                  style={{
+                    aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+                    border: `1px solid ${C.line}`, cursor: 'pointer',
+                    transition: 'opacity 0.2s ease',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                >
+                  <img src={dj.secondaryPhotos[0]} alt={`${dj.name} portrait 1`} style={{
                     width: '100%', height: '100%', objectFit: 'cover',
-                    objectPosition: dj.focus || 'center',
+                    objectPosition: 'center',
                   }} />
-                : <div aria-hidden="true" style={{
-                    width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontFamily: 'Playfair Display, serif', fontSize: T.hero, fontWeight: 700, color: 'rgba(23,21,18,0.08)',
-                  }}>{dj.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</div>
-              }
+                </div>
+              )}
+
+              {/* Photo 3 */}
+              {dj.secondaryPhotos && dj.secondaryPhotos.length > 1 && (
+                <div
+                  onClick={() => setSelectedImageIndex(2)}
+                  style={{
+                    aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+                    border: `1px solid ${C.line}`, cursor: 'pointer',
+                    transition: 'opacity 0.2s ease',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                >
+                  <img src={dj.secondaryPhotos[1]} alt={`${dj.name} portrait 2`} style={{
+                    width: '100%', height: '100%', objectFit: 'cover',
+                    objectPosition: 'center',
+                  }} />
+                </div>
+              )}
             </div>
 
-            {/* Secondary photo 2 (right) */}
-            {dj.secondaryPhotos && dj.secondaryPhotos.length > 1 && (
-              <div style={{
-                aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
-                border: `1px solid ${C.line}`,
-              }}>
-                <img src={dj.secondaryPhotos[1]} alt={`${dj.name} portrait 2`} style={{
-                  width: '100%', height: '100%', objectFit: 'cover',
-                  objectPosition: 'center',
-                }} />
+            {/* Lightbox Modal */}
+            {selectedImageIndex !== null && (
+              <div
+                onClick={() => setSelectedImageIndex(null)}
+                style={{
+                  position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                  background: 'rgba(0,0,0,0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  zIndex: 1000, cursor: 'pointer', padding: '2rem',
+                }}
+              >
+                <div onClick={e => e.stopPropagation()} style={{ maxWidth: '90%', maxHeight: '90vh' }}>
+                  <img
+                    src={[dj.photo, ...(dj.secondaryPhotos || []).slice(0, 2)][selectedImageIndex]}
+                    alt={`${dj.name} enlarged`}
+                    style={{
+                      width: '100%', height: '100%', objectFit: 'contain',
+                    }}
+                  />
+                </div>
               </div>
             )}
-          </div>
+          </>
         )}
 
         {/* Bio section */}
