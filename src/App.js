@@ -250,6 +250,9 @@ const ROSTER = [
     mixes: [],
     mixcloudEmbed: null,
     mixcloudUser: '[mixcloud-username]',
+    videos: [
+      { embed: 'https://www.youtube.com/embed/nolBqsVW9iw', title: 'DJ Set' },
+    ],
   },
 ];
 
