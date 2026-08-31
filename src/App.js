@@ -1913,44 +1913,59 @@ function ArtistPage({ slug, setPage }) {
           )}
         </div>
 
-        {/* Photo section — main + secondary images */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
-          {/* Main photo — reduced by 50% */}
+        {/* Photo section — primary centered with secondary flanking */}
+        {(dj.photo || dj.secondaryPhotos?.length > 0) && (
           <div style={{
-            maxWidth: '35%', aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
-            border: `1px solid ${C.line}`,
+            display: 'grid',
+            gridTemplateColumns: '1fr 1.4fr 1fr',
+            gap: '1rem',
+            marginBottom: '2.5rem',
+            alignItems: 'start',
           }}>
-            {dj.photo
-              ? <img src={dj.photo} alt={dj.name} style={{
+            {/* Secondary photo 1 (left) */}
+            {dj.secondaryPhotos && dj.secondaryPhotos.length > 0 && (
+              <div style={{
+                aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+                border: `1px solid ${C.line}`,
+              }}>
+                <img src={dj.secondaryPhotos[0]} alt={`${dj.name} portrait 1`} style={{
                   width: '100%', height: '100%', objectFit: 'cover',
-                  objectPosition: dj.focus || 'center',
+                  objectPosition: 'center',
                 }} />
-              : <div aria-hidden="true" style={{
-                  width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: 'Playfair Display, serif', fontSize: T.hero, fontWeight: 700, color: 'rgba(23,21,18,0.08)',
-                }}>{dj.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</div>
-            }
-          </div>
+              </div>
+            )}
 
-          {/* Secondary images grid — 2-up layout (full width) */}
-          {dj.secondaryPhotos && dj.secondaryPhotos.length > 0 && (
+            {/* Main photo — centered and larger */}
             <div style={{
-              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem',
+              aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+              border: `1px solid ${C.line}`,
             }}>
-              {dj.secondaryPhotos.slice(0, 2).map((photo, i) => (
-                <div key={i} style={{
-                  aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
-                  border: `1px solid ${C.line}`,
-                }}>
-                  <img src={photo} alt={`${dj.name} portrait ${i + 1}`} style={{
+              {dj.photo
+                ? <img src={dj.photo} alt={dj.name} style={{
                     width: '100%', height: '100%', objectFit: 'cover',
-                    objectPosition: 'center',
+                    objectPosition: dj.focus || 'center',
                   }} />
-                </div>
-              ))}
+                : <div aria-hidden="true" style={{
+                    width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontFamily: 'Playfair Display, serif', fontSize: T.hero, fontWeight: 700, color: 'rgba(23,21,18,0.08)',
+                  }}>{dj.name.split(' ').map(w => w[0]).join('').slice(0, 2)}</div>
+              }
             </div>
-          )}
-        </div>
+
+            {/* Secondary photo 2 (right) */}
+            {dj.secondaryPhotos && dj.secondaryPhotos.length > 1 && (
+              <div style={{
+                aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+                border: `1px solid ${C.line}`,
+              }}>
+                <img src={dj.secondaryPhotos[1]} alt={`${dj.name} portrait 2`} style={{
+                  width: '100%', height: '100%', objectFit: 'cover',
+                  objectPosition: 'center',
+                }} />
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Bio section */}
         <div>
