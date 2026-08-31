@@ -130,6 +130,7 @@ const ROSTER = [
     ],
     mixcloudEmbed: null,  // superseded by `mixes` above
     mixcloudUser: 'DJAppz',
+    mixcloudPlaylist: '%2FDJAppz%2Fplaylists%2Fdj-appz%2F',
     website: 'https://www.dj-appz.com/',
   },
   {
@@ -2022,23 +2023,40 @@ function ArtistPage({ slug, setPage }) {
           }}>Book {dj.name.split(' ').slice(-1)[0]}</button>
         </div>
 
-        {/* Mixes section */}
-        {mixes.length > 0 && (
+        {/* Mixes section — playlist or individual mixes */}
+        {(dj.mixcloudPlaylist || mixes.length > 0) && (
           <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginTop: '2rem' }}>
-            <SectionLabel>{mixes.length > 1 ? 'Selected Mixes' : 'Latest Mix'}</SectionLabel>
-            {mixes.map((m, i) => (
-              <div key={i} style={{ marginTop: '1rem' }}>
-                {m.title && mixes.length > 1 && (
-                  <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.5rem' }}>{m.title}</p>
-                )}
-                <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
-                  <iframe title={`${dj.name} — ${m.title || 'mix'}`} width="100%" height={m.height || 225}
-                          src={m.embed} frameBorder="0" loading="lazy"
-                          allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
-                          style={{ display: 'block' }} />
-                </div>
+            <SectionLabel>Playlists & Mixes</SectionLabel>
+
+            {/* Mixcloud Playlist (if available) */}
+            {dj.mixcloudPlaylist && (
+              <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden', marginBottom: '2rem' }}>
+                <iframe title={`${dj.name} — Mixcloud Playlist`} width="100%" height={500}
+                        src={`https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=${dj.mixcloudPlaylist}`}
+                        frameBorder="0" loading="lazy"
+                        allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
+                        style={{ display: 'block' }} />
               </div>
-            ))}
+            )}
+
+            {/* Individual mixes (if no playlist) */}
+            {!dj.mixcloudPlaylist && mixes.length > 0 && (
+              <>
+                {mixes.map((m, i) => (
+                  <div key={i} style={{ marginTop: '1rem' }}>
+                    {m.title && mixes.length > 1 && (
+                      <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.5rem' }}>{m.title}</p>
+                    )}
+                    <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
+                      <iframe title={`${dj.name} — ${m.title || 'mix'}`} width="100%" height={m.height || 225}
+                              src={m.embed} frameBorder="0" loading="lazy"
+                              allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
+                              style={{ display: 'block' }} />
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         )}
       </div>
