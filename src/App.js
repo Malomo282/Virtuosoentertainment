@@ -1825,6 +1825,7 @@ function ServicesPage({ setPage }) {
 function ArtistPage({ slug, setPage }) {
   const dj = LIVE_ROSTER.find(a => a.slug === slug);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [videoCarouselIndex, setVideoCarouselIndex] = useState(0);
 
   // Deep link to an artist who is unpublished or renamed — fail gracefully
   // rather than crashing on an undefined lookup.
@@ -2058,23 +2059,64 @@ function ArtistPage({ slug, setPage }) {
             </div>
           )}
 
-          {/* Videos — reduced by 30% */}
+          {/* Videos & Reels Carousel */}
           {videos.length > 0 && (
             <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginBottom: '2.5rem' }}>
               <SectionLabel>{videos.length > 1 ? 'Videos & Reels' : 'Video'}</SectionLabel>
-              {videos.map((v, i) => (
-                <div key={i} style={{ marginTop: '1.5rem' }}>
-                  {v.title && (
-                    <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.75rem' }}>{v.title}</p>
-                  )}
-                  <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
-                    <iframe title={`${dj.name} — ${v.title || 'video'}`} width="100%" height={v.height ? Math.round(v.height * 0.7) : 420}
-                            src={v.embed} frameBorder="0" loading="lazy"
-                            allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
-                            style={{ display: 'block' }} />
-                  </div>
+
+              <div style={{ marginTop: '1.5rem' }}>
+                {videos[videoCarouselIndex]?.title && (
+                  <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.75rem' }}>{videos[videoCarouselIndex].title}</p>
+                )}
+
+                <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden', marginBottom: '1rem' }}>
+                  <iframe
+                    title={`${dj.name} — ${videos[videoCarouselIndex]?.title || 'video'}`}
+                    width="100%"
+                    height={420}
+                    src={videos[videoCarouselIndex]?.embed}
+                    frameBorder="0"
+                    loading="lazy"
+                    allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
+                    style={{ display: 'block' }}
+                  />
                 </div>
-              ))}
+
+                {/* Carousel Controls */}
+                {videos.length > 1 && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+                    <button
+                      onClick={() => setVideoCarouselIndex(prev => (prev - 1 + videos.length) % videos.length)}
+                      style={{
+                        fontFamily: 'Outfit, sans-serif', fontSize: T.body, fontWeight: 600,
+                        color: C.white, background: C.goldSolid, border: 'none', padding: '0.75rem 1.5rem',
+                        cursor: 'pointer', transition: 'opacity 0.2s',
+                      }}
+                      onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                      onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                    >
+                      ← Previous
+                    </button>
+
+                    <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.mid }}>
+                      {videoCarouselIndex + 1} of {videos.length}
+                    </span>
+
+                    <button
+                      onClick={() => setVideoCarouselIndex(prev => (prev + 1) % videos.length)}
+                      style={{
+                        fontFamily: 'Outfit, sans-serif', fontSize: T.body, fontWeight: 600,
+                        color: C.white, background: C.goldSolid, border: 'none', padding: '0.75rem 1.5rem',
+                        cursor: 'pointer', transition: 'opacity 0.2s',
+                      }}
+                      onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                      onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                    >
+                      Next →
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
@@ -2085,40 +2127,32 @@ function ArtistPage({ slug, setPage }) {
           }}>Book {dj.name.split(' ').slice(-1)[0]}</button>
         </div>
 
-        {/* Mixes section — playlist or individual mixes */}
-        {(dj.mixcloudPlaylist || mixes.length > 0) && (
+        {/* Mixes section — mini widgets */}
+        {mixes.length > 0 && (
           <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '2rem', marginTop: '2rem' }}>
-            <SectionLabel>Playlists & Mixes</SectionLabel>
+            <SectionLabel>{mixes.length > 1 ? 'Mixes' : 'Latest Mix'}</SectionLabel>
 
-            {/* Mixcloud Playlist (if available) */}
-            {dj.mixcloudPlaylist && (
-              <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden', marginBottom: '2rem' }}>
-                <iframe title={`${dj.name} — Mixcloud Playlist`} width="100%" height={800}
-                        src={`https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=${dj.mixcloudPlaylist}`}
-                        frameBorder="0" loading="lazy"
-                        allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
-                        style={{ display: 'block' }} />
-              </div>
-            )}
-
-            {/* Individual mixes (if no playlist) */}
-            {!dj.mixcloudPlaylist && mixes.length > 0 && (
-              <>
-                {mixes.map((m, i) => (
-                  <div key={i} style={{ marginTop: '1rem' }}>
-                    {m.title && mixes.length > 1 && (
-                      <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.small, color: C.nearBlack, fontWeight: 500, marginBottom: '0.5rem' }}>{m.title}</p>
-                    )}
-                    <div style={{ border: `1px solid ${C.line}`, overflow: 'hidden' }}>
-                      <iframe title={`${dj.name} — ${m.title || 'mix'}`} width="100%" height={m.height || 225}
-                              src={m.embed} frameBorder="0" loading="lazy"
-                              allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
-                              style={{ display: 'block' }} />
-                    </div>
-                  </div>
-                ))}
-              </>
-            )}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {mixes.map((m, i) => (
+                <div key={i}>
+                  {m.title && mixes.length > 1 && (
+                    <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: C.mid, fontWeight: 500, marginBottom: '0.25rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                      {m.title}
+                    </p>
+                  )}
+                  <iframe
+                    title={`${dj.name} — ${m.title || 'mix'}`}
+                    width="100%"
+                    height="60"
+                    src={m.embed}
+                    frameBorder="0"
+                    loading="lazy"
+                    allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
+                    style={{ display: 'block', border: `1px solid ${C.line}` }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
