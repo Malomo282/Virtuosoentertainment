@@ -247,9 +247,22 @@ const ROSTER = [
     face:  "50% 35%",     // where his face sits in the frame
     thumbZoom: 1.6,       // push in for the 32px nav thumbnail
     instagram: "@[handle]",
-    mixes: [],
+    mixes: [
+      {
+        title: 'DJ Ramos R&B Demo Mix',
+        embed: 'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FitsdjRamos%2Fdj-ramos-rnb-demo-mix%2F',
+      },
+      {
+        title: 'Open Format Mix',
+        embed: 'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FitsdjRamos%2Fopen-format-mix-jwdjagent%2F',
+      },
+      {
+        title: 'Disco Demo Mix',
+        embed: 'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FitsdjRamos%2Fdisco-demo-mix-jwdjagent%2F',
+      },
+    ],
     mixcloudEmbed: null,
-    mixcloudUser: '[mixcloud-username]',
+    mixcloudUser: 'itsdjRamos',
     videos: [
       { embed: 'https://www.youtube.com/embed/nolBqsVW9iw', title: 'DJ Set' },
     ],
