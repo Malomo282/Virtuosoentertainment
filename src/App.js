@@ -1915,9 +1915,9 @@ function ArtistPage({ slug, setPage }) {
 
         {/* Photo section — main + secondary images */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
-          {/* Main photo — reduced by 30% */}
+          {/* Main photo — reduced by 50% */}
           <div style={{
-            maxWidth: '70%', aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
+            maxWidth: '35%', aspectRatio: '3/4', overflow: 'hidden', background: C.stone,
             border: `1px solid ${C.line}`,
           }}>
             {dj.photo
@@ -1932,10 +1932,10 @@ function ArtistPage({ slug, setPage }) {
             }
           </div>
 
-          {/* Secondary images grid — 2-up layout (70% width to match primary) */}
+          {/* Secondary images grid — 2-up layout (full width) */}
           {dj.secondaryPhotos && dj.secondaryPhotos.length > 0 && (
             <div style={{
-              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', maxWidth: '70%',
+              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem',
             }}>
               {dj.secondaryPhotos.slice(0, 2).map((photo, i) => (
                 <div key={i} style={{
