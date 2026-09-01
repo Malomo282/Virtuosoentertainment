@@ -1889,7 +1889,7 @@ function ArtistPage({ slug, setPage }) {
 
       {/* ── PROFILE — Single column layout ── */}
       <div style={{
-        maxWidth: 800, margin: '0 auto', padding: '0 1rem 4rem',
+        maxWidth: 1100, margin: '0 auto', padding: '0 1rem 4rem',
       }}>
         {/* Header: Name, tagline, best for, genres */}
         <div style={{ marginBottom: '2.5rem' }}>
