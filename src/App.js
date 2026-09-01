@@ -1876,7 +1876,7 @@ function ArtistPage({ slug, setPage }) {
 
   return (
     <div style={{ background: C.ivory, minHeight: '100vh', paddingTop: 72, position: 'relative', zIndex: 1 }}>
-      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '3rem 2rem 0' }}>
+      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '3rem 1rem 0' }}>
         <span
           onClick={() => setPage('Roster')}
           style={{
@@ -1889,7 +1889,7 @@ function ArtistPage({ slug, setPage }) {
 
       {/* ── PROFILE — Single column layout ── */}
       <div style={{
-        maxWidth: 800, margin: '0 auto', padding: '0 2rem 4rem',
+        maxWidth: 800, margin: '0 auto', padding: '0 1rem 4rem',
       }}>
         {/* Header: Name, tagline, best for, genres */}
         <div style={{ marginBottom: '2.5rem' }}>
