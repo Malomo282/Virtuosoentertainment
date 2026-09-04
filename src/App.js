@@ -2168,12 +2168,6 @@ function ArtistPage({ slug, setPage }) {
               </div>
             </div>
           )}
-
-          <button onClick={() => setPage('Work With Us')} style={{
-            fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
-            letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
-            background: C.goldSolid, border: 'none', padding: '1rem 2.25rem', cursor: 'pointer',
-          }}>Book {dj.name.split(' ').slice(-1)[0]}</button>
         </div>
 
         {/* Mixes section — mini widgets */}
@@ -2202,6 +2196,13 @@ function ArtistPage({ slug, setPage }) {
                 </div>
               ))}
             </div>
+
+            <button onClick={() => setPage('Work With Us')} style={{
+              fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
+              letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
+              background: C.goldSolid, border: 'none', padding: '1rem 2.25rem', cursor: 'pointer',
+              marginTop: '2rem', display: 'block', marginLeft: 'auto', marginRight: 'auto',
+            }}>Book {dj.name.split(' ').slice(-1)[0]}</button>
           </div>
         )}
       </div>
