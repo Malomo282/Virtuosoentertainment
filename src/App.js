@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import emailjs from '@emailjs/browser';
 
 // ─── BRAND LOGOS ─────────────────────────────────────────────────────────────
@@ -74,6 +75,42 @@ const EJS = {
   templateNotify:  'template_gg8tzfi',       // notification to Virtuoso team
   templateReply:   'template_c8zw31j',       // auto-reply to venue contact
   publicKey:       'iBIZDGwpqbEmiXcCW',
+};
+
+// ─── META TAGS CONFIG ────────────────────────────────────────────────────────
+const META_TAGS = {
+  'Home': {
+    title: 'Virtuoso Collective - Professional DJ Services',
+    description: 'Premium DJ services for weddings, corporate events, private parties, and venue residencies across London and the UK.',
+  },
+  'About Us': {
+    title: 'About Virtuoso Collective - Professional DJ Collective',
+    description: 'Learn about Virtuoso Collective, a curated collective of professional DJs selected for technical skill, audience awareness, and stage presence.',
+  },
+  'Services': {
+    title: 'DJ Services - Weddings, Corporate, Private Events & Venues',
+    description: 'Professional DJ services for weddings, corporate events, private parties, and venue residencies. Premium entertainment for every occasion.',
+  },
+  'Roster': {
+    title: 'Our DJ Roster - Professional Artists',
+    description: 'Meet our roster of professional DJs. Each artist is selected for technical skill, audience awareness, and exceptional stage presence.',
+  },
+  'FAQ': {
+    title: 'FAQ - Virtuoso Collective',
+    description: 'Frequently asked questions about booking DJs, services, pricing, and event details with Virtuoso Collective.',
+  },
+  'Join the Roster': {
+    title: 'Join the Roster - Talent Community',
+    description: 'Interested in joining our DJ collective? Learn about our talent acquisition process and become part of Virtuoso.',
+  },
+  'Book A DJ': {
+    title: 'Book a DJ - Virtuoso Collective',
+    description: 'Book a professional DJ for your event. Inquire about wedding DJs, corporate events, private parties, or venue residencies.',
+  },
+  'Work With Us': {
+    title: 'Partner With Virtuoso - Venue & Event Partnerships',
+    description: 'Partner with Virtuoso Collective for professional DJ entertainment. Contact us for venue residencies, events, and special projects.',
+  },
 };
 
 // ─── ROSTER DATA ─────────────────────────────────────────────────────────────
@@ -3114,6 +3151,20 @@ const hashToPage = (hash) => {
   return match || 'Home';
 };
 
+function getMetaData(page) {
+  if (page.startsWith('artist:')) {
+    const slug = page.slice(7);
+    const dj = ROSTER.find(d => d.slug === slug);
+    if (dj) {
+      return {
+        title: `${dj.name} - ${dj.tagline} | Virtuoso Collective`,
+        description: `${dj.name} is a professional DJ specializing in ${dj.genres.slice(0, 3).join(', ')}. Available for weddings, corporate events, private parties, and venue residencies across London and the UK.`,
+      };
+    }
+  }
+  return META_TAGS[page] || META_TAGS['Home'];
+}
+
 export default function App() {
   const [page, setPage] = useState(() => hashToPage(window.location.hash));
   const [contactDropdown, setContactDropdown] = useState(false);
@@ -3140,6 +3191,8 @@ export default function App() {
     emailjs.init(EJS.publicKey);
   }, []);
 
+  const meta = getMetaData(page);
+
   const renderPage = () => {
     if (page.startsWith('artist:')) {
       return <ArtistPage slug={page.slice(7)} setPage={setPageAndScroll} />;
@@ -3163,6 +3216,12 @@ export default function App() {
 
   return (
     <>
+      <Helmet>
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:description" content={meta.description} />
+      </Helmet>
       <Navbar activePage={navPage} setPage={setPageAndScroll} contactDropdown={contactDropdown} setContactDropdown={setContactDropdown} mobileContactOpen={mobileContactOpen} setMobileContactOpen={setMobileContactOpen} setPageAndScroll={setPageAndScroll} />
       <main>{renderPage()}</main>
       <Footer setPage={setPageAndScroll} />
