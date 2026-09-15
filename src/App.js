@@ -1941,6 +1941,9 @@ function ArtistPage({ slug, setPage }) {
     ? dj.mixes
     : (dj.mixcloudEmbed ? [{ title: 'Latest Mix', embed: dj.mixcloudEmbed }] : []);
 
+  // Spotify releases (displayed when no mixes available)
+  const spotifyReleases = dj.spotifyReleases || [];
+
   // Videos (YouTube reels/campaigns)
   const videos = dj.videos || [];
 
@@ -2247,32 +2250,63 @@ function ArtistPage({ slug, setPage }) {
           )}
         </div>
 
-        {/* Mixes section — mini widgets */}
-        {mixes.length > 0 && (
+        {/* Mixes section — mini widgets or Spotify releases */}
+        {(mixes.length > 0 || spotifyReleases.length > 0) && (
           <div style={{ borderTop: `2px solid ${C.goldSolid}`, paddingTop: '2.5rem', marginTop: '2.5rem' }}>
-            <SectionLabel>{mixes.length > 1 ? 'Mixes' : 'Latest Mix'}</SectionLabel>
+            <SectionLabel>{mixes.length > 0 ? (mixes.length > 1 ? 'Mixes' : 'Latest Mix') : 'Music Releases'}</SectionLabel>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {mixes.map((m, i) => (
-                <div key={i}>
-                  {m.title && mixes.length > 1 && (
-                    <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: C.mid, fontWeight: 500, marginBottom: '0.25rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                      {m.title}
-                    </p>
-                  )}
-                  <iframe
-                    title={`${dj.name} — ${m.title || 'mix'}`}
-                    width="100%"
-                    height="60"
-                    src={m.embed}
-                    frameBorder="0"
-                    loading="lazy"
-                    allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
-                    style={{ display: 'block', border: `1px solid ${C.line}` }}
-                  />
-                </div>
-              ))}
-            </div>
+            {mixes.length > 0 ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {mixes.map((m, i) => (
+                  <div key={i}>
+                    {m.title && mixes.length > 1 && (
+                      <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: C.mid, fontWeight: 500, marginBottom: '0.25rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                        {m.title}
+                      </p>
+                    )}
+                    <iframe
+                      title={`${dj.name} — ${m.title || 'mix'}`}
+                      width="100%"
+                      height="60"
+                      src={m.embed}
+                      frameBorder="0"
+                      loading="lazy"
+                      allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
+                      style={{ display: 'block', border: `1px solid ${C.line}` }}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {spotifyReleases.map((track, i) => (
+                  <a
+                    key={i}
+                    href={track.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontFamily: 'Outfit, sans-serif',
+                      fontSize: T.small,
+                      color: C.white,
+                      background: C.goldSolid,
+                      padding: '1rem',
+                      textDecoration: 'none',
+                      border: `1px solid ${C.goldSolid}`,
+                      cursor: 'pointer',
+                      transition: 'opacity 0.2s',
+                      display: 'block',
+                      textAlign: 'center',
+                      fontWeight: 500,
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                  >
+                    ♪ {track.title} — Listen on Spotify
+                  </a>
+                ))}
+              </div>
+            )}
 
             <button onClick={() => setPage('Work With Us')} style={{
               fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
