@@ -33,9 +33,9 @@ import djRamos2 from './Assets/Roster/djramos/DJRamos2.jpeg';
 import djRamos3 from './Assets/Roster/djramos/DJRamos3.jpeg';
 
 // Jack Boro primary and secondary images
-import jackBoroPhoto from './Assets/Roster/jackboro/JackBoro0.jpeg';
-import jackBoro2 from './Assets/Roster/jackboro/JackBoro2.jpeg';
-import jackBoro3 from './Assets/Roster/jackboro/JackBoro3.jpeg';
+import jackBoroPhoto from './Assets/Roster/JackBoro/Jackboro0.jpeg';
+import jackBoro2 from './Assets/Roster/JackBoro/Jackboro2.jpeg';
+import jackBoro3 from './Assets/Roster/JackBoro/Jackboro3.jpeg';
 
 // ─── ABOUT PAGE PHOTOGRAPHY ──────────────────────────────────────────────────
 // emmanuel-portrait.jpg is a 3:4 head-and-shoulders crop of the source (Emmanuel
