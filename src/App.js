@@ -2278,33 +2278,60 @@ function ArtistPage({ slug, setPage }) {
                 ))}
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {spotifyReleases.map((track, i) => (
-                  <a
-                    key={i}
-                    href={track.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontFamily: 'Outfit, sans-serif',
-                      fontSize: T.small,
-                      color: C.white,
-                      background: C.goldSolid,
-                      padding: '1rem',
-                      textDecoration: 'none',
-                      border: `1px solid ${C.goldSolid}`,
-                      cursor: 'pointer',
-                      transition: 'opacity 0.2s',
-                      display: 'block',
-                      textAlign: 'center',
-                      fontWeight: 500,
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
-                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                  >
-                    ♪ {track.title} — Listen on Spotify
-                  </a>
-                ))}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                {spotifyReleases.map((track, i) => {
+                  const trackId = track.trackId || (track.url && track.url.split('/track/')[1]?.split('?')[0]);
+                  const embedUrl = trackId
+                    ? `https://open.spotify.com/embed/track/${trackId}?utm_source=generator`
+                    : null;
+
+                  return (
+                    <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      {track.title && (
+                        <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: T.micro, color: C.mid, fontWeight: 500, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                          {track.title}
+                        </p>
+                      )}
+                      {embedUrl ? (
+                        <iframe
+                          title={`${dj.name} — ${track.title}`}
+                          style={{ borderRadius: '12px' }}
+                          src={embedUrl}
+                          width="100%"
+                          height="352"
+                          frameBorder="0"
+                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <a
+                          href={track.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            fontFamily: 'Outfit, sans-serif',
+                            fontSize: T.small,
+                            color: C.white,
+                            background: C.goldSolid,
+                            padding: '1rem',
+                            textDecoration: 'none',
+                            border: `1px solid ${C.goldSolid}`,
+                            cursor: 'pointer',
+                            transition: 'opacity 0.2s',
+                            display: 'block',
+                            textAlign: 'center',
+                            fontWeight: 500,
+                            borderRadius: '8px',
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                        >
+                          ♪ {track.title} — Listen on Spotify
+                        </a>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
 
