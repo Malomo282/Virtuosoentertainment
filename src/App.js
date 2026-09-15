@@ -32,6 +32,11 @@ import jordanKeni from './Assets/Roster/Jordan/jordan-keni2.jpeg';
 import djRamos2 from './Assets/Roster/djramos/DJRamos2.jpeg';
 import djRamos3 from './Assets/Roster/djramos/DJRamos3.jpeg';
 
+// Jack Boro primary and secondary images
+import jackBoroPhoto from './Assets/Roster/jackboro/JackBoro0.jpeg';
+import jackBoro2 from './Assets/Roster/jackboro/JackBoro2.jpeg';
+import jackBoro3 from './Assets/Roster/jackboro/JackBoro3.jpeg';
+
 // ─── ABOUT PAGE PHOTOGRAPHY ──────────────────────────────────────────────────
 // emmanuel-portrait.jpg is a 3:4 head-and-shoulders crop of the source (Emmanuel
 // bio.jpeg, kept as the master and deliberately not imported — a 943x2048 studio
@@ -110,6 +115,10 @@ const META_TAGS = {
   'Work With Us': {
     title: 'Partner With Virtuoso - Venue & Event Partnerships',
     description: 'Partner with Virtuoso Collective for professional DJ entertainment. Contact us for venue residencies, events, and special projects.',
+  },
+  'Jack Boro': {
+    title: 'Jack Boro - Italian DJ & Music Producer | Virtuoso Collective',
+    description: 'Jack Boro is a multi-genre DJ and music producer specializing in open format, house, and Latin grooves. Available for corporate events, private parties, and boat parties across London.',
   },
 };
 
@@ -303,6 +312,37 @@ const ROSTER = [
     videos: [
       { embed: 'https://www.youtube.com/embed/nolBqsVW9iw', title: 'DJ Set' },
     ],
+  },
+  {
+    id: 4,
+    name: "Jack Boro",
+    slug: "jack-boro",
+    tagline: "Italian heritage, London-based rhythm maker.",
+    bestFor: "Open Format · Private Events · Boat Parties · Corporate",
+    genres: ["Open Format", "Hip-Hop", "R&B", "Afrobeats", "Dancehall", "Reggaeton", "House", "Afro House", "Latin House", "Tech House"],
+    bio: "Jack Boro is an Italian DJ and music producer based in London, with over a decade of experience behind the decks. Rooted in hip-hop, funk and dance culture, his open-format sets span genres, with a particular love for house music and Latin grooves. He has played at Fabric, Ministry of Sound, Cargo, Trapeze and Boxpark, alongside boat parties, private celebrations and corporate events. Drawing on his background as a dancer, he brings a strong instinct for rhythm, energy and reading the room.",
+    photo: jackBoroPhoto,
+    secondaryPhotos: [jackBoro2, jackBoro3],
+    photoDecks: null,
+    focus: "50% 15%",
+    face: "50% 40%",
+    thumbZoom: 1.5,
+    instagram: "@[handle]",
+    videos: [],
+    mixes: [],
+    spotifyReleases: [
+      {
+        title: 'Original Mix 1',
+        url: 'https://open.spotify.com/track/2dE2vJHz8WEOTT7jhAH5X5?si=dbaac570770045e8',
+      },
+      {
+        title: 'Original Mix 2',
+        url: 'https://open.spotify.com/track/5kWstDjdWPxIoiKzMQ0vZG?si=75362ad80f4d463d',
+      },
+    ],
+    mixcloudEmbed: null,
+    mixcloudUser: '[mixcloud-username]',
+    website: null,
   },
 ];
 
