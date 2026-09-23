@@ -1285,7 +1285,7 @@ function HomePage({ setPage }) {
       {/* 78vh, not 100vh: at least 20% shorter than the old full-viewport
           height, with the name/subname sized up to fill the tighter frame
           rather than reading as empty. */}
-      <div style={{ position: 'relative', height: '78vh', minHeight: 480, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ position: 'relative', height: '78vh', minHeight: 480, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '4rem', marginBottom: '3rem' }}>
         <img
           src={heroPhoto}
           alt=""
@@ -1320,7 +1320,7 @@ function HomePage({ setPage }) {
             <span style={{
               display: 'block',
               fontFamily: 'Outfit, sans-serif',
-              fontSize: T.heroSub,
+              fontSize: '3.2rem',
               fontWeight: 300, letterSpacing: '0.42em',
               textTransform: 'uppercase', color: 'rgba(255,255,255,0.92)',
               marginLeft: '0.42em',   // offset the trailing letter-space
@@ -1331,7 +1331,7 @@ function HomePage({ setPage }) {
           {/* Tagline subheading */}
           <p style={{
             fontFamily: 'Playfair Display, serif', fontStyle: 'italic',
-            fontSize: T.heroTagline,
+            fontSize: '2rem',
             color: 'rgba(255,255,255,0.94)', maxWidth: 620,
             margin: '1.5rem auto 0', fontWeight: 400, lineHeight: 1.5,
             textShadow: '0 1px 18px rgba(23,21,18,0.6)',
@@ -1340,21 +1340,21 @@ function HomePage({ setPage }) {
           </p>
           <div style={{ maxWidth: 720, margin: '0.85rem auto 2rem' }}>
             <p style={{
-              fontFamily: 'Outfit, sans-serif', fontSize: T.body,
+              fontFamily: 'Outfit, sans-serif', fontSize: '1.125rem',
               color: 'rgba(255,255,255,0.88)', fontWeight: 300, lineHeight: 1.7,
               marginBottom: '1rem',
             }}>
               We place DJs in venues across London — from residencies, launch nights and private parties to weddings and corporate events — and stay involved after the booking is confirmed.
             </p>
             <p style={{
-              fontFamily: 'Outfit, sans-serif', fontSize: T.body,
+              fontFamily: 'Outfit, sans-serif', fontSize: '1.125rem',
               color: 'rgba(255,255,255,0.88)', fontWeight: 300, lineHeight: 1.7,
               marginBottom: '1rem',
             }}>
               We handle programming, equipment, timings and the transition from speeches to the first track, making sure the night runs smoothly.
             </p>
             <p style={{
-              fontFamily: 'Outfit, sans-serif', fontSize: T.body,
+              fontFamily: 'Outfit, sans-serif', fontSize: '1.125rem',
               color: 'rgba(255,255,255,0.88)', fontWeight: 300, lineHeight: 1.7,
             }}>
               Every DJ on our roster is vetted for skill and professionalism. They can read a room, adapt quickly and represent your venue properly.
@@ -1362,7 +1362,7 @@ function HomePage({ setPage }) {
           </div>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button onClick={() => setPage('Work With Us')} style={{
-              fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
+              fontFamily: 'Outfit, sans-serif', fontSize: '1rem', fontWeight: 600,
               letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
               background: C.goldSolid, border: 'none', padding: '1rem 2.5rem', cursor: 'pointer',
               transition: 'opacity 0.2s',
@@ -1371,7 +1371,7 @@ function HomePage({ setPage }) {
               onMouseLeave={e => e.target.style.opacity = '1'}
             >Enquire</button>
             <button onClick={() => setPage('Roster')} style={{
-              fontFamily: 'Outfit, sans-serif', fontSize: T.small, fontWeight: 600,
+              fontFamily: 'Outfit, sans-serif', fontSize: '1rem', fontWeight: 600,
               letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
               background: 'transparent', border: '1px solid rgba(255,255,255,0.5)', padding: '1rem 2.5rem',
               cursor: 'pointer', transition: 'all 0.2s',
