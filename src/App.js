@@ -1285,10 +1285,10 @@ function HomePage({ setPage }) {
       {/* 78vh, not 100vh: at least 20% shorter than the old full-viewport
           height, with the name/subname sized up to fill the tighter frame
           rather than reading as empty. */}
-      <div style={{ position: 'relative', height: '78vh', minHeight: 480, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '4rem', marginBottom: '3rem' }}>
+      <div style={{ position: 'relative', height: '78vh', minHeight: 480, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '2rem', marginBottom: '1.5rem' }}>
         <img
           src={heroPhoto}
-          alt=""
+          alt="DJ performing at a professional venue"
           aria-hidden="true"
           fetchPriority="high"
           style={{
@@ -1308,13 +1308,13 @@ function HomePage({ setPage }) {
         }} />
 
         {/* Hero content */}
-        <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '5rem 2rem 0', maxWidth: 860 }}>
+        <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '3rem 2rem 0', maxWidth: 860 }}>
           {/* Logo wordmark overlay */}
           <div style={{ margin: '0 auto 1.5rem', lineHeight: 1 }}>
             <Wordmark colour={C.white} note={C.goldSolid} style={{
-              fontSize: '4.5rem',
+              fontSize: 'clamp(3rem, 8vw, 4.5rem)',
               filter: 'drop-shadow(0 2px 30px rgba(23,21,18,0.55))',
-            }} />
+            }} aria-hidden="true" />
           </div>
           <h1 style={{ margin: 0, lineHeight: 1 }}>
             <span style={{
@@ -1323,7 +1323,7 @@ function HomePage({ setPage }) {
               fontSize: T.statement,
               fontWeight: 300, letterSpacing: '0.42em',
               textTransform: 'uppercase', color: 'rgba(255,255,255,0.92)',
-              marginLeft: '0.42em',   // offset the trailing letter-space
+              marginLeft: '0.42em',
               textShadow: '0 1px 18px rgba(23,21,18,0.6)',
             }}>Collective</span>
           </h1>
@@ -1331,63 +1331,56 @@ function HomePage({ setPage }) {
           {/* Tagline subheading */}
           <p style={{
             fontFamily: 'Playfair Display, serif', fontStyle: 'italic',
-            fontSize: T.statement,
+            fontSize: 'clamp(1.5rem, 4vw, 2rem)',
             color: 'rgba(255,255,255,0.94)', maxWidth: 620,
             margin: '1.5rem auto 0', fontWeight: 400, lineHeight: 1.5,
             textShadow: '0 1px 18px rgba(23,21,18,0.6)',
           }}>
             More than music
           </p>
-          <div style={{ maxWidth: 720, margin: '0.85rem auto 2rem' }}>
+          <div style={{ maxWidth: 720, margin: '1.5rem auto 1.5rem' }}>
             <p style={{
-              fontFamily: 'Outfit, sans-serif', fontSize: T.lead,
+              fontFamily: 'Outfit, sans-serif', fontSize: 'clamp(1rem, 2.5vw, 1.125rem)',
               color: 'rgba(255,255,255,0.88)', fontWeight: 300, lineHeight: 1.7,
               marginBottom: '1rem',
             }}>
-              We place DJs in venues across London — from residencies, launch nights and private parties to weddings and corporate events — and stay involved after the booking is confirmed.
+              We place DJs in venues across London — weddings, corporate events, private parties, and venue residencies.
             </p>
             <p style={{
-              fontFamily: 'Outfit, sans-serif', fontSize: T.lead,
-              color: 'rgba(255,255,255,0.88)', fontWeight: 300, lineHeight: 1.7,
-              marginBottom: '1rem',
-            }}>
-              We handle programming, equipment, timings and the transition from speeches to the first track, making sure the night runs smoothly.
-            </p>
-            <p style={{
-              fontFamily: 'Outfit, sans-serif', fontSize: T.lead,
+              fontFamily: 'Outfit, sans-serif', fontSize: 'clamp(1rem, 2.5vw, 1.125rem)',
               color: 'rgba(255,255,255,0.88)', fontWeight: 300, lineHeight: 1.7,
             }}>
-              Every DJ on our roster is vetted for skill and professionalism. They can read a room, adapt quickly and represent your venue properly.
+              Every DJ is vetted for skill and professionalism. They read a room, adapt quickly, and represent your venue properly.
             </p>
           </div>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
             <button onClick={() => setPage('Work With Us')} style={{
               fontFamily: 'Outfit, sans-serif', fontSize: T.lead, fontWeight: 600,
               letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
               background: C.goldSolid, border: 'none', padding: '1rem 2.5rem', cursor: 'pointer',
-              transition: 'opacity 0.2s',
+              transition: 'opacity 0.2s', minHeight: '48px', minWidth: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}
               onMouseEnter={e => e.target.style.opacity = '0.85'}
               onMouseLeave={e => e.target.style.opacity = '1'}
+              aria-label="Enquire about DJ services"
             >Enquire</button>
             <button onClick={() => setPage('Roster')} style={{
               fontFamily: 'Outfit, sans-serif', fontSize: T.lead, fontWeight: 600,
               letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white,
               background: 'transparent', border: '1px solid rgba(255,255,255,0.5)', padding: '1rem 2.5rem',
-              cursor: 'pointer', transition: 'all 0.2s',
+              cursor: 'pointer', transition: 'all 0.2s', minHeight: '48px', minWidth: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}
               onMouseEnter={e => { e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.borderColor = C.white; }}
               onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.borderColor = 'rgba(255,255,255,0.5)'; }}
+              aria-label="View our DJ roster"
             >View Our Roster</button>
           </div>
 
-          {/* Scroll indicator — in-flow beneath the buttons, not pinned to the
-              hero's bottom edge. A fixed bottom offset overlapped the buttons
-              once the hero got shorter; sitting in the flow means it can never
-              collide with content above it, whatever the hero's height. */}
+          {/* Scroll indicator */}
           <div style={{
-            marginTop: '0.75rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
+            marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
             color: 'rgba(255,255,255,0.78)', fontSize: T.micro, letterSpacing: '0.15em', textTransform: 'uppercase',
+            opacity: window.innerWidth > 768 ? 1 : 0,
           }}>
             <span>Scroll</span>
             <div style={{ width: 1, height: 40, background: 'rgba(255,255,255,0.3)', animation: 'scrollPulse 2s ease-in-out infinite' }} />
