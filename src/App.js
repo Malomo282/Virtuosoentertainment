@@ -1285,7 +1285,7 @@ function HomePage({ setPage }) {
       {/* 78vh, not 100vh: at least 20% shorter than the old full-viewport
           height, with the name/subname sized up to fill the tighter frame
           rather than reading as empty. */}
-      <div style={{ position: 'relative', height: '78vh', minHeight: 480, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '2rem', marginBottom: '1.5rem' }}>
+      <div style={{ position: 'relative', minHeight: '78vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8.5rem 0 2rem', marginBottom: '1.5rem' }}>
         <img
           src={heroPhoto}
           alt="DJ performing at a professional venue"
@@ -1308,7 +1308,7 @@ function HomePage({ setPage }) {
         }} />
 
         {/* Hero content */}
-        <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '3rem 2rem 0', maxWidth: 860 }}>
+        <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 2rem', maxWidth: 860 }}>
           {/* Logo wordmark overlay */}
           <div style={{ margin: '0 auto 1.5rem', lineHeight: 1 }}>
             <Wordmark colour={C.white} note={C.goldSolid} style={{
